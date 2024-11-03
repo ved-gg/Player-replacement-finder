@@ -23,7 +23,7 @@ def scrape_fbref(player_name: str) -> pd.DataFrame:
     df = pd.read_html(StringIO(str(table)))[0]
     return df
 
-scrape_fbref("Lionel Messi")
+# print(scrape_fbref("Patrice Evra"))
 
 # def get_player_data(player_name):
 
