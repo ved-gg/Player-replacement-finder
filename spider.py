@@ -4,6 +4,7 @@ import pandas as pd
 from io import StringIO
 import logging
 
+
 class CustomSpider2023:
 
     def __init__(self):
@@ -14,7 +15,7 @@ class CustomSpider2023:
         self.nationalities = []
         self.current_clubs = []
         self.market_values = []
-        self.dobs = []        
+        self.dobs = []
 
     def get_data(self, team_url: str) -> None:
         headers = {
@@ -24,21 +25,22 @@ class CustomSpider2023:
 
         logging.info(f"Sending request to {team_url}.")
 
-        response = requests.get(team_url, headers = headers)
+        response = requests.get(team_url, headers=headers)
         response.raise_for_status()
         soup = BeautifulSoup(response.content, "html.parser")
 
         table = soup.find("table", class_="items")
         if not table:
-            logging.error("Player table not found on the page. Check if the structure has changed.")
-            return 
+            logging.error(
+                "Player table not found on the page. Check if the structure has changed.")
+            return
 
         logging.info("Player table found on the page.")
-        self.table = table        
+        self.table = table
 
     def convert_market_value(self, value: str) -> float:
         # Function to convert market value to float, returns value in millions
-        
+
         if 'm' in value:
             return float(value.replace('€', '').replace('m', '').strip())
         elif 'k' in value:
@@ -47,17 +49,17 @@ class CustomSpider2023:
             return float(value.replace('€', '').strip())
 
     def scrap_data(self) -> pd.DataFrame:
-        
+
         # Table data was split into two classes, odd and even, so we need to scrape them separately
         for table_data in self.table.find_all('tr', class_='odd'):
-            
+
             # Test print statements
             # print(table_data.find('td')) #Get position and number of player
             # print(table_data.find_all('img', class_='bilderrahmen-fixed')) #get name of player
             # print(table_data.find_all('td', class_='zentriert')[3]) #get age/dob of player by using index 1, country by using index 2, current club by using index 3
             # print(table_data.find_all('td', class_='rechts hauptlink')) #get market value of player
 
-           self.scrape_row(table_data)
+            self.scrape_row(table_data)
 
         for table_data in self.table.find_all('tr', class_='even'):
             self.scrape_row(table_data)
@@ -68,48 +70,56 @@ class CustomSpider2023:
             'Position': self.positions,
             'Age': self.ages,
             'Date of Birth': self.dobs,
-            'Market Value(in Millions)': self.market_values, 
+            'Market Value(in Millions)': self.market_values,
             'Nationality': self.nationalities,
             'Current Club': self.current_clubs
-            }, 
+        },
         )
 
         logging.info("Data scraped successfully.")
         return df
-    
+
     def scrape_row(self, table_data) -> None:
-        try: 
-            player_name = table_data.find_all('img', class_='bilderrahmen-fixed')[0]['title']
+        try:
+            player_name = table_data.find_all(
+                'img', class_='bilderrahmen-fixed')[0]['title']
             self.names.append(player_name)
 
-            player_number_position = table_data.find_all('td')[0].get_text().strip()
+            player_number_position = table_data.find_all(
+                'td')[0].get_text().strip()
             self.numbers.append(player_number_position)
 
-            player_position = table_data.find_all('td')[1].get_text().strip().split(' ')[-1]
+            player_position = table_data.find_all(
+                'td')[1].get_text().strip().split(' ')[-1]
             self.positions.append(player_position)
-            
-            player_age = table_data.find_all('td', class_ = 'zentriert')[1].get_text().strip()
+
+            player_age = table_data.find_all('td', class_='zentriert')[
+                1].get_text().strip()
             date, age = player_age.rsplit("(", 1)
             self.ages.append(age.strip(')'))
             self.dobs.append(date)
 
             # Some players have more than one nationality so we use a for loop to get all of them and join them with a '/'
             nat = []
-            for nationality in table_data.find_all('td', class_ = 'zentriert')[2].find_all('img'):
+            for nationality in table_data.find_all('td', class_='zentriert')[2].find_all('img'):
                 nat.append(nationality['title'])
             self.nationalities.append(' / '.join(nat))
 
-            club = table_data.find_all('td', class_='zentriert')[3].find('img')['alt']
+            club = table_data.find_all('td', class_='zentriert')[
+                3].find('img')['alt']
             self.current_clubs.append(club)
 
-            player_market_value = table_data.find('td', class_='rechts hauptlink').get_text().strip()
-            self.market_values.append(self.convert_market_value(player_market_value))
+            player_market_value = table_data.find(
+                'td', class_='rechts hauptlink').get_text().strip()
+            self.market_values.append(
+                self.convert_market_value(player_market_value))
 
         except Exception as e:
             logging.error(f"Error scraping row: {e}")
 
+
 class FBrefSpider:
-    
+
     def __init__(self):
         self.df = df
 
@@ -117,14 +127,15 @@ class FBrefSpider:
         # TODO: Get data from other tables. Also get the table name.
 
         first_name, last_name = player_name.split()
-        player_url = f"https://fbref.com/en/search/search.fcgi?hint={first_name}+{last_name}&search={first_name}+{last_name}" 
+        player_url = f"https://fbref.com/en/search/search.fcgi?hint={
+            first_name}+{last_name}&search={first_name}+{last_name}"
 
         headers = {
             "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36",
             "Accept-Language": "en-US,en;q=0.9",
         }
 
-        response = requests.get(player_url, headers = headers)
+        response = requests.get(player_url, headers=headers)
         response.raise_for_status()
         soup = BeautifulSoup(response.content, "html.parser")
 
@@ -135,7 +146,39 @@ class FBrefSpider:
         for index, row in df.iterrows():
             stats_dict[f"{row['Statistic']} (Per 90)"] = row['Per 90']
             stats_dict[f"{row['Statistic']} (Percentile)"] = row['Percentile']
-        
+
+    # ? Original scrapper. Works but not completely and not for every player
+    # def get_player_data(player_name):
+
+    #     first_name, last_name = player_name.split()
+    #     player_page_url = f"https://fbref.com/en/search/search.fcgi?hint={
+    #         first_name}+{last_name}&search={first_name}+{last_name}"
+
+    #     response = requests.get(player_page_url)
+
+    #     if response.status_code != 200:
+    #         print(f"Player '{player_name}' not found on FBref.")
+    #         return None
+
+    #     soup = BeautifulSoup(response.content, "html.parser")
+
+    #     player_data = {}
+    #     for table in soup.find_all("table", class_="min_width"):
+    #         caption = table.find("caption")
+    #         if caption:
+    #             table_title = caption.text.strip()
+    #             df = pd.read_html(StringIO(str(table)))[0]
+    #             player_data[table_title] = df
+    #     print(player_data)
+
+    #     personal_info = ' '
+    #     info = soup.find("div", {"id": "meta"})
+    #     for p in info.find_all("p"):
+    #         parts = [part.text.strip()
+    #                 for part in p.children if p.string is not True]
+    #         personal_info += ' '.join(parts) + '\n'
+
+    #     return player_data, personal_info
 
 
 """ 
