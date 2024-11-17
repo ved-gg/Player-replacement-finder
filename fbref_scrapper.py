@@ -3,9 +3,10 @@ from bs4 import BeautifulSoup
 import pandas as pd
 from io import StringIO
 import os
+import json
 
 
-def scrape_fbref(player_name: str) -> pd.DataFrame:
+def scrape_fbref(player_name: str) -> dict:
     name = '-'.join(player_name.split())
     player_url = f"https://fbref.com/en/search/search.fcgi?hint={
         name}&search={name}"
@@ -26,15 +27,16 @@ def scrape_fbref(player_name: str) -> pd.DataFrame:
     # df = df.to_json()
 
     # Get personal info
-    personal_info = ' '
+    personal_info = {}
     info = soup.find("div", {"id": "meta"})
     for p in info.find_all("p"):
         parts = [part.text.strip()
                  for part in p.children if p.string is not True]
-        personal_info += ' '.join(parts) + '\n'
+        key = parts[0].replace(':', '').strip() if parts else 'Other'
+        value = ' '.join(parts[1:]).strip() if len(parts) > 1 else ''
+        personal_info[key] = value
 
     df_json = df.to_dict(orient='records')
-    personal_info = personal_info.strip()
 
     restructured_data = {
         "Statistic": df["Statistic"].tolist(),
@@ -45,7 +47,6 @@ def scrape_fbref(player_name: str) -> pd.DataFrame:
 
     print(restructured_data)
     return restructured_data
-    # return df_json, personal_info
 
 
-# print(scrape_fbref("Aaron-Wan-Bissaka"))  # Test
+print(scrape_fbref("Aaron-Wan-Bissaka"))  # Test

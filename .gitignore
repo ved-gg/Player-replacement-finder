@@ -1,3 +1,6 @@
-env
+.venv
 docs
 test_world.py
+serverz-output.txt
+ppt_maker.py
+Cloud_Computing_Genomics_Presentation_Updated.pptx
