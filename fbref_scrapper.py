@@ -12,6 +12,7 @@ def scrape_fbref(player_name: str) -> dict:
         name}&search={name}"
 
     headers = {
+        "Content-Type": "application/json",
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36",
         "Accept-Language": "en-US,en;q=0.9",
     }
@@ -49,4 +50,4 @@ def scrape_fbref(player_name: str) -> dict:
     return restructured_data
 
 
-print(scrape_fbref("Aaron-Wan-Bissaka"))  # Test
+# print(scrape_fbref("Aaron-Wan-Bissaka"))  # Test
