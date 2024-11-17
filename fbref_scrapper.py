@@ -1,4 +1,5 @@
-import requests
+# import requests
+from urllib.request import urlopen, Request
 from bs4 import BeautifulSoup
 import pandas as pd
 from io import StringIO
@@ -17,9 +18,9 @@ def scrape_fbref(player_name: str) -> dict:
         "Accept-Language": "en-US,en;q=0.9",
     }
 
-    response = requests.get(player_url, headers=headers)
-    response.raise_for_status()
-    soup = BeautifulSoup(response.content, "html.parser")
+    response = Request(player_url, headers=headers)
+    query = urlopen(response).read()
+    soup = BeautifulSoup(query, "html.parser")
 
     table = soup.find("table")
     df = pd.read_html(StringIO(str(table)))[0]
@@ -50,4 +51,5 @@ def scrape_fbref(player_name: str) -> dict:
     return restructured_data
 
 
-# print(scrape_fbref("Aaron-Wan-Bissaka"))  # Test
+print(scrape_fbref("Aaron-Wan-Bissaka"))  # Test
+
