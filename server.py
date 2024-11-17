@@ -1,11 +1,12 @@
 from flask import request, jsonify, make_response
-from flask import Flask
+from flask import Flask, CORS
 import json
 import pandas as pd
 
 from fbref_scrapper import scrape_fbref
 
 app = Flask(__name__)
+CORS(app)
 
 
 @app.route('/scrape', methods=['POST'])
@@ -15,8 +16,6 @@ def scrape():
         data = scrape_fbref(player_name)
         return jsonify({"data": data})
 
-    # except KeyError as e:
-    #     return make_response(jsonify({'error': f'Missing key: {e}'}), 400)
     except Exception as e:
         return make_response(jsonify({'error': str(e)}))
 

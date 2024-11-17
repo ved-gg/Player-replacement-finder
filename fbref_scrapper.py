@@ -22,10 +22,9 @@ def scrape_fbref(player_name: str) -> dict:
     query = urlopen(response).read()
     soup = BeautifulSoup(query, "html.parser")
 
+    # Get player statistics table
     table = soup.find("table")
     df = pd.read_html(StringIO(str(table)))[0]
-
-    # Remove rows with NaN values
     df = df.dropna()
 
     # Get personal info
@@ -40,6 +39,10 @@ def scrape_fbref(player_name: str) -> dict:
 
     df_json = df.to_dict(orient='records')
 
+    personal_info['name'] = info.find('h1').text
+    personal_info['image'] = info.find(
+        'div', {'class': 'media-item'}).find('img')['src']
+
     restructured_data = {
         "Statistic": df["Statistic"].tolist(),
         "Per 90": df["Per 90"].tolist(),
@@ -51,4 +54,4 @@ def scrape_fbref(player_name: str) -> dict:
     return restructured_data
 
 
-print(scrape_fbref("Aaron-Wan-Bissaka"))  # Test
+# print(scrape_fbref("Aaron-Wan-Bissaka"))  # Test
