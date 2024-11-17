@@ -25,8 +25,8 @@ def scrape_fbref(player_name: str) -> dict:
     table = soup.find("table")
     df = pd.read_html(StringIO(str(table)))[0]
 
-    # Convert the df into a json format
-    # df = df.to_json()
+    # Remove rows with NaN values
+    df = df.dropna()
 
     # Get personal info
     personal_info = {}
@@ -52,4 +52,3 @@ def scrape_fbref(player_name: str) -> dict:
 
 
 print(scrape_fbref("Aaron-Wan-Bissaka"))  # Test
-
