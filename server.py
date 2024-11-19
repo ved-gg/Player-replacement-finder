@@ -1,9 +1,11 @@
 from flask import request, jsonify, make_response
-from flask import Flask, CORS
+from flask import Flask
+from flask_cors import CORS, cross_origin
 import json
 import pandas as pd
 
-from fbref_scrapper import scrape_fbref
+from fbref_searcher import scrape_fbref
+from report_maker import generate_report
 
 app = Flask(__name__)
 CORS(app)
@@ -15,6 +17,20 @@ def scrape():
         player_name = request.json['player_name']
         data = scrape_fbref(player_name)
         return jsonify({"data": data})
+
+    except Exception as e:
+        return make_response(jsonify({'error': str(e)}))
+
+
+@app.route('/compare', methods=['POST'])
+def compare():
+    try:
+        player1 = request.json['player1']
+        player2 = request.json['player2']
+
+        report = generate_report(player1, player2)
+
+        return jsonify({"report": report})
 
     except Exception as e:
         return make_response(jsonify({'error': str(e)}))
