@@ -115,6 +115,7 @@
 
 from io import StringIO
 import logging
+import random
 import time
 from typing import List
 from urllib.request import urlopen, Request
@@ -148,7 +149,7 @@ class FbRefScrapper:
             for i, league in enumerate(self.leagues):
                 logging.info(f"Getting data for {league} in {season}")
                 self.league_links.append(f"{self.base_url}/en/comps/{self.seasons_ids[i]}/{
-                    season}/{season}-{league.replace(' ', '-')}-Stats")
+                                         season}/{season}-{league.replace(' ', '-')}-Stats")
             break  # * Remove this line to get data for all seasons
         return self.league_links
 
@@ -168,7 +169,7 @@ class FbRefScrapper:
             if links:
                 for link in links:
                     self.team_links.append(
-                        f"{self.base_url}{link.find("a")["href"]}")
+                        f"{self.base_url}{link.find('a')['href']}")
                     self.club_icons.append(link.find("img")["src"])
         return self.team_links
 
@@ -187,9 +188,9 @@ class FbRefScrapper:
             if link:
                 try:
                     self.player_links.append(
-                        f"{self.base_url}{link.find("a")['href']}")
+                        f"{self.base_url}{link.find('a')['href']}")
                 except Exception as e:
-                    logging.error(f"Coulnd't get player link for {
+                    logging.error(f"Couldn't get player link for {
                                   link.text}: {e}")
         print(len(self.player_links))
         return self.player_links
@@ -222,15 +223,19 @@ class FbRefScrapper:
         personal_info['name'] = name_tag.text if name_tag else 'Unknown'
         personal_info['image'] = info.find(
             'div', {'class': 'media-item'}).find('img')['src'] if info.find('div', {'class': 'media-item'}) else 'Unknown'
-
+        print(df)
         restructured_data = {
             "Statistic": df["Statistic"].tolist(),
             "Per 90": df["Per 90"].tolist(),
             "Percentile": df["Percentile"].tolist(),
             "Personal Info": personal_info
         }
-
         return restructured_data
+
+    def save_to_dataframe(self):
+        df = pd.DataFrame(self.player_data)
+        df.to_csv("player_data.csv", index=False)
+        logging.info("Data saved to player_data.csv")
 
 
 scraper = FbRefScrapper()
@@ -250,17 +255,21 @@ else:
                 else:
                     logging.info(
                         f"Player links for {team_link.split('/')[-1]}: {len(player_links)}")
-                    for player_link in player_links:
+                    for i, player_link in enumerate(player_links):
                         player_data = scraper.get_player_data(player_link)
                         if not player_data:
                             print("No player data found!")
                         else:
                             scraper.player_data.append(player_data)
                             logging.info(
-                                f"Player data for {player_link.split('/')[-1]}")
-                        time.sleep(2)
+                                f"Number {i} Player data for {player_link.split('/')[-1]}")
+                            time.sleep(random.uniform(1, 3))
+                    break
+                break
+            break
 
     logging.info(f"Total players scraped: {len(scraper.player_data)}")
+    scraper.save_to_dataframe()
     with open("player_data.json", "w") as f:
         json.dump(scraper.player_data, f, indent=4)
     logging.info("Data saved to player_data.json")
