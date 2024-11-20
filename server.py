@@ -1,24 +1,42 @@
-from flask import request, jsonify, make_response
-from flask import Flask, CORS
+from fastapi import FastAPI, HTTPException, Request
+from fastapi.middleware.cors import CORSMiddleware
+from pydantic import BaseModel
 import json
 import pandas as pd
 
-from fbref_scrapper import scrape_fbref
+from fbref_searcher import scrape_fbref
+from report_maker import generate_report
 
-app = Flask(__name__)
-CORS(app)
+app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 
-@app.route('/scrape', methods=['POST'])
-def scrape():
+class PlayerRequest(BaseModel):
+    player_name: str
+
+
+@app.post('/scrape')
+async def scrape(request: PlayerRequest):
     try:
-        player_name = request.json['player_name']
+        player_name = request.player_name
         data = scrape_fbref(player_name)
-        return jsonify({"data": data})
-
+        return {"data": data}
     except Exception as e:
-        return make_response(jsonify({'error': str(e)}))
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+def generate_report(player1, player2):
+    report = generate_report(player1, player2)
+    return report
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    import uvicorn
+    uvicorn.run(app, host='0.0.0.0', port=8000, debug=True)
