@@ -18,8 +18,7 @@ def generate_report(player1, player2):
     report = sequence.invoke({"player1": player1, "player2": player2})
     return report
 
-
-if __name__ == "__main__":
-    player1 = "Lamine Yamal"
-    player2 = "Nicolas Jackson"
-    print(generate_report(player1, player2))
+# if __name__ == "__main__":
+#     player1 = "Lamine Yamal"
+#     player2 = "Nicolas Jackson"
+#     print(generate_report(player1, player2))

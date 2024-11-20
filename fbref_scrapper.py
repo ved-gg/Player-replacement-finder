@@ -113,14 +113,17 @@
 
 
 
+from io import StringIO
 import logging
+import time
 from typing import List
-import requests
+from urllib.request import urlopen, Request
 from bs4 import BeautifulSoup
 import pandas as pd
 import numpy as np
 import re
 import json
+import requests
 class FbRefScrapper:
     def __init__(self):
         self.base_url = "https://fbref.com/"
@@ -138,19 +141,22 @@ class FbRefScrapper:
         self.club_icons = []
 
         logger = logging.getLogger(__name__)
-        logging.basicConfig(level=logging.INFO)
+        logging.basicConfig(level=logging.INFO, format="%(message)s")
 
     def get_league_links(self) -> List:
         for j, season in enumerate(self.seasons):
             for i, league in enumerate(self.leagues):
+                logging.info(f"Getting data for {league} in {season}")
                 self.league_links.append(f"{self.base_url}/en/comps/{self.seasons_ids[i]}/{
                     season}/{season}-{league.replace(' ', '-')}-Stats")
-            break
+            break  # * Remove this line to get data for all seasons
         return self.league_links
 
     def get_team_links(self, league_link: str) -> List:
-        response = requests.get(league_link)
-        soup = BeautifulSoup(response.content, 'html.parser')
+        logging.info(f"Getting team links for {league_link.split('/')[-1]}")
+        request = Request(league_link)
+        response = urlopen(request)
+        soup = BeautifulSoup(response.read(), 'html.parser')
         container = soup.find("div", class_="table_container")
         if not container:
             return self.team_links
@@ -167,20 +173,64 @@ class FbRefScrapper:
         return self.team_links
 
     def get_player_links(self, team_link: str) -> List:
-        response = requests.get(team_link)
-        soup = BeautifulSoup(response.content, 'html.parser')
-        container = soup.find("div", class_="table_container")
-        if not container:
+        logging.info(f"Getting player links for {team_link.split('/')[-1]}")
+        request = Request(team_link)
+        response = urlopen(request)
+        soup = BeautifulSoup(response.read(), 'html.parser')
+        table = soup.find(
+            "table", class_="stats_table", id="stats_standard_9")
+        if not table:
             return self.player_links
-        table = container.find("table") if container else None
-        if table:
-            links = table.find_all(  # type: ignore
-                "td", {"data-stat": "player"})
-            if links:
-                for link in links:
+        table_rows = table.find_all("tr")
+        for row in table_rows:
+            link = row.find("th", class_="left", scope="row")
+            if link:
+                try:
                     self.player_links.append(
-                        f"{self.base_url}{link.find('a')['href']}")
+                        f"{self.base_url}{link.find("a")['href']}")
+                except Exception as e:
+                    logging.error(f"Coulnd't get player link for {
+                                  link.text}: {e}")
+        print(len(self.player_links))
         return self.player_links
+
+    def get_player_data(self, player_link: str):
+        response = Request(player_link)
+        query = urlopen(response).read()
+        soup = BeautifulSoup(query, "html.parser")
+
+        # Get player statistics table
+        table = soup.find("table")
+        df = pd.read_html(StringIO(str(table)))[0]
+        df = df.dropna()
+
+        # Get personal info
+        personal_info = {}
+        info = soup.find("div", {"id": "meta"})
+        if not info:
+            return {"error": "Player not found"}
+        for p in info.find_all("p"):
+            parts = [part.text.strip()
+                     for part in p.children if p.string is not True]
+            key = parts[0].replace(':', '').strip() if parts else 'Other'
+            value = ' '.join(parts[1:]).strip() if len(parts) > 1 else ''
+            personal_info[key] = value
+
+        name_tag = info.find('h1') if info.find('h1') else None
+        if not name_tag:
+            return {"error": "Player not found"}
+        personal_info['name'] = name_tag.text if name_tag else 'Unknown'
+        personal_info['image'] = info.find(
+            'div', {'class': 'media-item'}).find('img')['src'] if info.find('div', {'class': 'media-item'}) else 'Unknown'
+
+        restructured_data = {
+            "Statistic": df["Statistic"].tolist(),
+            "Per 90": df["Per 90"].tolist(),
+            "Percentile": df["Percentile"].tolist(),
+            "Personal Info": personal_info
+        }
+
+        return restructured_data
 
 
 scraper = FbRefScrapper()
@@ -198,7 +248,20 @@ else:
                 if not player_links:
                     print("No player links found!")
                 else:
-                    print(player_links)
-                    break
-                break
-            break
+                    logging.info(
+                        f"Player links for {team_link.split('/')[-1]}: {len(player_links)}")
+                    for player_link in player_links:
+                        player_data = scraper.get_player_data(player_link)
+                        if not player_data:
+                            print("No player data found!")
+                        else:
+                            scraper.player_data.append(player_data)
+                            logging.info(
+                                f"Player data for {player_link.split('/')[-1]}")
+                        time.sleep(2)
+
+    logging.info(f"Total players scraped: {len(scraper.player_data)}")
+    with open("player_data.json", "w") as f:
+        json.dump(scraper.player_data, f, indent=4)
+    logging.info("Data saved to player_data.json")
+    logging.info("Scraping completed!")

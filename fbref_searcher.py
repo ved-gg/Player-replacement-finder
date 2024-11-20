@@ -32,7 +32,7 @@ def scrape_fbref(player_name: str) -> dict:
     info = soup.find("div", {"id": "meta"})
     if not info:
         return {"error": "Player not found"}
-    for p in info.find_all("p"):  # type: ignore
+    for p in info.find_all("p"): 
         parts = [part.text.strip()
                  for part in p.children if p.string is not True]
         key = parts[0].replace(':', '').strip() if parts else 'Other'
@@ -44,8 +44,8 @@ def scrape_fbref(player_name: str) -> dict:
         return {"error": "Player not found"}
     personal_info['name'] = name_tag.text if name_tag else 'Unknown'
     personal_info['image'] = info.find(
-        'div', {'class': 'media-item'}).find('img')['src']  # type: ignore
-
+        'div', {'class': 'media-item'}).find('img')['src'] if info.find('div', {'class': 'media-item'}) else 'Unknown'
+    
     restructured_data = {
         "Statistic": df["Statistic"].tolist(),
         "Per 90": df["Per 90"].tolist(),
@@ -53,8 +53,6 @@ def scrape_fbref(player_name: str) -> dict:
         "Personal Info": personal_info
     }
 
-    # print(restructured_data)
     return restructured_data
-
 
 # print(scrape_fbref("Nicolas Jackson"))  # Test
