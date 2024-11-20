@@ -30,19 +30,22 @@ def scrape_fbref(player_name: str) -> dict:
     # Get personal info
     personal_info = {}
     info = soup.find("div", {"id": "meta"})
-    for p in info.find_all("p"):
+    if not info:
+        return {"error": "Player not found"}
+    for p in info.find_all("p"): 
         parts = [part.text.strip()
                  for part in p.children if p.string is not True]
         key = parts[0].replace(':', '').strip() if parts else 'Other'
         value = ' '.join(parts[1:]).strip() if len(parts) > 1 else ''
         personal_info[key] = value
 
-    df_json = df.to_dict(orient='records')
-
-    personal_info['name'] = info.find('h1').text
+    name_tag = info.find('h1') if info.find('h1') else None
+    if not name_tag:
+        return {"error": "Player not found"}
+    personal_info['name'] = name_tag.text if name_tag else 'Unknown'
     personal_info['image'] = info.find(
-        'div', {'class': 'media-item'}).find('img')['src']
-
+        'div', {'class': 'media-item'}).find('img')['src'] if info.find('div', {'class': 'media-item'}) else 'Unknown'
+    
     restructured_data = {
         "Statistic": df["Statistic"].tolist(),
         "Per 90": df["Per 90"].tolist(),
@@ -50,8 +53,6 @@ def scrape_fbref(player_name: str) -> dict:
         "Personal Info": personal_info
     }
 
-    print(restructured_data)
     return restructured_data
 
-
-print(scrape_fbref("Nicolas Jackson"))  # Test
+# print(scrape_fbref("Nicolas Jackson"))  # Test
