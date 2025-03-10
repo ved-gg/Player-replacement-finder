@@ -1,0 +1,18 @@
+1. Attack vs Defense Scatter Plot
+Why? It helps visualize teams’ playing styles.
+X-axis: Goals Scored per Game
+Y-axis: Goals Conceded per Game
+Quadrants:
+🔵 Top-left: Strong defense, weak attack (e.g., teams that park the bus)
+🔴 Top-right: Strong attack, weak defense (e.g., high-scoring teams with weak defense)
+🟢 Bottom-right: Elite teams (strong attack + defense)
+🟡 Bottom-left: Struggling teams
+
+2. Defensive Solidity Index (Duels Won % vs Tackles per 90)
+Why? Helps identify the best defensive teams in the league.
+X-axis: Tackles per 90
+Y-axis: Duels Won %
+Bubble size: Interceptions per 90
+📌 Findings:
+🟢 Teams in the top-right → Defensive beasts
+🔴 Teams in the bottom-left → Weak defensively

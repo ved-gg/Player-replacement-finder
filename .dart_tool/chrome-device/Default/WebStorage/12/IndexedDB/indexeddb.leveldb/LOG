@@ -1,6 +1,10 @@
-2024/11/17-22:08:14.760 6164 Creating DB C:\Users\Shubh\AppData\Local\Temp\flutter_tools.755c16f0\flutter_tools_chrome_device.4713c7e3\Default\WebStorage\12\IndexedDB\indexeddb.leveldb since it was missing.
-2024/11/17-22:08:14.766 6164 Reusing MANIFEST C:\Users\Shubh\AppData\Local\Temp\flutter_tools.755c16f0\flutter_tools_chrome_device.4713c7e3\Default\WebStorage\12\IndexedDB\indexeddb.leveldb/MANIFEST-000001
-2024/11/17-23:05:52.207 615c Level-0 table #5: started
-2024/11/17-23:05:52.210 615c Level-0 table #5: 12913 bytes OK
-2024/11/17-23:05:52.212 615c Delete type=0 #3
-2024/11/17-23:05:52.213 615c Manual compaction at level-0 from (begin) .. (end); will stop at (end)
+2025/03/02-14:27:15.029 4580 Reusing MANIFEST C:\Users\Shubh\AppData\Local\Temp\flutter_tools.785dfc7b\flutter_tools_chrome_device.4627597c\Default\WebStorage\12\IndexedDB\indexeddb.leveldb/MANIFEST-000001
+2025/03/02-14:27:15.029 4580 Recovering log #7
+2025/03/02-14:27:15.029 4580 Reusing old log C:\Users\Shubh\AppData\Local\Temp\flutter_tools.785dfc7b\flutter_tools_chrome_device.4627597c\Default\WebStorage\12\IndexedDB\indexeddb.leveldb/000007.log 
+2025/03/02-14:27:15.030 4580 Delete type=0 #4
+2025/03/02-14:27:15.030 4580 Delete type=2 #5
+2025/03/02-14:27:15.030 4580 Delete type=2 #8
+2025/03/02-14:27:15.040 4324 Level-0 table #12: started
+2025/03/02-14:27:15.041 4324 Level-0 table #12: 8561 bytes OK
+2025/03/02-14:27:15.042 4324 Delete type=0 #7
+2025/03/02-14:27:15.042 4580 Manual compaction at level-0 from '\x00\x04\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00\x05\x00\x00\x00' @ 0 : 0; will stop at (end)

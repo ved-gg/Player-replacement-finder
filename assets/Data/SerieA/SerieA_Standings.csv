@@ -1,0 +1,21 @@
+Rk,Squad,MP,W,D,L,GF,GA,GD,Pts,Pts/MP,xG,xGA,xGD,xGD/90,Last 5,Top Team Scorer,Goalkeeper
+1,Inter,28,18,7,3,63,27,36,61,2.18,51.5,24.7,26.9,0.96,W L W D W,Marcus Thuram - 13,Yann Sommer
+2,Napoli,27,17,6,4,43,22,21,57,2.11,36.6,20.5,16.2,0.6,D D D L D,Romelu Lukaku - 9,Alex Meret
+3,Atalanta,27,16,7,4,59,26,33,55,2.04,46.4,25.4,21.0,0.78,D W D W D,Mateo Retegui - 21,Marco Carnesecchi
+4,Juventus,27,13,13,1,45,21,24,52,1.93,38.7,23.3,15.4,0.57,W W W W W,Dušan Vlahović - 9,Michele Di Gregorio
+5,Lazio,27,15,5,7,49,35,14,50,1.85,42.8,29.0,13.8,0.51,W W D D W,Valentín Castellanos - 9,Ivan Provedel
+6,Bologna,27,12,11,4,42,33,9,47,1.74,36.7,26.1,10.6,0.39,D W L W W,Riccardo Orsolini - 9,Łukasz Skorupski
+7,Fiorentina,27,13,6,8,42,28,14,45,1.67,34.9,27.8,7.1,0.26,W L L L W,Moise Kean - 15,David de Gea
+8,Milan,28,12,8,8,42,32,10,44,1.57,47.0,30.5,16.5,0.59,W L L L W,"Christian Pulisic, Tijjani Reijnders - 8",Mike Maignan
+9,Roma,27,12,7,8,42,30,12,43,1.59,38.5,30.5,7.9,0.29,D W W W W,Artem Dovbyk - 9,Mile Svilar
+10,Udinese,27,11,6,10,34,37,-3,39,1.44,27.5,36.6,-9.0,-0.33,W D W W W,Lorenzo Lucca - 10,Maduka Okoye
+11,Torino,28,8,11,9,33,34,-1,35,1.25,24.9,37.7,-12.8,-0.46,D L W W D,Che Adams - 8,Vanja Milinković-Savić
+12,Genoa,28,7,11,10,26,36,-10,32,1.14,29.2,35.0,-5.8,-0.21,D W L D D,Andrea Pinamonti - 8,Nicola Leali
+13,Como,28,7,8,13,34,44,-10,29,1.04,31.4,30.2,1.1,0.04,L W W L D,"Patrick Cutrone, Nicolás Paz - 6","Pepe Reina, Jean Butez"
+14,Cagliari,28,6,8,14,28,43,-15,26,0.93,33.0,44.1,-11.1,-0.39,W D L L D,Roberto Piccoli - 7,Simone Scuffet
+15,Hellas Verona,27,8,2,17,27,56,-29,26,0.96,26.1,42.5,-16.4,-0.61,W L L W L,Casper Tengstedt - 6,Lorenzo Montipò
+16,Lecce,28,6,7,15,20,46,-26,25,0.89,25.6,44.3,-18.7,-0.67,D D L L L,Nikola Krstović - 9,Wladimiro Falcone
+17,Parma,28,5,9,14,34,48,-14,24,0.86,33.2,47.2,-14.1,-0.5,L L W L D,Ange-Yoan Bonny - 5,Zion Suzuki
+18,Empoli,27,4,10,13,23,44,-21,22,0.81,23.4,36.7,-13.3,-0.49,L L L L D,Sebastiano Esposito - 8,Devis Vásquez
+19,Venezia,28,3,10,15,23,42,-19,19,0.68,25.5,43.4,-17.9,-0.64,L L D D D,Joel Pohjanpalo - 6,Filip Stankovic
+20,Monza,28,2,8,18,23,48,-25,14,0.5,22.0,39.5,-17.5,-0.62,L D L L L,"Milan Đurić, Dany Mota - 4",Stefano Turati
