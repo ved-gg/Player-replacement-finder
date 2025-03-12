@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable, file_names
+
 import 'package:flutter/material.dart';
 import 'package:player_replacement/Components/constants.dart';
 
@@ -9,13 +11,13 @@ class AllLeagues extends StatefulWidget {
 }
 
 class _AllLeaguesState extends State<AllLeagues> {
-  Color premColor = Color(0xFF3d195b);
-  Color laLigaColor = Color(0xFFFF4B44);
-  Color bundesligaColor = Color(0xFFD10214);
-  Color serieAColor = Color(0xFF0578FF);
-  Color erediviseColor = Color(0xFF002F63);
-  Color portugalColor = Color(0xFF00235A);
-  Color scottishPLColor = Color(0xFF27305D);
+  Color premColor = const Color(0xFF3d195b);
+  Color laLigaColor = const Color(0xFFFF4B44);
+  Color bundesligaColor = const Color(0xFFD10214);
+  Color serieAColor = const Color(0xFF0578FF);
+  Color erediviseColor = const Color(0xFF002F63);
+  Color portugalColor = const Color(0xFF00235A);
+  Color scottishPLColor = const Color(0xFF27305D);
   Color ligueOneColor = Colors.black;
   Color superLigColor = Colors.black;
 
@@ -25,6 +27,7 @@ class _AllLeaguesState extends State<AllLeagues> {
     final w = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: true,
         toolbarHeight: h * 0.1,
         backgroundColor: kPrimaryColor,
         foregroundColor: kSecondaryColor,

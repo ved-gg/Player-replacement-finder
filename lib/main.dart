@@ -4,7 +4,6 @@ import 'package:player_replacement/All%20Leagues/Eredivise/Eredivise.dart';
 import 'package:player_replacement/Home%20Page/homePage.dart';
 import 'package:player_replacement/Player%20Positions/playerPositions.dart';
 import 'package:player_replacement/Player%20Replacement/playerReplacement.dart';
-import 'package:player_replacement/PlayerComparison/playerComparison.dart';
 import 'All Leagues/allLeagues.dart';
 import 'All Leagues/La Liga/LaLiga.dart';
 import 'All Leagues/LigaPortugal/LigaPortugal.dart';
@@ -28,9 +27,8 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       routes: {
-        '/': (context) => PlayerComparison(),
+        '/': (context) => Homepage(),
         '/PlayerReplacement': (context) => PlayerReplacement(),
-        '/PlayerComparison': (context) => PlayerComparison(),
         '/AllTeams': (context) => AllLeagues(),
         '/PremierLeague': (context) => PremierLeague(),
         '/LaLiga': (context) => LaLiga(),

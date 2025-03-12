@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:player_replacement/Components/constants.dart';
 import 'package:flutter_flip_card/flutter_flip_card.dart';
 import 'package:flip_carousel/flip_carousel.dart';
+import 'package:player_replacement/PlayerComparison/playerComparison.dart';
 
 class PlayerPositions extends StatelessWidget {
   @override
@@ -25,8 +26,10 @@ class _SoccerFieldScreenState extends State<SoccerFieldScreen> {
     return Scaffold(
       backgroundColor: kSecondaryColor,
       appBar: AppBar(
+        automaticallyImplyLeading: true,
         toolbarHeight: h * 0.1,
         backgroundColor: kPrimaryColor,
+        foregroundColor: kSecondaryColor,
         title: Padding(
           padding: EdgeInsets.symmetric(vertical: h * 0.03),
           child: Column(
@@ -186,7 +189,17 @@ class PositionsCard extends StatelessWidget {
           frontWidget: Column(
             children: [
               GestureDetector(
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => PlayerComparison(
+                        positionSF: positionSF,
+                        position: position,
+                      ),
+                    ),
+                  );
+                },
                 child: Image.asset(
                   'images/Positions/$positionSF.png',
                   height: h * 0.4,

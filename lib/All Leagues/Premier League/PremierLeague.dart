@@ -78,7 +78,6 @@ class _PremierLeagueState extends State<PremierLeague> {
       final response = await http.get(
         Uri.parse('http://127.0.0.1:5000/standings'),
         headers: {
-          'X-Auth-Token': '157ed7af01e24ef496771bf1338cf2c6',
           'league': 'Premier League',
         },
       );

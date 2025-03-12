@@ -1,0 +1,85 @@
+Here are the formulas for calculating each metric using FBRef data. The formulas are based on per 90 statistics wherever applicable to ensure fair comparisons.  
+
+---
+
+## 1️⃣ Center Backs (CBs)  
+🔹 Key Metrics & Formulas:  
+1. Defensive Actions = (Tackles + Interceptions + Blocks + Clearances) / 90  Tkl, Int, Clr, Blocks
+2. Aerial Duels = (Aerials Won / Aerial Duels Attempted) * 100  Won, Lost, Won+Lost
+3. Passing & Build-up Play = (Passes Completed / Passes Attempted) * 100  Cmp and Att
+4. Positioning & Defensive Awareness = (Clearances + Blocks) / 90 Clr, Blocks
+5. Defensive Contributions = (Tackles + Interceptions) / 90 Tkl, Int
+
+📌 Data Source: Squad Defensive Actions, Squad Possession, Squad Passing  
+
+---
+
+## 2️⃣ Fullbacks & Wingbacks (LBs, RBs)  
+🔹 Key Metrics & Formulas:  
+1. Defensive Duties = (Tackles in Defensive Third + Interceptions) / 90  Def 3rd, Int
+2. Offensive Contribution = (Progressive Carries + Progressive Passes + xA) / 90    PrgP, PrgC, xA
+3. Final Third Play = (Crosses Attempted + SCA+ CPA) / 90  Crs, SCA, CPA
+4. Possession Play = (Touches in Attacking Third + Carry Distance) / 90  Att 3rd, TotDist
+5. Dribbling & Transition Play = (Successful Take-ons / Take-ons Attempted) * 100  in Possession Att, Succ
+
+📌 Data Source: Squad Passing, Squad Possession, Squad Goal and Shot Creation  
+
+---
+
+## 3️⃣ Central Defensive Midfielders (CDMs)  
+🔹 Key Metrics & Formulas:  
+1. Defensive Contributions = (Tackles + Interceptions + Blocks) / 90 Tkl, Int, Blocks
+2. Passing Ability = (Passes Completed / Passes Attempted) * 100 Cmp, Att
+3. Build-up Play = (xG Buildup / 90) xG
+4. Ball Recovery & Defensive Work = (Recoveries + Interceptions) / 90 Recov, Int
+5. Defensive Line Breaking Passes = (Progressive Passes / 90) PrgP 
+📌 Data Source: Squad Defensive Actions, Squad Passing, Squad Possession  
+
+---
+
+## 4️⃣ Central Midfielders (CMs)  
+🔹 Key Metrics & Formulas:  
+1. Passing & Vision = (Progressive Passes + Passes into Final Third) / 90 in Passing PrgP, 1/3
+2. Ball Carrying = (Progressive Carries / 90) PrgC 
+3. Defensive Work = (Tackles + Interceptions) / 90 Tkl, Int
+4. Chance Creation = (Shot-Creating Actions + xG Chain) / 90 SCA, npxG
+5. Possession Retention = (Passes Completed / Total Passes) * 100 Cmp, Att
+
+
+📌 Data Source: Squad Passing, Squad Goal and Shot Creation, Squad Possession  
+
+---
+
+## 5️⃣ Central Attacking Midfielders (CAMs)  
+🔹 Key Metrics & Formulas:  
+1. Creativity & Playmaking = (xA + Shot-Creating Actions +Passes into Final Third) / 90  xA, PrgP, 1/3
+2. Ball Progression = (Progressive Passes + Progressive Carries) / 90  PrgP, PrgC
+3. Final Third Impact = (Touches in Attacking Third + Passes into Penalty Area) / 90  Att 3rd, PPA
+4. Goal Threat = (xG + Goals) / 90  xG, Gls
+5. Final Ball Efficiency = (Passes into Final Third / 90)  1/3
+
+📌 Data Source: Squad Goal and Shot Creation, Squad Possession, Squad Shooting  
+
+---
+
+## 6️⃣ Left & Right Wingers (LW, RW)  
+🔹 Key Metrics & Formulas:  
+1. Dribbling & Ball Carrying = (Successful Take-ons / Take-ons Attempted) * 100 In Possession Att, Succ
+2. Crossing & Playmaking = (xA + Crosses Completed) / 90 xA, Crs 
+3. Shooting & Goal Threat = (Goals + xG) / 90 Gls, xG
+4. Final Third Involvement = (Passes into the Final Third + Progressive Passes Received) / 90  1/3, PrgR
+5. Ball Carrying into Dangerous Areas = (Carries into Penalty Area + Progressive Carries) / 90  in Possession CPA,  PrgC
+
+📌 Data Source: Squad Shooting, Squad Passing, Squad Goal and Shot Creation  
+
+---
+
+## 7️⃣ Center Forwards (CFs)  
+🔹 Key Metrics & Formulas:  
+1. Goal Threat = (xG + Goals) / 90   xG, Gls
+2. Chance Conversion = (Non-Penalty Goals / xG)  G-PK, xG
+3. Link-Up Play = (Progressive Passes Received + Passes into Final Third + xA) / 90  PrgR, 1/3, PrgP, xA
+4. Shooting Accuracy = (Shots on Target / Total Shots) * 100 SoT%
+5. Penalty Box Presence = (Touches in Attacking Penalty Area / 90)  Att 3rd, Att Pen
+📌 Data Source: Squad Shooting, Squad Goal and Shot Creation, Squad Possession  
+

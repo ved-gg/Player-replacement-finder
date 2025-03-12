@@ -1,21 +1,2 @@
-2025/03/10-22:48:13.040 3ba8 Reusing MANIFEST C:\Users\Shubh\AppData\Local\Temp\flutter_tools.f62e1dc1\flutter_tools_chrome_device.60bfefeb\Default\shared_proto_db/MANIFEST-000001
-2025/03/10-22:48:13.042 3ba8 Recovering log #32
-2025/03/10-22:48:13.043 3ba8 Reusing old log C:\Users\Shubh\AppData\Local\Temp\flutter_tools.f62e1dc1\flutter_tools_chrome_device.60bfefeb\Default\shared_proto_db/000032.log 
-2025/03/10-22:48:13.044 3ba8 Delete type=0 #3
-2025/03/10-22:48:13.045 3ba8 Delete type=0 #4
-2025/03/10-22:48:13.045 3ba8 Delete type=0 #7
-2025/03/10-22:48:13.045 3ba8 Delete type=2 #8
-2025/03/10-22:48:13.045 3ba8 Delete type=0 #10
-2025/03/10-22:48:13.045 3ba8 Delete type=2 #11
-2025/03/10-22:48:13.045 3ba8 Delete type=0 #13
-2025/03/10-22:48:13.045 3ba8 Delete type=2 #14
-2025/03/10-22:48:13.046 3ba8 Delete type=0 #16
-2025/03/10-22:48:13.046 3ba8 Delete type=2 #17
-2025/03/10-22:48:13.046 3ba8 Delete type=0 #19
-2025/03/10-22:48:13.046 3ba8 Delete type=2 #21
-2025/03/10-22:48:13.047 3ba8 Delete type=0 #23
-2025/03/10-22:48:13.047 3ba8 Delete type=2 #24
-2025/03/10-22:48:13.047 3ba8 Delete type=0 #26
-2025/03/10-22:48:13.047 3ba8 Delete type=2 #27
-2025/03/10-22:48:13.047 3ba8 Delete type=0 #29
-2025/03/10-22:48:13.047 3ba8 Delete type=2 #30
+2025/03/12-23:42:01.935 55e0 Creating DB C:\Users\Shubh\AppData\Local\Temp\flutter_tools.592245a9\flutter_tools_chrome_device.f3ac977a\Default\shared_proto_db since it was missing.
+2025/03/12-23:42:01.937 55e0 Reusing MANIFEST C:\Users\Shubh\AppData\Local\Temp\flutter_tools.592245a9\flutter_tools_chrome_device.f3ac977a\Default\shared_proto_db/MANIFEST-000001

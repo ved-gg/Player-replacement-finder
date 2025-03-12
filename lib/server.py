@@ -9,6 +9,7 @@ from standings_getter import standings_getter
 from standings_getter import fetch_top_performers
 from plot_data import attack_vs_defence
 from plot_data import defensive_solidity
+from attributes_calculation import attributes_calculation
 
 
 
@@ -27,17 +28,17 @@ def scrape():
         return make_response(jsonify({'error': str(e)}))
 
 
-@app.route('/report', methods=['POST'])
-def report():
-    try:
-        player1 = request.json['player1']
-        player2 = request.json['player2']
-        report = generate_report(player1, player2)
-        print(report)
-        return jsonify({"report": report})
+# @app.route('/report', methods=['POST'])
+# def report():
+#     try:
+#         player1 = request.json['player1']
+#         player2 = request.json['player2']
+#         report = generate_report(player1, player2)
+#         print(report)
+#         return jsonify({"report": report})
     
-    except Exception as e:
-        return make_response(jsonify({'error': str(e)}))
+#     except Exception as e:
+#         return make_response(jsonify({'error': str(e)}))
 
 @app.route('/standings', methods=['GET'])
 def standings():
@@ -75,6 +76,17 @@ def defensive_solidity_chart_data():
         return jsonify(data)
     except Exception as e:
         return make_response(jsonify({'error':str(e)}))
+    
+@app.route('/player_attributes',methods=["GET"])
+def get_player_attributes():
+    try: 
+        pos = request.headers.get("position")
+        player = request.headers.get("player")
+        data = attributes_calculation(pos,player)
+        return jsonify(data)
+    except Exception as e:
+        return make_response(jsonify({'Error': str(e)}))
+    
 
 if __name__ == '__main__':
     app.run(debug=True)
