@@ -4,6 +4,7 @@ import numpy as np
 
 def attributes_calculation(pos,player):
     csv_path = f"D:\\College\\Final Year Project\\Front end\\player_replacement\\assets\\data\\playerdata\\{pos}.csv"
+    tis_csv_path = f"D:\\College\\Final Year Project\\Front end\\player_replacement\\assets\\data\\playerdata\\TIS_{pos}.csv"
     df = pd.read_csv(csv_path)
     df = df.fillna(0)
     player_row = df[df["name"]==player]
@@ -14,6 +15,7 @@ def attributes_calculation(pos,player):
             "Passing and Build-up": player_row["Passing and Build-up"].values[0].item(),
             "Defensive Awareness": player_row["Defensive Awareness"].values[0].item(),
             "Discipline": player_row["Discipline"].values[0].item(),
+            "TIS": player_row["TIS"].values[0].item(),
         }
         return cb_attributes
     if(pos=='LB'):
@@ -23,6 +25,7 @@ def attributes_calculation(pos,player):
             "Final Third Play": player_row["Final Third Play"].values[0].item(),
             "Possession Play": player_row["Possession Play"].values[0].item(),
             "Dribbling": player_row["Dribbling"].values[0].item(),
+            "TIS": player_row["TIS"].values[0].item(),
         }
         return lb_attributes
     if(pos=='RB'):
@@ -32,6 +35,7 @@ def attributes_calculation(pos,player):
             "Final Third Play": player_row["Final Third Play"].values[0].item(),
             "Possession Play": player_row["Possession Play"].values[0].item(),
             "Dribbling": player_row["Dribbling"].values[0].item(),
+            "TIS": player_row["TIS"].values[0].item(),
         }  
         return rb_attributes
     elif(pos=='CDM'):
@@ -41,6 +45,7 @@ def attributes_calculation(pos,player):
             "Build-Up Play" :player_row["Build-Up Play"].values[0].item(),
             "Ball Recovery": player_row["Ball Recovery & Defensive Work"].values[0].item(),
             "Line Breaking Passes": player_row["Line Breaking Passes"].values[0].item(),
+            "TIS": player_row["TIS"].values[0].item(),
         }  
         return cdm_attributes
     elif(pos=='CM'):
@@ -50,6 +55,7 @@ def attributes_calculation(pos,player):
             "Defensive Work":player_row["Defensive Work"].values[0].item(),
             "Chance Creation": player_row["Chance Creation"].values[0].item(),
             "Possession Retention": player_row["Possession Retention"].values[0].item(),
+            "TIS": player_row["TIS"].values[0].item(),
         }
         return cm_attributes
     elif(pos=='CAM'):        
@@ -59,6 +65,7 @@ def attributes_calculation(pos,player):
             "Final Third Impact": player_row["Final Third Impact"].values[0].item(),
             "Goal Threat": player_row["Goal Threat"].values[0].item(),
             "Final Ball Efficiency": player_row["Final Ball Efficiency"].values[0].item(),
+            "TIS": player_row["TIS"].values[0].item(),
         }
         return cam_attributes
     elif(pos=="LW"):
@@ -68,6 +75,7 @@ def attributes_calculation(pos,player):
             "Goal Threat": player_row["Goal Threat"].values[0].item(),
             "Final Third Impact": player_row["Final Third Impact"].values[0].item(),
             "Ball Carrying" : player_row["Ball Carrying"].values[0].item(),
+            "TIS": player_row["TIS"].values[0].item(),
         }
         return lw_attributes
     elif(pos=='RW'):
@@ -77,6 +85,7 @@ def attributes_calculation(pos,player):
             "Goal Threat": player_row["Goal Threat"].values[0].item(),
             "Final Third Impact": player_row["Final Third Impact"].values[0].item(),
             "Ball Carrying" : player_row["Ball Carrying"].values[0].item(),
+            "TIS": player_row["TIS"].values[0].item(),
         }
         return rw_attributes
     elif(pos=='CF'):
@@ -85,7 +94,8 @@ def attributes_calculation(pos,player):
             "Chance Conversion": player_row["Chance Conversion"].values[0].item(),
             "Link-Up Play": player_row["Link-Up Play"].values[0].item(),
             "Shooting Accuracy": player_row["Shooting Accuracy"].values[0].item(),
-            "Penalty Box Presence": player_row["Penalty Box Presence"].values[0].item()
+            "Penalty Box Presence": player_row["Penalty Box Presence"].values[0].item(),
+            "TIS": player_row["TIS"].values[0].item(),
         }
         return cf_attributes
     elif(pos=='GK'):
@@ -94,7 +104,8 @@ def attributes_calculation(pos,player):
             "Expected Goals Prevented": player_row["Expected Goals Prevented"].values[0].item(),
             "Cross and Aerial Control": player_row["Cross and Aerial Control"].values[0].item(),
             "Sweeper Keeper Activity": player_row["Sweeper Keeper Activity"].values[0].item(),
-            "Passing": player_row["Passing"].values[0].item()
+            "Passing": player_row["Passing"].values[0].item(),
+            "TIS": player_row["TIS"].values[0].item(),
         }
         return gk_attributes
     else:
@@ -102,3 +113,5 @@ def attributes_calculation(pos,player):
             "Error": "Given Position Not Found"
         }
         return error
+
+attributes_calculation('CB','Abakar Sylla')

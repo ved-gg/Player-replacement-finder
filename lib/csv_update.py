@@ -6,7 +6,10 @@ positions_list = ['CB','LB','RB','LW','RW','GK','CF','CDM','CAM','CM']
 
 def csv_update(pos):
     csv_path = f"D:\\College\\Final Year Project\\Front end\\player_replacement\\assets\\data\\playerdata\\{pos}.csv"
+    tis_csv_path = f"D:\\College\\Final Year Project\\Front end\\player_replacement\\assets\\data\\playerdata\\TIS_{pos}.csv"
+    tis_df = pd.read_csv(tis_csv_path)
     df = pd.read_csv(csv_path)
+    df["TIS"] = np.array(tis_df["TIS"]/10)
     df = df.fillna(0)
     if(pos=='CB'):
         # Defensive Actions

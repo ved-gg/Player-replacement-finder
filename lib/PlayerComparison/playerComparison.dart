@@ -358,6 +358,7 @@ class _PlayerComparisonState extends State<PlayerComparison> {
                                     ),
                                   ),
                                 )),
+                            DataColumn(label: Text('TIS')),
                             DataColumn(label: Text('Actions')),
                           ],
                           rows: selectedPlayers.entries.map((entry) {
@@ -365,7 +366,6 @@ class _PlayerComparisonState extends State<PlayerComparison> {
                                 .toList()
                                 .indexOf(entry.key);
                             Map<String, double> attributes = entry.value;
-
                             return DataRow(
                               cells: [
                                 DataCell(
@@ -381,6 +381,10 @@ class _PlayerComparisonState extends State<PlayerComparison> {
                                       Text(attr.value.toStringAsFixed(
                                           1)), // Only 1 decimal place
                                     )),
+                                DataCell(
+                                  Text(attributes['TIS']?.toStringAsFixed(1) ??
+                                      'N/A'),
+                                ),
                                 DataCell(
                                   IconButton(
                                     icon: Icon(Icons.delete, color: Colors.red),

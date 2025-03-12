@@ -10,6 +10,7 @@ class CBAttributes extends PlayerAttributes {
   final double passingBuildUp;
   final double defensiveAwareness;
   final double discipline;
+  final double tis;
 
   CBAttributes({
     required this.defensiveActions,
@@ -17,16 +18,17 @@ class CBAttributes extends PlayerAttributes {
     required this.passingBuildUp,
     required this.defensiveAwareness,
     required this.discipline,
+    required this.tis,
   });
 
   factory CBAttributes.fromJson(Map<String, dynamic> json) {
     return CBAttributes(
-      defensiveActions: json["Defensive Actions"] ?? 0.0,
-      aerialDuels: json["Aerial Duels"] ?? 0.0,
-      passingBuildUp: json["Passing and Build-up"] ?? 0.0,
-      defensiveAwareness: json["Defensive Awareness"] ?? 0.0,
-      discipline: json["Discipline"] ?? 0.0,
-    );
+        defensiveActions: json["Defensive Actions"] ?? 0.0,
+        aerialDuels: json["Aerial Duels"] ?? 0.0,
+        passingBuildUp: json["Passing and Build-up"] ?? 0.0,
+        defensiveAwareness: json["Defensive Awareness"] ?? 0.0,
+        discipline: json["Discipline"] ?? 0.0,
+        tis: json["TIS"] ?? 0.0);
   }
 
   @override
@@ -36,6 +38,7 @@ class CBAttributes extends PlayerAttributes {
         "Passing and Build-up": passingBuildUp,
         "Defensive Awareness": defensiveAwareness,
         "Discipline": discipline,
+        "TIS": tis,
       };
 }
 
@@ -47,6 +50,7 @@ class LBAttributes extends PlayerAttributes {
   final double finalThirdPlay;
   final double offensiveContributions;
   final double possessionPlay;
+  final double tis;
 
   LBAttributes({
     required this.defensiveDuties,
@@ -54,6 +58,7 @@ class LBAttributes extends PlayerAttributes {
     required this.finalThirdPlay,
     required this.offensiveContributions,
     required this.possessionPlay,
+    required this.tis,
   });
 
   factory LBAttributes.fromJson(Map<String, dynamic> json) {
@@ -63,6 +68,7 @@ class LBAttributes extends PlayerAttributes {
       finalThirdPlay: json["Final Third Play"] ?? 0.0,
       offensiveContributions: json["Offensive Contributions"] ?? 0.0,
       possessionPlay: json["Possession Play"] ?? 0.0,
+      tis: json["TIS"] ?? 0.0,
     );
   }
 
@@ -73,6 +79,7 @@ class LBAttributes extends PlayerAttributes {
         "Final Third Play": finalThirdPlay,
         "Offensive Contributions": offensiveContributions,
         "Possession Play": possessionPlay,
+        "TIS": tis,
       };
 }
 
@@ -82,6 +89,7 @@ class RBAttributes extends PlayerAttributes {
   final double finalThirdPlay;
   final double offensiveContributions;
   final double possessionPlay;
+  final double tis;
 
   RBAttributes({
     required this.defensiveDuties,
@@ -89,6 +97,7 @@ class RBAttributes extends PlayerAttributes {
     required this.finalThirdPlay,
     required this.offensiveContributions,
     required this.possessionPlay,
+    required this.tis,
   });
 
   factory RBAttributes.fromJson(Map<String, dynamic> json) {
@@ -98,6 +107,7 @@ class RBAttributes extends PlayerAttributes {
       finalThirdPlay: json["Final Third Play"] ?? 0.0,
       offensiveContributions: json["Offensive Contributions"] ?? 0.0,
       possessionPlay: json["Possession Play"] ?? 0.0,
+      tis: json["TIS"] ?? 0.0,
     );
   }
 
@@ -108,6 +118,7 @@ class RBAttributes extends PlayerAttributes {
         "Final Third Play": finalThirdPlay,
         "Offensive Contributions": offensiveContributions,
         "Possession Play": possessionPlay,
+        "TIS": tis,
       };
 }
 
@@ -119,6 +130,7 @@ class CDMAttributes extends PlayerAttributes {
   final double buildUpPlay;
   final double ballRecovery;
   final double lineBreakingPasses;
+  final double tis;
 
   CDMAttributes({
     required this.defensiveContribution,
@@ -126,6 +138,7 @@ class CDMAttributes extends PlayerAttributes {
     required this.buildUpPlay,
     required this.ballRecovery,
     required this.lineBreakingPasses,
+    required this.tis,
   });
 
   factory CDMAttributes.fromJson(Map<String, dynamic> json) {
@@ -135,6 +148,7 @@ class CDMAttributes extends PlayerAttributes {
       buildUpPlay: json["Build-Up Play"] ?? 0.0,
       ballRecovery: json["Ball Recovery"] ?? 0.0,
       lineBreakingPasses: json["Line Breaking Passes"] ?? 0.0,
+      tis: json["TIS"] ?? 0.0,
     );
   }
 
@@ -145,6 +159,7 @@ class CDMAttributes extends PlayerAttributes {
         "Build-Up Play": buildUpPlay,
         "Ball Recovery": ballRecovery,
         "Line Breaking Passes": lineBreakingPasses,
+        "TIS": tis,
       };
 }
 
@@ -154,6 +169,7 @@ class CMAttributes extends PlayerAttributes {
   final double defensiveWork;
   final double chanceCreation;
   final double possessionRetention;
+  final double tis;
 
   CMAttributes({
     required this.passing,
@@ -161,6 +177,7 @@ class CMAttributes extends PlayerAttributes {
     required this.defensiveWork,
     required this.chanceCreation,
     required this.possessionRetention,
+    required this.tis,
   });
 
   factory CMAttributes.fromJson(Map<String, dynamic> json) {
@@ -170,6 +187,7 @@ class CMAttributes extends PlayerAttributes {
       defensiveWork: json["Defensive Work"] ?? 0.0,
       chanceCreation: json["Chance Creation"] ?? 0.0,
       possessionRetention: json["Possession Retention"] ?? 0.0,
+      tis: json["TIS"] ?? 0.0,
     );
   }
 
@@ -180,6 +198,7 @@ class CMAttributes extends PlayerAttributes {
         "Defensive Work": defensiveWork,
         "Chance Creation": chanceCreation,
         "Possession Retention": possessionRetention,
+        "TIS": tis,
       };
 }
 
@@ -189,6 +208,7 @@ class CAMAttributes extends PlayerAttributes {
   final double finalThirdImpact;
   final double goalThreat;
   final double finalBallEfficiency;
+  final double tis;
 
   CAMAttributes({
     required this.playmaking,
@@ -196,6 +216,7 @@ class CAMAttributes extends PlayerAttributes {
     required this.finalThirdImpact,
     required this.goalThreat,
     required this.finalBallEfficiency,
+    required this.tis,
   });
 
   factory CAMAttributes.fromJson(Map<String, dynamic> json) {
@@ -205,6 +226,7 @@ class CAMAttributes extends PlayerAttributes {
       finalThirdImpact: json["Final Third Impact"] ?? 0.0,
       goalThreat: json["Goal Threat"] ?? 0.0,
       finalBallEfficiency: json["Final Ball Efficiency"] ?? 0.0,
+      tis: json["TIS"] ?? 0.0,
     );
   }
 
@@ -215,6 +237,7 @@ class CAMAttributes extends PlayerAttributes {
         "Final Third Impact": finalThirdImpact,
         "Goal Threat": goalThreat,
         "Final Ball Efficiency": finalBallEfficiency,
+        "TIS": tis,
       };
 }
 
@@ -224,6 +247,7 @@ class LWAttributes extends PlayerAttributes {
   final double goalThreat;
   final double finalThirdImpact;
   final double ballCarrying;
+  final double tis;
 
   LWAttributes({
     required this.dribbling,
@@ -231,6 +255,7 @@ class LWAttributes extends PlayerAttributes {
     required this.finalThirdImpact,
     required this.goalThreat,
     required this.ballCarrying,
+    required this.tis,
   });
 
   factory LWAttributes.fromJson(Map<String, dynamic> json) {
@@ -240,6 +265,7 @@ class LWAttributes extends PlayerAttributes {
       finalThirdImpact: json["Final Third Impact"] ?? 0.0,
       goalThreat: json["Goal Threat"] ?? 0.0,
       ballCarrying: json["Ball Carrying"] ?? 0.0,
+      tis: json["TIS"] ?? 0.0,
     );
   }
 
@@ -250,6 +276,7 @@ class LWAttributes extends PlayerAttributes {
         "Final Third Impact": finalThirdImpact,
         "Goal Threat": goalThreat,
         "Crosses": crosses,
+        "TIS": tis,
       };
 }
 
@@ -259,6 +286,7 @@ class RWAttributes extends PlayerAttributes {
   final double goalThreat;
   final double finalThirdImpact;
   final double ballCarrying;
+  final double tis;
 
   RWAttributes({
     required this.dribbling,
@@ -266,6 +294,7 @@ class RWAttributes extends PlayerAttributes {
     required this.finalThirdImpact,
     required this.goalThreat,
     required this.ballCarrying,
+    required this.tis,
   });
 
   factory RWAttributes.fromJson(Map<String, dynamic> json) {
@@ -275,6 +304,7 @@ class RWAttributes extends PlayerAttributes {
       finalThirdImpact: json["Final Third Impact"] ?? 0.0,
       goalThreat: json["Goal Threat"] ?? 0.0,
       ballCarrying: json["Ball Carrying"] ?? 0.0,
+      tis: json["TIS"] ?? 0.0,
     );
   }
 
@@ -285,6 +315,7 @@ class RWAttributes extends PlayerAttributes {
         "Final Third Impact": finalThirdImpact,
         "Goal Threat": goalThreat,
         "Crosses": crosses,
+        "TIS": tis,
       };
 }
 
@@ -294,6 +325,7 @@ class CFAttributes extends PlayerAttributes {
   final double goalThreat;
   final double shootingAccuracy;
   final double penaltyBoxPresence;
+  final double tis;
 
   CFAttributes({
     required this.chanceConversion,
@@ -301,6 +333,7 @@ class CFAttributes extends PlayerAttributes {
     required this.shootingAccuracy,
     required this.goalThreat,
     required this.penaltyBoxPresence,
+    required this.tis,
   });
 
   factory CFAttributes.fromJson(Map<String, dynamic> json) {
@@ -310,6 +343,7 @@ class CFAttributes extends PlayerAttributes {
       shootingAccuracy: json["Shooting Accuracy"] ?? 0.0,
       goalThreat: json["Goal Threat"] ?? 0.0,
       penaltyBoxPresence: json["Penalty Box Presence"] ?? 0.0,
+      tis: json["TIS"] ?? 0.0,
     );
   }
 
@@ -320,6 +354,7 @@ class CFAttributes extends PlayerAttributes {
         "Shooting Accuracy": shootingAccuracy,
         "Goal Threat": goalThreat,
         "Penalty Box Presence": penaltyBoxPresence,
+        "TIS": tis,
       };
 }
 
@@ -329,6 +364,7 @@ class GKAttributes extends PlayerAttributes {
   final double crossAndAerialControl;
   final double sweeperKeeperActivity;
   final double passing;
+  final double tis;
 
   GKAttributes({
     required this.shotStopping,
@@ -336,6 +372,7 @@ class GKAttributes extends PlayerAttributes {
     required this.crossAndAerialControl,
     required this.sweeperKeeperActivity,
     required this.passing,
+    required this.tis,
   });
 
   factory GKAttributes.fromJson(Map<String, dynamic> json) {
@@ -345,6 +382,7 @@ class GKAttributes extends PlayerAttributes {
       crossAndAerialControl: json["Cross and Aerial Control"] ?? 0.0,
       sweeperKeeperActivity: json["Sweeper Keeper Activity"] ?? 0.0,
       passing: json["Passing"] ?? 0.0,
+      tis: json["TIS"] ?? 0.0,
     );
   }
 
@@ -355,5 +393,6 @@ class GKAttributes extends PlayerAttributes {
         "Cross and Aerial Control": crossAndAerialControl,
         "Sweeper Keeper Activity": sweeperKeeperActivity,
         "Passing": passing,
+        "TIS": tis,
       };
 }
