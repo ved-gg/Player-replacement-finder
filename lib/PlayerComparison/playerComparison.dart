@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:csv/csv.dart';
 import 'package:http/http.dart' as http;
 import 'package:fl_chart/fl_chart.dart';
+import 'package:player_replacement/Components/Widgets/PlayersDashboard.dart';
 import 'package:player_replacement/Components/constants.dart';
 
 class PlayerComparison extends StatefulWidget {
@@ -316,6 +317,7 @@ class _PlayerComparisonState extends State<PlayerComparison> {
                                       .map((val) => RadarEntry(value: val))
                                       .toList(),
                                   fillColor:
+                                      // ignore: deprecated_member_use
                                       chartColors[index].withOpacity(0.2),
                                   borderColor: chartColors[index],
                                   entryRadius: 2.0,
@@ -358,7 +360,6 @@ class _PlayerComparisonState extends State<PlayerComparison> {
                                     ),
                                   ),
                                 )),
-                            DataColumn(label: Text('TIS')),
                             DataColumn(label: Text('Actions')),
                           ],
                           rows: selectedPlayers.entries.map((entry) {
@@ -369,29 +370,44 @@ class _PlayerComparisonState extends State<PlayerComparison> {
                             return DataRow(
                               cells: [
                                 DataCell(
-                                  Text(
-                                    entry.key,
-                                    style: TextStyle(
-                                      color: chartColors[index],
-                                      fontWeight: FontWeight.bold,
+                                  GestureDetector(
+                                    onTap: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              PlayersDashboard(
+                                            playerName: entry.key,
+                                            position: widget.positionSF,
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                    child: Text(
+                                      entry.key,
+                                      style: TextStyle(
+                                        color: chartColors[index],
+                                        fontWeight: FontWeight.bold,
+                                      ),
                                     ),
                                   ),
                                 ),
-                                ...attributes.entries.map((attr) => DataCell(
-                                      Text(attr.value.toStringAsFixed(
-                                          1)), // Only 1 decimal place
-                                    )),
-                                DataCell(
-                                  Text(attributes['TIS']?.toStringAsFixed(1) ??
-                                      'N/A'),
+                                ...attributes.entries.map(
+                                  (attr) => DataCell(
+                                    Text(
+                                      attr.value.toStringAsFixed(1),
+                                    ), // Only 1 decimal place
+                                  ),
                                 ),
                                 DataCell(
                                   IconButton(
                                     icon: Icon(Icons.delete, color: Colors.red),
                                     onPressed: () {
-                                      setState(() {
-                                        selectedPlayers.remove(entry.key);
-                                      });
+                                      setState(
+                                        () {
+                                          selectedPlayers.remove(entry.key);
+                                        },
+                                      );
                                     },
                                   ),
                                 ),

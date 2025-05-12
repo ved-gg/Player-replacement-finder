@@ -18,7 +18,8 @@ dependencies:
   webviewx: ^0.1.0
   csv: ^6.0.0
   path_provider: ^2.1.5
-
+  percent_indicator: ^4.2.5
+  pie_chart: ^5.4.0
 
   
 

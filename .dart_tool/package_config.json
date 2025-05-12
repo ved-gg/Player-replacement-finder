@@ -218,6 +218,18 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "percent_indicator",
+      "rootUri": "file:///C:/Users/Shubh/AppData/Local/Pub/Cache/hosted/pub.dev/percent_indicator-4.2.5",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "pie_chart",
+      "rootUri": "file:///C:/Users/Shubh/AppData/Local/Pub/Cache/hosted/pub.dev/pie_chart-5.4.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "platform",
       "rootUri": "file:///C:/Users/Shubh/AppData/Local/Pub/Cache/hosted/pub.dev/platform-3.1.6",
       "packageUri": "lib/",
@@ -362,7 +374,7 @@
       "languageVersion": "3.4"
     }
   ],
-  "generated": "2025-03-12T18:11:36.096416Z",
+  "generated": "2025-05-09T16:24:01.532044Z",
   "generator": "pub",
   "generatorVersion": "3.7.0",
   "flutterRoot": "file:///C:/Users/Shubh/Downloads/SetUps/Flutter/flutter",

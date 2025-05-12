@@ -1,6 +1,7 @@
 // ignore_for_file: must_be_immutable, file_names
 
 import 'package:flutter/material.dart';
+import 'package:player_replacement/Components/Widgets/LeaguesData.dart';
 import 'package:player_replacement/Components/constants.dart';
 
 class AllLeagues extends StatefulWidget {
@@ -85,21 +86,21 @@ class _AllLeaguesState extends State<AllLeagues> {
                       leagueName: 'Premier League',
                       logoPath: 'images/Leagues/Prem.png',
                       textColor: premColor,
-                      routeName: '/PremierLeague',
+                      routeName: 'Premier League',
                     ),
                     LeagueContainers(
                       containerColor: laLigaColor,
                       leagueName: 'La Liga',
                       logoPath: 'images/Leagues/LaLiga.png',
                       textColor: laLigaColor,
-                      routeName: '/LaLiga',
+                      routeName: 'La Liga',
                     ),
                     LeagueContainers(
                       containerColor: portugalColor,
                       leagueName: 'Liga Portgual',
                       logoPath: 'images/Leagues/LigaPortugal.png',
                       textColor: portugalColor,
-                      routeName: '/LigaPortugal',
+                      routeName: 'Liga Portugal',
                     ),
                   ],
                 ),
@@ -117,21 +118,21 @@ class _AllLeaguesState extends State<AllLeagues> {
                       leagueName: 'Bundesliga',
                       logoPath: 'images/Leagues/Bundesliga.png',
                       textColor: bundesligaColor,
-                      routeName: '/Bundesliga',
+                      routeName: 'Bundesliga',
                     ),
                     LeagueContainers(
                       containerColor: erediviseColor,
                       leagueName: 'Eredivise',
                       logoPath: 'images/Leagues/Eredivise.png',
                       textColor: erediviseColor,
-                      routeName: '/Eredivise',
+                      routeName: 'Eredivise',
                     ),
                     LeagueContainers(
                       containerColor: serieAColor,
                       leagueName: 'Serie A',
                       logoPath: 'images/Leagues/SerieA.png',
                       textColor: serieAColor,
-                      routeName: '/SerieA',
+                      routeName: 'SerieA',
                     ),
                   ],
                 ),
@@ -149,7 +150,7 @@ class _AllLeaguesState extends State<AllLeagues> {
                       leagueName: 'Ligue One',
                       logoPath: 'images/Leagues/Ligue1.png',
                       textColor: ligueOneColor,
-                      routeName: '/LigueOne',
+                      routeName: 'Ligue 1',
                     ),
                   ],
                 ),
@@ -184,7 +185,10 @@ class LeagueContainers extends StatelessWidget {
     final w = MediaQuery.of(context).size.width;
     return GestureDetector(
       onTap: () {
-        Navigator.pushNamed(context, routeName);
+        MaterialPageRoute route = MaterialPageRoute(
+          builder: (context) => BuildTeamData(league: routeName),
+        );
+        Navigator.push(context, route);
       },
       child: Container(
         height: h * 0.2,

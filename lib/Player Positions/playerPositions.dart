@@ -214,7 +214,7 @@ class PositionsCard extends StatelessWidget {
                 style: TextStyle(
                   color: kPrimaryColor,
                   fontFamily: 'Barcelona',
-                  fontSize: h * 0.05,
+                  fontSize: h * 0.045,
                 ),
               )
             ],

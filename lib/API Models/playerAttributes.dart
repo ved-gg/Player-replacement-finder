@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 abstract class PlayerAttributes {
   Map<String, double> toMap();
 }

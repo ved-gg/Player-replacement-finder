@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:player_replacement/Components/Widgets/TeamsDashboard.dart';
 import 'package:player_replacement/Components/constants.dart';
 
 class Homepage extends StatefulWidget {
@@ -279,176 +280,189 @@ class _HomepageState extends State<Homepage> {
               MouseRegion(
                 onEnter: (event) => setState(() => isHovered = true),
                 onExit: (event) => setState(() => isHovered = false),
-                child: AnimatedContainer(
-                  duration: const Duration(milliseconds: 200),
-                  height: h * 0.2,
-                  width: w,
-                  decoration: BoxDecoration(
-                    color: kPrimaryColor,
-                  ),
-                  child: Center(
-                    child: Stack(
-                      alignment: Alignment.center,
-                      children: [
-                        Image.asset(
-                          'images/Clubs/Backgrounds/FCBarcelonaStripes.png',
-                          width: w,
-                          height: h * 0.4,
-                          fit: BoxFit.cover,
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => TeamsDashboard(
+                          teamName: 'Barcelona',
                         ),
-                        AnimatedPositioned(
-                          duration: const Duration(milliseconds: 300),
-                          left: isHovered ? w * 0.43 : w * 0.45,
-                          curve: Curves.easeInOut,
-                          child: Image.asset(
-                            'images/Clubs/Barcelona.png',
-                            height: h * 0.15,
+                      ),
+                    );
+                  },
+                  child: AnimatedContainer(
+                    duration: const Duration(milliseconds: 200),
+                    height: h * 0.2,
+                    width: w,
+                    decoration: BoxDecoration(
+                      color: kPrimaryColor,
+                    ),
+                    child: Center(
+                      child: Stack(
+                        alignment: Alignment.center,
+                        children: [
+                          Image.asset(
+                            'images/Clubs/Backgrounds/FCBarcelonaStripes.png',
+                            width: w,
+                            height: h * 0.4,
+                            fit: BoxFit.cover,
                           ),
-                        ),
-                        AnimatedPositioned(
-                          duration: const Duration(milliseconds: 300),
-                          left: isHovered ? w * 0.52 : w * 0.48,
-                          curve: Curves.easeInOut,
-                          child: AnimatedOpacity(
+                          AnimatedPositioned(
                             duration: const Duration(milliseconds: 300),
-                            opacity: isHovered ? 1.0 : 0.0,
-                            child: Text(
-                              'FC BARCELONA',
-                              style: TextStyle(
-                                fontSize: h * 0.04,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white,
-                                fontFamily: 'Barcelona',
+                            left: isHovered ? w * 0.43 : w * 0.45,
+                            curve: Curves.easeInOut,
+                            child: Image.asset(
+                              'images/Clubs/Barcelona.png',
+                              height: h * 0.15,
+                            ),
+                          ),
+                          AnimatedPositioned(
+                            duration: const Duration(milliseconds: 300),
+                            left: isHovered ? w * 0.52 : w * 0.48,
+                            curve: Curves.easeInOut,
+                            child: AnimatedOpacity(
+                              duration: const Duration(milliseconds: 300),
+                              opacity: isHovered ? 1.0 : 0.0,
+                              child: Text(
+                                'FC BARCELONA',
+                                style: TextStyle(
+                                  fontSize: h * 0.04,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white,
+                                  fontFamily: 'Barcelona',
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                        AnimatedPositioned(
-                          duration: const Duration(microseconds: 500),
-                          left: isHovered ? w * 0.24 : w * 0.20,
-                          curve: Curves.easeInOut,
-                          child: AnimatedOpacity(
+                          AnimatedPositioned(
                             duration: const Duration(microseconds: 500),
-                            opacity: isHovered ? 1.0 : 0.0,
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  'Founded in',
-                                  style: TextStyle(
-                                    fontSize: h * 0.03,
-                                    color: Colors.white,
-                                    fontFamily: 'Nevis',
+                            left: isHovered ? w * 0.24 : w * 0.20,
+                            curve: Curves.easeInOut,
+                            child: AnimatedOpacity(
+                              duration: const Duration(microseconds: 500),
+                              opacity: isHovered ? 1.0 : 0.0,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    'Founded in',
+                                    style: TextStyle(
+                                      fontSize: h * 0.03,
+                                      color: Colors.white,
+                                      fontFamily: 'Nevis',
+                                    ),
                                   ),
-                                ),
-                                Text(
-                                  '1899',
-                                  style: TextStyle(
-                                    fontSize: h * 0.06,
-                                    color: Colors.white,
-                                    fontFamily: 'Barcelona',
+                                  Text(
+                                    '1899',
+                                    style: TextStyle(
+                                      fontSize: h * 0.06,
+                                      color: Colors.white,
+                                      fontFamily: 'Barcelona',
+                                    ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
                           ),
-                        ),
-                        AnimatedPositioned(
-                          duration: const Duration(microseconds: 500),
-                          left: isHovered ? w * 0.70 : w * 0.65,
-                          curve: Curves.easeInOut,
-                          child: AnimatedOpacity(
+                          AnimatedPositioned(
                             duration: const Duration(microseconds: 500),
-                            opacity: isHovered ? 1.0 : 0.0,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Image.asset(
-                                      'images/Trophies/UCL.png',
-                                      height: h * 0.1,
-                                      width: w * 0.05,
-                                      color: Colors.white,
-                                    ),
-                                    Text(
-                                      'UCL',
-                                      style: TextStyle(
+                            left: isHovered ? w * 0.70 : w * 0.65,
+                            curve: Curves.easeInOut,
+                            child: AnimatedOpacity(
+                              duration: const Duration(microseconds: 500),
+                              opacity: isHovered ? 1.0 : 0.0,
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Image.asset(
+                                        'images/Trophies/UCL.png',
+                                        height: h * 0.1,
+                                        width: w * 0.05,
                                         color: Colors.white,
-                                        fontFamily: 'Nevis',
-                                        fontSize: h * 0.02,
                                       ),
-                                    ),
-                                    Text(
-                                      'x5',
-                                      style: TextStyle(
+                                      Text(
+                                        'UCL',
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontFamily: 'Nevis',
+                                          fontSize: h * 0.02,
+                                        ),
+                                      ),
+                                      Text(
+                                        'x5',
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontFamily: 'Nevis',
+                                          fontSize: h * 0.02,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Image.asset(
+                                        'images/Trophies/LaLiga.png',
+                                        height: h * 0.1,
+                                        width: w * 0.05,
                                         color: Colors.white,
-                                        fontFamily: 'Nevis',
-                                        fontSize: h * 0.02,
                                       ),
-                                    ),
-                                  ],
-                                ),
-                                Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Image.asset(
-                                      'images/Trophies/LaLiga.png',
-                                      height: h * 0.1,
-                                      width: w * 0.05,
-                                      color: Colors.white,
-                                    ),
-                                    Text(
-                                      'LA LIGA',
-                                      style: TextStyle(
+                                      Text(
+                                        'LA LIGA',
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontFamily: 'Nevis',
+                                          fontSize: h * 0.02,
+                                        ),
+                                      ),
+                                      Text(
+                                        'x15',
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontFamily: 'Nevis',
+                                          fontSize: h * 0.02,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Image.asset(
+                                        'images/Trophies/CopaDelRey.png',
+                                        height: h * 0.1,
+                                        width: w * 0.05,
                                         color: Colors.white,
-                                        fontFamily: 'Nevis',
-                                        fontSize: h * 0.02,
                                       ),
-                                    ),
-                                    Text(
-                                      'x15',
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontFamily: 'Nevis',
-                                        fontSize: h * 0.02,
+                                      Text(
+                                        'COPA DEL REY',
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontFamily: 'Nevis',
+                                          fontSize: h * 0.02,
+                                        ),
                                       ),
-                                    ),
-                                  ],
-                                ),
-                                Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Image.asset(
-                                      'images/Trophies/CopaDelRey.png',
-                                      height: h * 0.1,
-                                      width: w * 0.05,
-                                      color: Colors.white,
-                                    ),
-                                    Text(
-                                      'COPA DEL REY',
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontFamily: 'Nevis',
-                                        fontSize: h * 0.02,
+                                      Text(
+                                        'x31',
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontFamily: 'Nevis',
+                                          fontSize: h * 0.02,
+                                        ),
                                       ),
-                                    ),
-                                    Text(
-                                      'x31',
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontFamily: 'Nevis',
-                                        fontSize: h * 0.02,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ],
+                                    ],
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                 ),
@@ -457,298 +471,312 @@ class _HomepageState extends State<Homepage> {
               MouseRegion(
                 onEnter: (event) => setState(() => isHovered2 = true),
                 onExit: (event) => setState(() => isHovered2 = false),
-                child: AnimatedContainer(
-                  duration: const Duration(milliseconds: 200),
-                  height: h * 0.2,
-                  width: w,
-                  decoration: BoxDecoration(
-                    color: kPrimaryColor,
-                  ),
-                  child: Center(
-                    child: Stack(
-                      alignment: Alignment.center,
-                      children: [
-                        Container(
-                          color: kSecondaryColor,
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => TeamsDashboard(
+                          teamName: 'Real Madrid',
                         ),
-                        AnimatedPositioned(
-                          duration: const Duration(milliseconds: 300),
-                          left: isHovered2 ? w * 0.43 : w * 0.45,
-                          curve: Curves.easeInOut,
-                          child: Image.asset(
-                            'images/Clubs/RealMadrid.png',
-                            height: h * 0.15,
+                      ),
+                    );
+                  },
+                  child: AnimatedContainer(
+                    duration: const Duration(milliseconds: 200),
+                    height: h * 0.2,
+                    width: w,
+                    decoration: BoxDecoration(
+                      color: kPrimaryColor,
+                    ),
+                    child: Center(
+                      child: Stack(
+                        alignment: Alignment.center,
+                        children: [
+                          Container(
+                            color: kSecondaryColor,
                           ),
-                        ),
-                        AnimatedPositioned(
-                          duration: const Duration(milliseconds: 300),
-                          left: isHovered2 ? w * 0.52 : w * 0.48,
-                          curve: Curves.easeInOut,
-                          child: AnimatedOpacity(
+                          AnimatedPositioned(
                             duration: const Duration(milliseconds: 300),
-                            opacity: isHovered2 ? 1.0 : 0.0,
-                            child: Text(
-                              'REAL MADRID',
-                              style: TextStyle(
-                                fontSize: h * 0.04,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black,
-                                fontFamily: 'Barcelona',
+                            left: isHovered2 ? w * 0.43 : w * 0.45,
+                            curve: Curves.easeInOut,
+                            child: Image.asset(
+                              'images/Clubs/RealMadrid.png',
+                              height: h * 0.15,
+                            ),
+                          ),
+                          AnimatedPositioned(
+                            duration: const Duration(milliseconds: 300),
+                            left: isHovered2 ? w * 0.52 : w * 0.48,
+                            curve: Curves.easeInOut,
+                            child: AnimatedOpacity(
+                              duration: const Duration(milliseconds: 300),
+                              opacity: isHovered2 ? 1.0 : 0.0,
+                              child: Text(
+                                'REAL MADRID',
+                                style: TextStyle(
+                                  fontSize: h * 0.04,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black,
+                                  fontFamily: 'Barcelona',
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                        AnimatedPositioned(
-                          duration: const Duration(microseconds: 500),
-                          left: isHovered ? w * 0.24 : w * 0.20,
-                          curve: Curves.easeInOut,
-                          child: AnimatedOpacity(
+                          AnimatedPositioned(
                             duration: const Duration(microseconds: 500),
-                            opacity: isHovered ? 1.0 : 0.0,
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  'Founded in',
-                                  style: TextStyle(
-                                    fontSize: h * 0.03,
-                                    color: Colors.white,
-                                    fontFamily: 'Nevis',
-                                  ),
-                                ),
-                                Text(
-                                  '1899',
-                                  style: TextStyle(
-                                    fontSize: h * 0.06,
-                                    color: Colors.white,
-                                    fontFamily: 'Barcelona',
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        AnimatedPositioned(
-                          duration: const Duration(microseconds: 500),
-                          left: isHovered ? w * 0.70 : w * 0.65,
-                          curve: Curves.easeInOut,
-                          child: AnimatedOpacity(
-                            duration: const Duration(microseconds: 500),
-                            opacity: isHovered ? 1.0 : 0.0,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Image.asset(
-                                      'images/Trophies/UCL.png',
-                                      height: h * 0.1,
-                                      width: w * 0.05,
+                            left: isHovered ? w * 0.24 : w * 0.20,
+                            curve: Curves.easeInOut,
+                            child: AnimatedOpacity(
+                              duration: const Duration(microseconds: 500),
+                              opacity: isHovered ? 1.0 : 0.0,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    'Founded in',
+                                    style: TextStyle(
+                                      fontSize: h * 0.03,
                                       color: Colors.white,
+                                      fontFamily: 'Nevis',
                                     ),
-                                    Text(
-                                      'UCL',
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontFamily: 'Nevis',
-                                        fontSize: h * 0.02,
-                                      ),
-                                    ),
-                                    Text(
-                                      'x5',
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontFamily: 'Nevis',
-                                        fontSize: h * 0.02,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Image.asset(
-                                      'images/Trophies/LaLiga.png',
-                                      height: h * 0.1,
-                                      width: w * 0.05,
-                                      color: Colors.white,
-                                    ),
-                                    Text(
-                                      'LA LIGA',
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontFamily: 'Nevis',
-                                        fontSize: h * 0.02,
-                                      ),
-                                    ),
-                                    Text(
-                                      'x15',
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontFamily: 'Nevis',
-                                        fontSize: h * 0.02,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Image.asset(
-                                      'images/Trophies/CopaDelRey.png',
-                                      height: h * 0.1,
-                                      width: w * 0.05,
-                                      color: Colors.white,
-                                    ),
-                                    Text(
-                                      'COPA DEL REY',
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontFamily: 'Nevis',
-                                        fontSize: h * 0.02,
-                                      ),
-                                    ),
-                                    Text(
-                                      'x31',
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontFamily: 'Nevis',
-                                        fontSize: h * 0.02,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        AnimatedPositioned(
-                          duration: const Duration(microseconds: 500),
-                          left: isHovered2 ? w * 0.24 : w * 0.20,
-                          curve: Curves.easeInOut,
-                          child: AnimatedOpacity(
-                            duration: const Duration(microseconds: 500),
-                            opacity: isHovered2 ? 1.0 : 0.0,
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  'Founded in',
-                                  style: TextStyle(
-                                    fontSize: h * 0.03,
-                                    color: Colors.black,
-                                    fontFamily: 'Nevis',
                                   ),
-                                ),
-                                Text(
-                                  '1902',
-                                  style: TextStyle(
-                                    fontSize: h * 0.06,
-                                    color: Colors.black,
-                                    fontFamily: 'Barcelona',
+                                  Text(
+                                    '1899',
+                                    style: TextStyle(
+                                      fontSize: h * 0.06,
+                                      color: Colors.white,
+                                      fontFamily: 'Barcelona',
+                                    ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
                           ),
-                        ),
-                        AnimatedPositioned(
-                          duration: const Duration(microseconds: 500),
-                          left: isHovered2 ? w * 0.70 : w * 0.65,
-                          curve: Curves.easeInOut,
-                          child: AnimatedOpacity(
+                          AnimatedPositioned(
                             duration: const Duration(microseconds: 500),
-                            opacity: isHovered2 ? 1.0 : 0.0,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Image.asset(
-                                      'images/Trophies/UCL.png',
-                                      height: h * 0.1,
-                                      width: w * 0.05,
-                                      color: Colors.black,
-                                    ),
-                                    Text(
-                                      'UCL',
-                                      style: TextStyle(
-                                        color: Colors.black,
-                                        fontFamily: 'Nevis',
-                                        fontSize: h * 0.02,
+                            left: isHovered ? w * 0.70 : w * 0.65,
+                            curve: Curves.easeInOut,
+                            child: AnimatedOpacity(
+                              duration: const Duration(microseconds: 500),
+                              opacity: isHovered ? 1.0 : 0.0,
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Image.asset(
+                                        'images/Trophies/UCL.png',
+                                        height: h * 0.1,
+                                        width: w * 0.05,
+                                        color: Colors.white,
                                       ),
-                                    ),
-                                    Text(
-                                      'x15',
-                                      style: TextStyle(
-                                        color: Colors.black,
-                                        fontFamily: 'Nevis',
-                                        fontSize: h * 0.02,
+                                      Text(
+                                        'UCL',
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontFamily: 'Nevis',
+                                          fontSize: h * 0.02,
+                                        ),
                                       ),
-                                    ),
-                                  ],
-                                ),
-                                Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Image.asset(
-                                      'images/Trophies/LaLiga.png',
-                                      height: h * 0.1,
-                                      width: w * 0.05,
-                                      color: Colors.black,
-                                    ),
-                                    Text(
-                                      'LA LIGA',
-                                      style: TextStyle(
-                                        color: Colors.black,
-                                        fontFamily: 'Nevis',
-                                        fontSize: h * 0.02,
+                                      Text(
+                                        'x5',
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontFamily: 'Nevis',
+                                          fontSize: h * 0.02,
+                                        ),
                                       ),
-                                    ),
-                                    Text(
-                                      'x36',
-                                      style: TextStyle(
-                                        color: Colors.black,
-                                        fontFamily: 'Nevis',
-                                        fontSize: h * 0.02,
+                                    ],
+                                  ),
+                                  Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Image.asset(
+                                        'images/Trophies/LaLiga.png',
+                                        height: h * 0.1,
+                                        width: w * 0.05,
+                                        color: Colors.white,
                                       ),
-                                    ),
-                                  ],
-                                ),
-                                Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Image.asset(
-                                      'images/Trophies/CopaDelRey.png',
-                                      height: h * 0.1,
-                                      width: w * 0.05,
-                                      color: Colors.black,
-                                    ),
-                                    Text(
-                                      'COPA DEL REY',
-                                      style: TextStyle(
-                                        color: Colors.black,
-                                        fontFamily: 'Nevis',
-                                        fontSize: h * 0.02,
+                                      Text(
+                                        'LA LIGA',
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontFamily: 'Nevis',
+                                          fontSize: h * 0.02,
+                                        ),
                                       ),
-                                    ),
-                                    Text(
-                                      'x20',
-                                      style: TextStyle(
-                                        color: Colors.black,
-                                        fontFamily: 'Nevis',
-                                        fontSize: h * 0.02,
+                                      Text(
+                                        'x15',
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontFamily: 'Nevis',
+                                          fontSize: h * 0.02,
+                                        ),
                                       ),
-                                    ),
-                                  ],
-                                ),
-                              ],
+                                    ],
+                                  ),
+                                  Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Image.asset(
+                                        'images/Trophies/CopaDelRey.png',
+                                        height: h * 0.1,
+                                        width: w * 0.05,
+                                        color: Colors.white,
+                                      ),
+                                      Text(
+                                        'COPA DEL REY',
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontFamily: 'Nevis',
+                                          fontSize: h * 0.02,
+                                        ),
+                                      ),
+                                      Text(
+                                        'x31',
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontFamily: 'Nevis',
+                                          fontSize: h * 0.02,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
-                        ),
-                      ],
+                          AnimatedPositioned(
+                            duration: const Duration(microseconds: 500),
+                            left: isHovered2 ? w * 0.24 : w * 0.20,
+                            curve: Curves.easeInOut,
+                            child: AnimatedOpacity(
+                              duration: const Duration(microseconds: 500),
+                              opacity: isHovered2 ? 1.0 : 0.0,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    'Founded in',
+                                    style: TextStyle(
+                                      fontSize: h * 0.03,
+                                      color: Colors.black,
+                                      fontFamily: 'Nevis',
+                                    ),
+                                  ),
+                                  Text(
+                                    '1902',
+                                    style: TextStyle(
+                                      fontSize: h * 0.06,
+                                      color: Colors.black,
+                                      fontFamily: 'Barcelona',
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          AnimatedPositioned(
+                            duration: const Duration(microseconds: 500),
+                            left: isHovered2 ? w * 0.70 : w * 0.65,
+                            curve: Curves.easeInOut,
+                            child: AnimatedOpacity(
+                              duration: const Duration(microseconds: 500),
+                              opacity: isHovered2 ? 1.0 : 0.0,
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Image.asset(
+                                        'images/Trophies/UCL.png',
+                                        height: h * 0.1,
+                                        width: w * 0.05,
+                                        color: Colors.black,
+                                      ),
+                                      Text(
+                                        'UCL',
+                                        style: TextStyle(
+                                          color: Colors.black,
+                                          fontFamily: 'Nevis',
+                                          fontSize: h * 0.02,
+                                        ),
+                                      ),
+                                      Text(
+                                        'x15',
+                                        style: TextStyle(
+                                          color: Colors.black,
+                                          fontFamily: 'Nevis',
+                                          fontSize: h * 0.02,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Image.asset(
+                                        'images/Trophies/LaLiga.png',
+                                        height: h * 0.1,
+                                        width: w * 0.05,
+                                        color: Colors.black,
+                                      ),
+                                      Text(
+                                        'LA LIGA',
+                                        style: TextStyle(
+                                          color: Colors.black,
+                                          fontFamily: 'Nevis',
+                                          fontSize: h * 0.02,
+                                        ),
+                                      ),
+                                      Text(
+                                        'x36',
+                                        style: TextStyle(
+                                          color: Colors.black,
+                                          fontFamily: 'Nevis',
+                                          fontSize: h * 0.02,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Image.asset(
+                                        'images/Trophies/CopaDelRey.png',
+                                        height: h * 0.1,
+                                        width: w * 0.05,
+                                        color: Colors.black,
+                                      ),
+                                      Text(
+                                        'COPA DEL REY',
+                                        style: TextStyle(
+                                          color: Colors.black,
+                                          fontFamily: 'Nevis',
+                                          fontSize: h * 0.02,
+                                        ),
+                                      ),
+                                      Text(
+                                        'x20',
+                                        style: TextStyle(
+                                          color: Colors.black,
+                                          fontFamily: 'Nevis',
+                                          fontSize: h * 0.02,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),
@@ -757,176 +785,189 @@ class _HomepageState extends State<Homepage> {
               MouseRegion(
                 onEnter: (event) => setState(() => isHovered3 = true),
                 onExit: (event) => setState(() => isHovered3 = false),
-                child: AnimatedContainer(
-                  duration: const Duration(milliseconds: 200),
-                  height: h * 0.2,
-                  width: w,
-                  decoration: BoxDecoration(
-                    color: kPrimaryColor,
-                  ),
-                  child: Center(
-                    child: Stack(
-                      alignment: Alignment.center,
-                      children: [
-                        Image.asset(
-                          'images/Clubs/Backgrounds/Liverpoolback.png',
-                          width: w,
-                          height: h * 0.4,
-                          fit: BoxFit.cover,
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => TeamsDashboard(
+                          teamName: 'Barcelona',
                         ),
-                        AnimatedPositioned(
-                          duration: const Duration(milliseconds: 300),
-                          left: isHovered3 ? w * 0.40 : w * 0.42,
-                          curve: Curves.easeInOut,
-                          child: Image.asset(
-                            'images/Clubs/Liverpool.png',
-                            height: h * 0.15,
+                      ),
+                    );
+                  },
+                  child: AnimatedContainer(
+                    duration: const Duration(milliseconds: 200),
+                    height: h * 0.2,
+                    width: w,
+                    decoration: BoxDecoration(
+                      color: kPrimaryColor,
+                    ),
+                    child: Center(
+                      child: Stack(
+                        alignment: Alignment.center,
+                        children: [
+                          Image.asset(
+                            'images/Clubs/Backgrounds/Liverpoolback.png',
+                            width: w,
+                            height: h * 0.4,
+                            fit: BoxFit.cover,
                           ),
-                        ),
-                        AnimatedPositioned(
-                          duration: const Duration(milliseconds: 300),
-                          left: isHovered3 ? w * 0.5 : w * 0.45,
-                          curve: Curves.easeInOut,
-                          child: AnimatedOpacity(
+                          AnimatedPositioned(
                             duration: const Duration(milliseconds: 300),
-                            opacity: isHovered3 ? 1.0 : 0.0,
-                            child: Text(
-                              'LIVERPOOL',
-                              style: TextStyle(
-                                fontSize: h * 0.04,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white,
-                                fontFamily: 'Barcelona',
+                            left: isHovered3 ? w * 0.40 : w * 0.42,
+                            curve: Curves.easeInOut,
+                            child: Image.asset(
+                              'images/Clubs/Liverpool.png',
+                              height: h * 0.15,
+                            ),
+                          ),
+                          AnimatedPositioned(
+                            duration: const Duration(milliseconds: 300),
+                            left: isHovered3 ? w * 0.5 : w * 0.45,
+                            curve: Curves.easeInOut,
+                            child: AnimatedOpacity(
+                              duration: const Duration(milliseconds: 300),
+                              opacity: isHovered3 ? 1.0 : 0.0,
+                              child: Text(
+                                'LIVERPOOL',
+                                style: TextStyle(
+                                  fontSize: h * 0.04,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white,
+                                  fontFamily: 'Barcelona',
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                        AnimatedPositioned(
-                          duration: const Duration(microseconds: 500),
-                          left: isHovered3 ? w * 0.24 : w * 0.20,
-                          curve: Curves.easeInOut,
-                          child: AnimatedOpacity(
+                          AnimatedPositioned(
                             duration: const Duration(microseconds: 500),
-                            opacity: isHovered3 ? 1.0 : 0.0,
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  'Founded in',
-                                  style: TextStyle(
-                                    fontSize: h * 0.03,
-                                    color: Colors.white,
-                                    fontFamily: 'Nevis',
+                            left: isHovered3 ? w * 0.24 : w * 0.20,
+                            curve: Curves.easeInOut,
+                            child: AnimatedOpacity(
+                              duration: const Duration(microseconds: 500),
+                              opacity: isHovered3 ? 1.0 : 0.0,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    'Founded in',
+                                    style: TextStyle(
+                                      fontSize: h * 0.03,
+                                      color: Colors.white,
+                                      fontFamily: 'Nevis',
+                                    ),
                                   ),
-                                ),
-                                Text(
-                                  '1892',
-                                  style: TextStyle(
-                                    fontSize: h * 0.06,
-                                    color: Colors.white,
-                                    fontFamily: 'Barcelona',
+                                  Text(
+                                    '1892',
+                                    style: TextStyle(
+                                      fontSize: h * 0.06,
+                                      color: Colors.white,
+                                      fontFamily: 'Barcelona',
+                                    ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
                           ),
-                        ),
-                        AnimatedPositioned(
-                          duration: const Duration(microseconds: 500),
-                          left: isHovered3 ? w * 0.70 : w * 0.65,
-                          curve: Curves.easeInOut,
-                          child: AnimatedOpacity(
+                          AnimatedPositioned(
                             duration: const Duration(microseconds: 500),
-                            opacity: isHovered3 ? 1.0 : 0.0,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Image.asset(
-                                      'images/Trophies/UCL.png',
-                                      height: h * 0.1,
-                                      width: w * 0.05,
-                                      color: Colors.white,
-                                    ),
-                                    Text(
-                                      'UCL',
-                                      style: TextStyle(
+                            left: isHovered3 ? w * 0.70 : w * 0.65,
+                            curve: Curves.easeInOut,
+                            child: AnimatedOpacity(
+                              duration: const Duration(microseconds: 500),
+                              opacity: isHovered3 ? 1.0 : 0.0,
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Image.asset(
+                                        'images/Trophies/UCL.png',
+                                        height: h * 0.1,
+                                        width: w * 0.05,
                                         color: Colors.white,
-                                        fontFamily: 'Nevis',
-                                        fontSize: h * 0.02,
                                       ),
-                                    ),
-                                    Text(
-                                      'x6',
-                                      style: TextStyle(
+                                      Text(
+                                        'UCL',
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontFamily: 'Nevis',
+                                          fontSize: h * 0.02,
+                                        ),
+                                      ),
+                                      Text(
+                                        'x6',
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontFamily: 'Nevis',
+                                          fontSize: h * 0.02,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Image.asset(
+                                        'images/Trophies/PL.png',
+                                        height: h * 0.1,
+                                        width: w * 0.05,
                                         color: Colors.white,
-                                        fontFamily: 'Nevis',
-                                        fontSize: h * 0.02,
                                       ),
-                                    ),
-                                  ],
-                                ),
-                                Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Image.asset(
-                                      'images/Trophies/PL.png',
-                                      height: h * 0.1,
-                                      width: w * 0.05,
-                                      color: Colors.white,
-                                    ),
-                                    Text(
-                                      'PREMIER LEAGUE',
-                                      style: TextStyle(
+                                      Text(
+                                        'PREMIER LEAGUE',
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontFamily: 'Nevis',
+                                          fontSize: h * 0.02,
+                                        ),
+                                      ),
+                                      Text(
+                                        'x1',
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontFamily: 'Nevis',
+                                          fontSize: h * 0.02,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Image.asset(
+                                        'images/Trophies/FACup.png',
+                                        height: h * 0.1,
+                                        width: w * 0.05,
                                         color: Colors.white,
-                                        fontFamily: 'Nevis',
-                                        fontSize: h * 0.02,
                                       ),
-                                    ),
-                                    Text(
-                                      'x1',
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontFamily: 'Nevis',
-                                        fontSize: h * 0.02,
+                                      Text(
+                                        'FA CUP',
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontFamily: 'Nevis',
+                                          fontSize: h * 0.02,
+                                        ),
                                       ),
-                                    ),
-                                  ],
-                                ),
-                                Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Image.asset(
-                                      'images/Trophies/FACup.png',
-                                      height: h * 0.1,
-                                      width: w * 0.05,
-                                      color: Colors.white,
-                                    ),
-                                    Text(
-                                      'FA CUP',
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontFamily: 'Nevis',
-                                        fontSize: h * 0.02,
+                                      Text(
+                                        'x8',
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontFamily: 'Nevis',
+                                          fontSize: h * 0.02,
+                                        ),
                                       ),
-                                    ),
-                                    Text(
-                                      'x8',
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontFamily: 'Nevis',
-                                        fontSize: h * 0.02,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ],
+                                    ],
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                 ),
@@ -935,176 +976,189 @@ class _HomepageState extends State<Homepage> {
               MouseRegion(
                 onEnter: (event) => setState(() => isHovered4 = true),
                 onExit: (event) => setState(() => isHovered4 = false),
-                child: AnimatedContainer(
-                  duration: const Duration(milliseconds: 200),
-                  height: h * 0.2,
-                  width: w,
-                  decoration: BoxDecoration(
-                    color: kPrimaryColor,
-                  ),
-                  child: Center(
-                    child: Stack(
-                      alignment: Alignment.center,
-                      children: [
-                        Image.asset(
-                          'images/Clubs/Backgrounds/Mancityback.png',
-                          width: w,
-                          height: h * 0.4,
-                          fit: BoxFit.cover,
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => TeamsDashboard(
+                          teamName: 'Manchester City',
                         ),
-                        AnimatedPositioned(
-                          duration: const Duration(milliseconds: 300),
-                          left: isHovered4 ? w * 0.40 : w * 0.42,
-                          curve: Curves.easeInOut,
-                          child: Image.asset(
-                            'images/Clubs/ManCity.png',
-                            height: h * 0.15,
+                      ),
+                    );
+                  },
+                  child: AnimatedContainer(
+                    duration: const Duration(milliseconds: 200),
+                    height: h * 0.2,
+                    width: w,
+                    decoration: BoxDecoration(
+                      color: kPrimaryColor,
+                    ),
+                    child: Center(
+                      child: Stack(
+                        alignment: Alignment.center,
+                        children: [
+                          Image.asset(
+                            'images/Clubs/Backgrounds/Mancityback.png',
+                            width: w,
+                            height: h * 0.4,
+                            fit: BoxFit.cover,
                           ),
-                        ),
-                        AnimatedPositioned(
-                          duration: const Duration(milliseconds: 300),
-                          left: isHovered4 ? w * 0.52 : w * 0.46,
-                          curve: Curves.easeInOut,
-                          child: AnimatedOpacity(
+                          AnimatedPositioned(
                             duration: const Duration(milliseconds: 300),
-                            opacity: isHovered4 ? 1.0 : 0.0,
-                            child: Text(
-                              'MANCHESTER CITY',
-                              style: TextStyle(
-                                fontSize: h * 0.04,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white,
-                                fontFamily: 'Barcelona',
+                            left: isHovered4 ? w * 0.40 : w * 0.42,
+                            curve: Curves.easeInOut,
+                            child: Image.asset(
+                              'images/Clubs/ManCity.png',
+                              height: h * 0.15,
+                            ),
+                          ),
+                          AnimatedPositioned(
+                            duration: const Duration(milliseconds: 300),
+                            left: isHovered4 ? w * 0.52 : w * 0.46,
+                            curve: Curves.easeInOut,
+                            child: AnimatedOpacity(
+                              duration: const Duration(milliseconds: 300),
+                              opacity: isHovered4 ? 1.0 : 0.0,
+                              child: Text(
+                                'MANCHESTER CITY',
+                                style: TextStyle(
+                                  fontSize: h * 0.04,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white,
+                                  fontFamily: 'Barcelona',
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                        AnimatedPositioned(
-                          duration: const Duration(microseconds: 500),
-                          left: isHovered4 ? w * 0.24 : w * 0.20,
-                          curve: Curves.easeInOut,
-                          child: AnimatedOpacity(
+                          AnimatedPositioned(
                             duration: const Duration(microseconds: 500),
-                            opacity: isHovered4 ? 1.0 : 0.0,
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  'Founded in',
-                                  style: TextStyle(
-                                    fontSize: h * 0.03,
-                                    color: Colors.white,
-                                    fontFamily: 'Nevis',
+                            left: isHovered4 ? w * 0.24 : w * 0.20,
+                            curve: Curves.easeInOut,
+                            child: AnimatedOpacity(
+                              duration: const Duration(microseconds: 500),
+                              opacity: isHovered4 ? 1.0 : 0.0,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    'Founded in',
+                                    style: TextStyle(
+                                      fontSize: h * 0.03,
+                                      color: Colors.white,
+                                      fontFamily: 'Nevis',
+                                    ),
                                   ),
-                                ),
-                                Text(
-                                  '1880',
-                                  style: TextStyle(
-                                    fontSize: h * 0.06,
-                                    color: Colors.white,
-                                    fontFamily: 'Barcelona',
+                                  Text(
+                                    '1880',
+                                    style: TextStyle(
+                                      fontSize: h * 0.06,
+                                      color: Colors.white,
+                                      fontFamily: 'Barcelona',
+                                    ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
                           ),
-                        ),
-                        AnimatedPositioned(
-                          duration: const Duration(microseconds: 500),
-                          left: isHovered4 ? w * 0.70 : w * 0.65,
-                          curve: Curves.easeInOut,
-                          child: AnimatedOpacity(
+                          AnimatedPositioned(
                             duration: const Duration(microseconds: 500),
-                            opacity: isHovered4 ? 1.0 : 0.0,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Image.asset(
-                                      'images/Trophies/UCL.png',
-                                      height: h * 0.1,
-                                      width: w * 0.05,
-                                      color: Colors.white,
-                                    ),
-                                    Text(
-                                      'UCL',
-                                      style: TextStyle(
+                            left: isHovered4 ? w * 0.70 : w * 0.65,
+                            curve: Curves.easeInOut,
+                            child: AnimatedOpacity(
+                              duration: const Duration(microseconds: 500),
+                              opacity: isHovered4 ? 1.0 : 0.0,
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Image.asset(
+                                        'images/Trophies/UCL.png',
+                                        height: h * 0.1,
+                                        width: w * 0.05,
                                         color: Colors.white,
-                                        fontFamily: 'Nevis',
-                                        fontSize: h * 0.02,
                                       ),
-                                    ),
-                                    Text(
-                                      'x1',
-                                      style: TextStyle(
+                                      Text(
+                                        'UCL',
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontFamily: 'Nevis',
+                                          fontSize: h * 0.02,
+                                        ),
+                                      ),
+                                      Text(
+                                        'x1',
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontFamily: 'Nevis',
+                                          fontSize: h * 0.02,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Image.asset(
+                                        'images/Trophies/PL.png',
+                                        height: h * 0.1,
+                                        width: w * 0.05,
                                         color: Colors.white,
-                                        fontFamily: 'Nevis',
-                                        fontSize: h * 0.02,
                                       ),
-                                    ),
-                                  ],
-                                ),
-                                Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Image.asset(
-                                      'images/Trophies/PL.png',
-                                      height: h * 0.1,
-                                      width: w * 0.05,
-                                      color: Colors.white,
-                                    ),
-                                    Text(
-                                      'PREMIER LEAGUE',
-                                      style: TextStyle(
+                                      Text(
+                                        'PREMIER LEAGUE',
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontFamily: 'Nevis',
+                                          fontSize: h * 0.02,
+                                        ),
+                                      ),
+                                      Text(
+                                        'x10',
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontFamily: 'Nevis',
+                                          fontSize: h * 0.02,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Image.asset(
+                                        'images/Trophies/FACup.png',
+                                        height: h * 0.1,
+                                        width: w * 0.05,
                                         color: Colors.white,
-                                        fontFamily: 'Nevis',
-                                        fontSize: h * 0.02,
                                       ),
-                                    ),
-                                    Text(
-                                      'x10',
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontFamily: 'Nevis',
-                                        fontSize: h * 0.02,
+                                      Text(
+                                        'FA CUP',
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontFamily: 'Nevis',
+                                          fontSize: h * 0.02,
+                                        ),
                                       ),
-                                    ),
-                                  ],
-                                ),
-                                Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Image.asset(
-                                      'images/Trophies/FACup.png',
-                                      height: h * 0.1,
-                                      width: w * 0.05,
-                                      color: Colors.white,
-                                    ),
-                                    Text(
-                                      'FA CUP',
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontFamily: 'Nevis',
-                                        fontSize: h * 0.02,
+                                      Text(
+                                        'x7',
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontFamily: 'Nevis',
+                                          fontSize: h * 0.02,
+                                        ),
                                       ),
-                                    ),
-                                    Text(
-                                      'x7',
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontFamily: 'Nevis',
-                                        fontSize: h * 0.02,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ],
+                                    ],
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                 ),
@@ -1113,179 +1167,192 @@ class _HomepageState extends State<Homepage> {
               MouseRegion(
                 onEnter: (event) => setState(() => isHovered5 = true),
                 onExit: (event) => setState(() => isHovered5 = false),
-                child: AnimatedContainer(
-                  duration: const Duration(milliseconds: 200),
-                  height: h * 0.2,
-                  width: w,
-                  decoration: BoxDecoration(
-                    color: kPrimaryColor,
-                  ),
-                  child: Center(
-                    child: Stack(
-                      alignment: Alignment.center,
-                      children: [
-                        Image.asset(
-                          'images/Clubs/Backgrounds/Dortmundback.png',
-                          width: w,
-                          height: h * 0.4,
-                          fit: BoxFit.cover,
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => TeamsDashboard(
+                          teamName: 'Dortmund',
                         ),
-                        AnimatedPositioned(
-                          duration: const Duration(milliseconds: 300),
-                          left: isHovered5 ? w * 0.42 : w * 0.435,
-                          curve: Curves.easeInOut,
-                          child: Image.asset(
-                            'images/Clubs/BorussiaDortmund.png',
-                            height: h * 0.15,
+                      ),
+                    );
+                  },
+                  child: AnimatedContainer(
+                    duration: const Duration(milliseconds: 200),
+                    height: h * 0.2,
+                    width: w,
+                    decoration: BoxDecoration(
+                      color: kPrimaryColor,
+                    ),
+                    child: Center(
+                      child: Stack(
+                        alignment: Alignment.center,
+                        children: [
+                          Image.asset(
+                            'images/Clubs/Backgrounds/Dortmundback.png',
+                            width: w,
+                            height: h * 0.4,
+                            fit: BoxFit.cover,
                           ),
-                        ),
-                        AnimatedPositioned(
-                          duration: const Duration(milliseconds: 300),
-                          left: isHovered5 ? w * 0.54 : w * 0.47,
-                          curve: Curves.easeInOut,
-                          child: AnimatedOpacity(
+                          AnimatedPositioned(
                             duration: const Duration(milliseconds: 300),
-                            opacity: isHovered5 ? 1.0 : 0.0,
-                            child: Text(
-                              'BORUSSIA DORTMUND',
-                              style: TextStyle(
-                                fontSize: h * 0.04,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.yellow,
-                                fontFamily: 'Barcelona',
+                            left: isHovered5 ? w * 0.42 : w * 0.435,
+                            curve: Curves.easeInOut,
+                            child: Image.asset(
+                              'images/Clubs/BorussiaDortmund.png',
+                              height: h * 0.15,
+                            ),
+                          ),
+                          AnimatedPositioned(
+                            duration: const Duration(milliseconds: 300),
+                            left: isHovered5 ? w * 0.54 : w * 0.47,
+                            curve: Curves.easeInOut,
+                            child: AnimatedOpacity(
+                              duration: const Duration(milliseconds: 300),
+                              opacity: isHovered5 ? 1.0 : 0.0,
+                              child: Text(
+                                'BORUSSIA DORTMUND',
+                                style: TextStyle(
+                                  fontSize: h * 0.04,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.yellow,
+                                  fontFamily: 'Barcelona',
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                        AnimatedPositioned(
-                          duration: const Duration(microseconds: 500),
-                          left: isHovered5 ? w * 0.24 : w * 0.20,
-                          curve: Curves.easeInOut,
-                          child: AnimatedOpacity(
+                          AnimatedPositioned(
                             duration: const Duration(microseconds: 500),
-                            opacity: isHovered5 ? 1.0 : 0.0,
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  'Founded in',
-                                  style: TextStyle(
-                                    fontSize: h * 0.03,
-                                    color: Colors.yellow,
-                                    fontFamily: 'Nevis',
+                            left: isHovered5 ? w * 0.24 : w * 0.20,
+                            curve: Curves.easeInOut,
+                            child: AnimatedOpacity(
+                              duration: const Duration(microseconds: 500),
+                              opacity: isHovered5 ? 1.0 : 0.0,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    'Founded in',
+                                    style: TextStyle(
+                                      fontSize: h * 0.03,
+                                      color: Colors.yellow,
+                                      fontFamily: 'Nevis',
+                                    ),
                                   ),
-                                ),
-                                Text(
-                                  '1909',
-                                  style: TextStyle(
-                                    fontSize: h * 0.06,
-                                    color: Colors.yellow,
-                                    fontFamily: 'Barcelona',
+                                  Text(
+                                    '1909',
+                                    style: TextStyle(
+                                      fontSize: h * 0.06,
+                                      color: Colors.yellow,
+                                      fontFamily: 'Barcelona',
+                                    ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
                           ),
-                        ),
-                        AnimatedPositioned(
-                          duration: const Duration(microseconds: 500),
-                          left: isHovered5 ? w * 0.70 : w * 0.65,
-                          curve: Curves.easeInOut,
-                          child: AnimatedOpacity(
+                          AnimatedPositioned(
                             duration: const Duration(microseconds: 500),
-                            opacity: isHovered5 ? 1.0 : 0.0,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Image.asset(
-                                      'images/Trophies/UCL.png',
-                                      height: h * 0.1,
-                                      width: w * 0.05,
-                                      color: Colors.yellow,
-                                    ),
-                                    Text(
-                                      'UCL',
-                                      style: TextStyle(
+                            left: isHovered5 ? w * 0.70 : w * 0.65,
+                            curve: Curves.easeInOut,
+                            child: AnimatedOpacity(
+                              duration: const Duration(microseconds: 500),
+                              opacity: isHovered5 ? 1.0 : 0.0,
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Image.asset(
+                                        'images/Trophies/UCL.png',
+                                        height: h * 0.1,
+                                        width: w * 0.05,
                                         color: Colors.yellow,
-                                        fontFamily: 'Nevis',
-                                        fontSize: h * 0.02,
                                       ),
-                                    ),
-                                    Text(
-                                      'x1',
-                                      style: TextStyle(
+                                      Text(
+                                        'UCL',
+                                        style: TextStyle(
+                                          color: Colors.yellow,
+                                          fontFamily: 'Nevis',
+                                          fontSize: h * 0.02,
+                                        ),
+                                      ),
+                                      Text(
+                                        'x1',
+                                        style: TextStyle(
+                                          color: Colors.yellow,
+                                          fontFamily: 'Nevis',
+                                          fontSize: h * 0.02,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Image.asset(
+                                        'images/Trophies/Bundesliga.png',
+                                        height: h * 0.1,
+                                        width: w * 0.05,
                                         color: Colors.yellow,
-                                        fontFamily: 'Nevis',
-                                        fontSize: h * 0.02,
                                       ),
-                                    ),
-                                  ],
-                                ),
-                                Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Image.asset(
-                                      'images/Trophies/Bundesliga.png',
-                                      height: h * 0.1,
-                                      width: w * 0.05,
-                                      color: Colors.yellow,
-                                    ),
-                                    Text(
-                                      'BUNDESLIGA',
-                                      style: TextStyle(
+                                      Text(
+                                        'BUNDESLIGA',
+                                        style: TextStyle(
+                                          color: Colors.yellow,
+                                          fontFamily: 'Nevis',
+                                          fontSize: h * 0.02,
+                                        ),
+                                      ),
+                                      Text(
+                                        'x8',
+                                        style: TextStyle(
+                                          color: Colors.yellow,
+                                          fontFamily: 'Nevis',
+                                          fontSize: h * 0.02,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    width: w * 0.01 / 2,
+                                  ),
+                                  Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Image.asset(
+                                        'images/Trophies/DFBPokal.png',
+                                        height: h * 0.1,
+                                        width: w * 0.05,
                                         color: Colors.yellow,
-                                        fontFamily: 'Nevis',
-                                        fontSize: h * 0.02,
                                       ),
-                                    ),
-                                    Text(
-                                      'x8',
-                                      style: TextStyle(
-                                        color: Colors.yellow,
-                                        fontFamily: 'Nevis',
-                                        fontSize: h * 0.02,
+                                      Text(
+                                        'DFB POKAL',
+                                        style: TextStyle(
+                                          color: Colors.yellow,
+                                          fontFamily: 'Nevis',
+                                          fontSize: h * 0.02,
+                                        ),
                                       ),
-                                    ),
-                                  ],
-                                ),
-                                SizedBox(
-                                  width: w * 0.01 / 2,
-                                ),
-                                Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Image.asset(
-                                      'images/Trophies/DFBPokal.png',
-                                      height: h * 0.1,
-                                      width: w * 0.05,
-                                      color: Colors.yellow,
-                                    ),
-                                    Text(
-                                      'DFB POKAL',
-                                      style: TextStyle(
-                                        color: Colors.yellow,
-                                        fontFamily: 'Nevis',
-                                        fontSize: h * 0.02,
+                                      Text(
+                                        'x5',
+                                        style: TextStyle(
+                                          color: Colors.yellow,
+                                          fontFamily: 'Nevis',
+                                          fontSize: h * 0.02,
+                                        ),
                                       ),
-                                    ),
-                                    Text(
-                                      'x5',
-                                      style: TextStyle(
-                                        color: Colors.yellow,
-                                        fontFamily: 'Nevis',
-                                        fontSize: h * 0.02,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ],
+                                    ],
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                 ),
@@ -1294,179 +1361,192 @@ class _HomepageState extends State<Homepage> {
               MouseRegion(
                 onEnter: (event) => setState(() => isHovered6 = true),
                 onExit: (event) => setState(() => isHovered6 = false),
-                child: AnimatedContainer(
-                  duration: const Duration(milliseconds: 200),
-                  height: h * 0.2,
-                  width: w,
-                  decoration: BoxDecoration(
-                    color: kPrimaryColor,
-                  ),
-                  child: Center(
-                    child: Stack(
-                      alignment: Alignment.center,
-                      children: [
-                        Image.asset(
-                          'images/Clubs/Backgrounds/Bayernback.png',
-                          width: w,
-                          height: h * 0.4,
-                          fit: BoxFit.cover,
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => TeamsDashboard(
+                          teamName: 'Bayern Munich',
                         ),
-                        AnimatedPositioned(
-                          duration: const Duration(milliseconds: 300),
-                          left: isHovered6 ? w * 0.40 : w * 0.427,
-                          curve: Curves.easeInOut,
-                          child: Image.asset(
-                            'images/Clubs/BayernMunich.png',
-                            height: h * 0.15,
+                      ),
+                    );
+                  },
+                  child: AnimatedContainer(
+                    duration: const Duration(milliseconds: 200),
+                    height: h * 0.2,
+                    width: w,
+                    decoration: BoxDecoration(
+                      color: kPrimaryColor,
+                    ),
+                    child: Center(
+                      child: Stack(
+                        alignment: Alignment.center,
+                        children: [
+                          Image.asset(
+                            'images/Clubs/Backgrounds/Bayernback.png',
+                            width: w,
+                            height: h * 0.4,
+                            fit: BoxFit.cover,
                           ),
-                        ),
-                        AnimatedPositioned(
-                          duration: const Duration(milliseconds: 300),
-                          left: isHovered6 ? w * 0.52 : w * 0.46,
-                          curve: Curves.easeInOut,
-                          child: AnimatedOpacity(
+                          AnimatedPositioned(
                             duration: const Duration(milliseconds: 300),
-                            opacity: isHovered6 ? 1.0 : 0.0,
-                            child: Text(
-                              'BAYERN MUNICH',
-                              style: TextStyle(
-                                fontSize: h * 0.04,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white,
-                                fontFamily: 'Barcelona',
+                            left: isHovered6 ? w * 0.40 : w * 0.427,
+                            curve: Curves.easeInOut,
+                            child: Image.asset(
+                              'images/Clubs/BayernMunich.png',
+                              height: h * 0.15,
+                            ),
+                          ),
+                          AnimatedPositioned(
+                            duration: const Duration(milliseconds: 300),
+                            left: isHovered6 ? w * 0.52 : w * 0.46,
+                            curve: Curves.easeInOut,
+                            child: AnimatedOpacity(
+                              duration: const Duration(milliseconds: 300),
+                              opacity: isHovered6 ? 1.0 : 0.0,
+                              child: Text(
+                                'BAYERN MUNICH',
+                                style: TextStyle(
+                                  fontSize: h * 0.04,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white,
+                                  fontFamily: 'Barcelona',
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                        AnimatedPositioned(
-                          duration: const Duration(microseconds: 500),
-                          left: isHovered6 ? w * 0.24 : w * 0.20,
-                          curve: Curves.easeInOut,
-                          child: AnimatedOpacity(
+                          AnimatedPositioned(
                             duration: const Duration(microseconds: 500),
-                            opacity: isHovered6 ? 1.0 : 0.0,
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  'Founded in',
-                                  style: TextStyle(
-                                    fontSize: h * 0.03,
-                                    color: Colors.white,
-                                    fontFamily: 'Nevis',
+                            left: isHovered6 ? w * 0.24 : w * 0.20,
+                            curve: Curves.easeInOut,
+                            child: AnimatedOpacity(
+                              duration: const Duration(microseconds: 500),
+                              opacity: isHovered6 ? 1.0 : 0.0,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    'Founded in',
+                                    style: TextStyle(
+                                      fontSize: h * 0.03,
+                                      color: Colors.white,
+                                      fontFamily: 'Nevis',
+                                    ),
                                   ),
-                                ),
-                                Text(
-                                  '1900',
-                                  style: TextStyle(
-                                    fontSize: h * 0.06,
-                                    color: Colors.white,
-                                    fontFamily: 'Barcelona',
+                                  Text(
+                                    '1900',
+                                    style: TextStyle(
+                                      fontSize: h * 0.06,
+                                      color: Colors.white,
+                                      fontFamily: 'Barcelona',
+                                    ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
                           ),
-                        ),
-                        AnimatedPositioned(
-                          duration: const Duration(microseconds: 500),
-                          left: isHovered6 ? w * 0.70 : w * 0.65,
-                          curve: Curves.easeInOut,
-                          child: AnimatedOpacity(
+                          AnimatedPositioned(
                             duration: const Duration(microseconds: 500),
-                            opacity: isHovered6 ? 1.0 : 0.0,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Image.asset(
-                                      'images/Trophies/UCL.png',
-                                      height: h * 0.1,
-                                      width: w * 0.05,
-                                      color: Colors.white,
-                                    ),
-                                    Text(
-                                      'UCL',
-                                      style: TextStyle(
+                            left: isHovered6 ? w * 0.70 : w * 0.65,
+                            curve: Curves.easeInOut,
+                            child: AnimatedOpacity(
+                              duration: const Duration(microseconds: 500),
+                              opacity: isHovered6 ? 1.0 : 0.0,
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Image.asset(
+                                        'images/Trophies/UCL.png',
+                                        height: h * 0.1,
+                                        width: w * 0.05,
                                         color: Colors.white,
-                                        fontFamily: 'Nevis',
-                                        fontSize: h * 0.02,
                                       ),
-                                    ),
-                                    Text(
-                                      'x6',
-                                      style: TextStyle(
+                                      Text(
+                                        'UCL',
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontFamily: 'Nevis',
+                                          fontSize: h * 0.02,
+                                        ),
+                                      ),
+                                      Text(
+                                        'x6',
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontFamily: 'Nevis',
+                                          fontSize: h * 0.02,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Image.asset(
+                                        'images/Trophies/Bundesliga.png',
+                                        height: h * 0.1,
+                                        width: w * 0.05,
                                         color: Colors.white,
-                                        fontFamily: 'Nevis',
-                                        fontSize: h * 0.02,
                                       ),
-                                    ),
-                                  ],
-                                ),
-                                Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Image.asset(
-                                      'images/Trophies/Bundesliga.png',
-                                      height: h * 0.1,
-                                      width: w * 0.05,
-                                      color: Colors.white,
-                                    ),
-                                    Text(
-                                      'BUNDESLIGA',
-                                      style: TextStyle(
+                                      Text(
+                                        'BUNDESLIGA',
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontFamily: 'Nevis',
+                                          fontSize: h * 0.02,
+                                        ),
+                                      ),
+                                      Text(
+                                        'x33',
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontFamily: 'Nevis',
+                                          fontSize: h * 0.02,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    width: w * 0.01 / 2,
+                                  ),
+                                  Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Image.asset(
+                                        'images/Trophies/DFBPokal.png',
+                                        height: h * 0.1,
+                                        width: w * 0.05,
                                         color: Colors.white,
-                                        fontFamily: 'Nevis',
-                                        fontSize: h * 0.02,
                                       ),
-                                    ),
-                                    Text(
-                                      'x33',
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontFamily: 'Nevis',
-                                        fontSize: h * 0.02,
+                                      Text(
+                                        'DFB POKAL',
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontFamily: 'Nevis',
+                                          fontSize: h * 0.02,
+                                        ),
                                       ),
-                                    ),
-                                  ],
-                                ),
-                                SizedBox(
-                                  width: w * 0.01 / 2,
-                                ),
-                                Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Image.asset(
-                                      'images/Trophies/DFBPokal.png',
-                                      height: h * 0.1,
-                                      width: w * 0.05,
-                                      color: Colors.white,
-                                    ),
-                                    Text(
-                                      'DFB POKAL',
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontFamily: 'Nevis',
-                                        fontSize: h * 0.02,
+                                      Text(
+                                        'x20',
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontFamily: 'Nevis',
+                                          fontSize: h * 0.02,
+                                        ),
                                       ),
-                                    ),
-                                    Text(
-                                      'x20',
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontFamily: 'Nevis',
-                                        fontSize: h * 0.02,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ],
+                                    ],
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                 ),
@@ -1475,179 +1555,192 @@ class _HomepageState extends State<Homepage> {
               MouseRegion(
                 onEnter: (event) => setState(() => isHovered7 = true),
                 onExit: (event) => setState(() => isHovered7 = false),
-                child: AnimatedContainer(
-                  duration: const Duration(milliseconds: 200),
-                  height: h * 0.2,
-                  width: w,
-                  decoration: BoxDecoration(
-                    color: kPrimaryColor,
-                  ),
-                  child: Center(
-                    child: Stack(
-                      alignment: Alignment.center,
-                      children: [
-                        Image.asset(
-                          'images/Clubs/Backgrounds/Chelseaback.png',
-                          width: w,
-                          height: h * 0.4,
-                          fit: BoxFit.cover,
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => TeamsDashboard(
+                          teamName: 'Chelsea',
                         ),
-                        AnimatedPositioned(
-                          duration: const Duration(milliseconds: 300),
-                          left: isHovered7 ? w * 0.42 : w * 0.45,
-                          curve: Curves.easeInOut,
-                          child: Image.asset(
-                            'images/Clubs/Chelsea.png',
-                            height: h * 0.15,
+                      ),
+                    );
+                  },
+                  child: AnimatedContainer(
+                    duration: const Duration(milliseconds: 200),
+                    height: h * 0.2,
+                    width: w,
+                    decoration: BoxDecoration(
+                      color: kPrimaryColor,
+                    ),
+                    child: Center(
+                      child: Stack(
+                        alignment: Alignment.center,
+                        children: [
+                          Image.asset(
+                            'images/Clubs/Backgrounds/Chelseaback.png',
+                            width: w,
+                            height: h * 0.4,
+                            fit: BoxFit.cover,
                           ),
-                        ),
-                        AnimatedPositioned(
-                          duration: const Duration(milliseconds: 300),
-                          left: isHovered7 ? w * 0.52 : w * 0.48,
-                          curve: Curves.easeInOut,
-                          child: AnimatedOpacity(
+                          AnimatedPositioned(
                             duration: const Duration(milliseconds: 300),
-                            opacity: isHovered7 ? 1.0 : 0.0,
-                            child: Text(
-                              'CHELSEA',
-                              style: TextStyle(
-                                fontSize: h * 0.04,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white,
-                                fontFamily: 'Barcelona',
+                            left: isHovered7 ? w * 0.42 : w * 0.45,
+                            curve: Curves.easeInOut,
+                            child: Image.asset(
+                              'images/Clubs/Chelsea.png',
+                              height: h * 0.15,
+                            ),
+                          ),
+                          AnimatedPositioned(
+                            duration: const Duration(milliseconds: 300),
+                            left: isHovered7 ? w * 0.52 : w * 0.48,
+                            curve: Curves.easeInOut,
+                            child: AnimatedOpacity(
+                              duration: const Duration(milliseconds: 300),
+                              opacity: isHovered7 ? 1.0 : 0.0,
+                              child: Text(
+                                'CHELSEA',
+                                style: TextStyle(
+                                  fontSize: h * 0.04,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white,
+                                  fontFamily: 'Barcelona',
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                        AnimatedPositioned(
-                          duration: const Duration(microseconds: 500),
-                          left: isHovered7 ? w * 0.24 : w * 0.20,
-                          curve: Curves.easeInOut,
-                          child: AnimatedOpacity(
+                          AnimatedPositioned(
                             duration: const Duration(microseconds: 500),
-                            opacity: isHovered7 ? 1.0 : 0.0,
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  'Founded in',
-                                  style: TextStyle(
-                                    fontSize: h * 0.03,
-                                    color: Colors.white,
-                                    fontFamily: 'Nevis',
+                            left: isHovered7 ? w * 0.24 : w * 0.20,
+                            curve: Curves.easeInOut,
+                            child: AnimatedOpacity(
+                              duration: const Duration(microseconds: 500),
+                              opacity: isHovered7 ? 1.0 : 0.0,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    'Founded in',
+                                    style: TextStyle(
+                                      fontSize: h * 0.03,
+                                      color: Colors.white,
+                                      fontFamily: 'Nevis',
+                                    ),
                                   ),
-                                ),
-                                Text(
-                                  '1905',
-                                  style: TextStyle(
-                                    fontSize: h * 0.06,
-                                    color: Colors.white,
-                                    fontFamily: 'Barcelona',
+                                  Text(
+                                    '1905',
+                                    style: TextStyle(
+                                      fontSize: h * 0.06,
+                                      color: Colors.white,
+                                      fontFamily: 'Barcelona',
+                                    ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
                           ),
-                        ),
-                        AnimatedPositioned(
-                          duration: const Duration(microseconds: 500),
-                          left: isHovered7 ? w * 0.70 : w * 0.65,
-                          curve: Curves.easeInOut,
-                          child: AnimatedOpacity(
+                          AnimatedPositioned(
                             duration: const Duration(microseconds: 500),
-                            opacity: isHovered7 ? 1.0 : 0.0,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Image.asset(
-                                      'images/Trophies/UCL.png',
-                                      height: h * 0.1,
-                                      width: w * 0.05,
-                                      color: Colors.white,
-                                    ),
-                                    Text(
-                                      'UCL',
-                                      style: TextStyle(
+                            left: isHovered7 ? w * 0.70 : w * 0.65,
+                            curve: Curves.easeInOut,
+                            child: AnimatedOpacity(
+                              duration: const Duration(microseconds: 500),
+                              opacity: isHovered7 ? 1.0 : 0.0,
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Image.asset(
+                                        'images/Trophies/UCL.png',
+                                        height: h * 0.1,
+                                        width: w * 0.05,
                                         color: Colors.white,
-                                        fontFamily: 'Nevis',
-                                        fontSize: h * 0.02,
                                       ),
-                                    ),
-                                    Text(
-                                      'x5',
-                                      style: TextStyle(
+                                      Text(
+                                        'UCL',
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontFamily: 'Nevis',
+                                          fontSize: h * 0.02,
+                                        ),
+                                      ),
+                                      Text(
+                                        'x5',
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontFamily: 'Nevis',
+                                          fontSize: h * 0.02,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Image.asset(
+                                        'images/Trophies/PL.png',
+                                        height: h * 0.1,
+                                        width: w * 0.05,
                                         color: Colors.white,
-                                        fontFamily: 'Nevis',
-                                        fontSize: h * 0.02,
                                       ),
-                                    ),
-                                  ],
-                                ),
-                                Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Image.asset(
-                                      'images/Trophies/PL.png',
-                                      height: h * 0.1,
-                                      width: w * 0.05,
-                                      color: Colors.white,
-                                    ),
-                                    Text(
-                                      'PREMIER LEAGUE',
-                                      style: TextStyle(
+                                      Text(
+                                        'PREMIER LEAGUE',
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontFamily: 'Nevis',
+                                          fontSize: h * 0.02,
+                                        ),
+                                      ),
+                                      Text(
+                                        'x6',
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontFamily: 'Nevis',
+                                          fontSize: h * 0.02,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    width: w * 0.01 / 2,
+                                  ),
+                                  Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Image.asset(
+                                        'images/Trophies/FACup.png',
+                                        height: h * 0.1,
+                                        width: w * 0.05,
                                         color: Colors.white,
-                                        fontFamily: 'Nevis',
-                                        fontSize: h * 0.02,
                                       ),
-                                    ),
-                                    Text(
-                                      'x6',
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontFamily: 'Nevis',
-                                        fontSize: h * 0.02,
+                                      Text(
+                                        'FA Cup',
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontFamily: 'Nevis',
+                                          fontSize: h * 0.02,
+                                        ),
                                       ),
-                                    ),
-                                  ],
-                                ),
-                                SizedBox(
-                                  width: w * 0.01 / 2,
-                                ),
-                                Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Image.asset(
-                                      'images/Trophies/FACup.png',
-                                      height: h * 0.1,
-                                      width: w * 0.05,
-                                      color: Colors.white,
-                                    ),
-                                    Text(
-                                      'FA Cup',
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontFamily: 'Nevis',
-                                        fontSize: h * 0.02,
+                                      Text(
+                                        'x5',
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontFamily: 'Nevis',
+                                          fontSize: h * 0.02,
+                                        ),
                                       ),
-                                    ),
-                                    Text(
-                                      'x5',
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontFamily: 'Nevis',
-                                        fontSize: h * 0.02,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ],
+                                    ],
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                 ),
@@ -1656,179 +1749,192 @@ class _HomepageState extends State<Homepage> {
               MouseRegion(
                 onEnter: (event) => setState(() => isHovered8 = true),
                 onExit: (event) => setState(() => isHovered8 = false),
-                child: AnimatedContainer(
-                  duration: const Duration(milliseconds: 200),
-                  height: h * 0.2,
-                  width: w,
-                  decoration: BoxDecoration(
-                    color: kPrimaryColor,
-                  ),
-                  child: Center(
-                    child: Stack(
-                      alignment: Alignment.center,
-                      children: [
-                        Image.asset(
-                          'images/Clubs/Backgrounds/Athleticoback.png',
-                          width: w,
-                          height: h * 0.4,
-                          fit: BoxFit.cover,
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => TeamsDashboard(
+                          teamName: 'Atletico Madrid',
                         ),
-                        AnimatedPositioned(
-                          duration: const Duration(milliseconds: 300),
-                          left: isHovered8 ? w * 0.42 : w * 0.45,
-                          curve: Curves.easeInOut,
-                          child: Image.asset(
-                            'images/Clubs/Athletico.png',
-                            height: h * 0.15,
+                      ),
+                    );
+                  },
+                  child: AnimatedContainer(
+                    duration: const Duration(milliseconds: 200),
+                    height: h * 0.2,
+                    width: w,
+                    decoration: BoxDecoration(
+                      color: kPrimaryColor,
+                    ),
+                    child: Center(
+                      child: Stack(
+                        alignment: Alignment.center,
+                        children: [
+                          Image.asset(
+                            'images/Clubs/Backgrounds/Athleticoback.png',
+                            width: w,
+                            height: h * 0.4,
+                            fit: BoxFit.cover,
                           ),
-                        ),
-                        AnimatedPositioned(
-                          duration: const Duration(milliseconds: 300),
-                          left: isHovered8 ? w * 0.50 : w * 0.45,
-                          curve: Curves.easeInOut,
-                          child: AnimatedOpacity(
+                          AnimatedPositioned(
                             duration: const Duration(milliseconds: 300),
-                            opacity: isHovered8 ? 1.0 : 0.0,
-                            child: Text(
-                              'ATLETICO MADRID',
-                              style: TextStyle(
-                                fontSize: h * 0.04,
-                                fontWeight: FontWeight.bold,
-                                color: kPrimaryColor,
-                                fontFamily: 'Barcelona',
+                            left: isHovered8 ? w * 0.42 : w * 0.45,
+                            curve: Curves.easeInOut,
+                            child: Image.asset(
+                              'images/Clubs/Athletico.png',
+                              height: h * 0.15,
+                            ),
+                          ),
+                          AnimatedPositioned(
+                            duration: const Duration(milliseconds: 300),
+                            left: isHovered8 ? w * 0.50 : w * 0.45,
+                            curve: Curves.easeInOut,
+                            child: AnimatedOpacity(
+                              duration: const Duration(milliseconds: 300),
+                              opacity: isHovered8 ? 1.0 : 0.0,
+                              child: Text(
+                                'ATLETICO MADRID',
+                                style: TextStyle(
+                                  fontSize: h * 0.04,
+                                  fontWeight: FontWeight.bold,
+                                  color: kPrimaryColor,
+                                  fontFamily: 'Barcelona',
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                        AnimatedPositioned(
-                          duration: const Duration(microseconds: 500),
-                          left: isHovered8 ? w * 0.24 : w * 0.20,
-                          curve: Curves.easeInOut,
-                          child: AnimatedOpacity(
+                          AnimatedPositioned(
                             duration: const Duration(microseconds: 500),
-                            opacity: isHovered8 ? 1.0 : 0.0,
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  'Founded in',
-                                  style: TextStyle(
-                                    fontSize: h * 0.03,
-                                    color: kPrimaryColor,
-                                    fontFamily: 'Nevis',
+                            left: isHovered8 ? w * 0.24 : w * 0.20,
+                            curve: Curves.easeInOut,
+                            child: AnimatedOpacity(
+                              duration: const Duration(microseconds: 500),
+                              opacity: isHovered8 ? 1.0 : 0.0,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    'Founded in',
+                                    style: TextStyle(
+                                      fontSize: h * 0.03,
+                                      color: kPrimaryColor,
+                                      fontFamily: 'Nevis',
+                                    ),
                                   ),
-                                ),
-                                Text(
-                                  '1903',
-                                  style: TextStyle(
-                                    fontSize: h * 0.06,
-                                    color: kPrimaryColor,
-                                    fontFamily: 'Barcelona',
+                                  Text(
+                                    '1903',
+                                    style: TextStyle(
+                                      fontSize: h * 0.06,
+                                      color: kPrimaryColor,
+                                      fontFamily: 'Barcelona',
+                                    ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
                           ),
-                        ),
-                        AnimatedPositioned(
-                          duration: const Duration(microseconds: 500),
-                          left: isHovered8 ? w * 0.70 : w * 0.65,
-                          curve: Curves.easeInOut,
-                          child: AnimatedOpacity(
+                          AnimatedPositioned(
                             duration: const Duration(microseconds: 500),
-                            opacity: isHovered8 ? 1.0 : 0.0,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Image.asset(
-                                      'images/Trophies/UEL.png',
-                                      height: h * 0.1,
-                                      width: w * 0.05,
-                                      color: kPrimaryColor,
-                                    ),
-                                    Text(
-                                      'UEL',
-                                      style: TextStyle(
+                            left: isHovered8 ? w * 0.70 : w * 0.65,
+                            curve: Curves.easeInOut,
+                            child: AnimatedOpacity(
+                              duration: const Duration(microseconds: 500),
+                              opacity: isHovered8 ? 1.0 : 0.0,
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Image.asset(
+                                        'images/Trophies/UEL.png',
+                                        height: h * 0.1,
+                                        width: w * 0.05,
                                         color: kPrimaryColor,
-                                        fontFamily: 'Nevis',
-                                        fontSize: h * 0.02,
                                       ),
-                                    ),
-                                    Text(
-                                      'x3',
-                                      style: TextStyle(
+                                      Text(
+                                        'UEL',
+                                        style: TextStyle(
+                                          color: kPrimaryColor,
+                                          fontFamily: 'Nevis',
+                                          fontSize: h * 0.02,
+                                        ),
+                                      ),
+                                      Text(
+                                        'x3',
+                                        style: TextStyle(
+                                          color: kPrimaryColor,
+                                          fontFamily: 'Nevis',
+                                          fontSize: h * 0.02,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Image.asset(
+                                        'images/Trophies/LaLiga.png',
+                                        height: h * 0.1,
+                                        width: w * 0.05,
                                         color: kPrimaryColor,
-                                        fontFamily: 'Nevis',
-                                        fontSize: h * 0.02,
                                       ),
-                                    ),
-                                  ],
-                                ),
-                                Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Image.asset(
-                                      'images/Trophies/LaLiga.png',
-                                      height: h * 0.1,
-                                      width: w * 0.05,
-                                      color: kPrimaryColor,
-                                    ),
-                                    Text(
-                                      'LA LIGA',
-                                      style: TextStyle(
+                                      Text(
+                                        'LA LIGA',
+                                        style: TextStyle(
+                                          color: kPrimaryColor,
+                                          fontFamily: 'Nevis',
+                                          fontSize: h * 0.02,
+                                        ),
+                                      ),
+                                      Text(
+                                        'x11',
+                                        style: TextStyle(
+                                          color: kPrimaryColor,
+                                          fontFamily: 'Nevis',
+                                          fontSize: h * 0.02,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    width: w * 0.01 / 2,
+                                  ),
+                                  Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Image.asset(
+                                        'images/Trophies/CopaDelRey.png',
+                                        height: h * 0.1,
+                                        width: w * 0.05,
                                         color: kPrimaryColor,
-                                        fontFamily: 'Nevis',
-                                        fontSize: h * 0.02,
                                       ),
-                                    ),
-                                    Text(
-                                      'x11',
-                                      style: TextStyle(
-                                        color: kPrimaryColor,
-                                        fontFamily: 'Nevis',
-                                        fontSize: h * 0.02,
+                                      Text(
+                                        'COPA DEL REY',
+                                        style: TextStyle(
+                                          color: kPrimaryColor,
+                                          fontFamily: 'Nevis',
+                                          fontSize: h * 0.02,
+                                        ),
                                       ),
-                                    ),
-                                  ],
-                                ),
-                                SizedBox(
-                                  width: w * 0.01 / 2,
-                                ),
-                                Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Image.asset(
-                                      'images/Trophies/CopaDelRey.png',
-                                      height: h * 0.1,
-                                      width: w * 0.05,
-                                      color: kPrimaryColor,
-                                    ),
-                                    Text(
-                                      'COPA DEL REY',
-                                      style: TextStyle(
-                                        color: kPrimaryColor,
-                                        fontFamily: 'Nevis',
-                                        fontSize: h * 0.02,
+                                      Text(
+                                        'x10',
+                                        style: TextStyle(
+                                          color: kPrimaryColor,
+                                          fontFamily: 'Nevis',
+                                          fontSize: h * 0.02,
+                                        ),
                                       ),
-                                    ),
-                                    Text(
-                                      'x10',
-                                      style: TextStyle(
-                                        color: kPrimaryColor,
-                                        fontFamily: 'Nevis',
-                                        fontSize: h * 0.02,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ],
+                                    ],
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                 ),
