@@ -2,7 +2,7 @@ import traceback
 import pandas as pd
 import json
 
-from fastapi import FastAPI, HTTPException, Header, Body
+from fastapi import FastAPI, HTTPException, Header, Body, status
 from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
@@ -198,3 +198,8 @@ async def get_player_dashboard(
 @app.get("/healthz")
 async def healthz_check():
     return {"status": "ok"}
+
+
+@app.head("/healthz", status_code=status.HTTP_200_OK)
+async def healthz_check_head():
+    return {}
