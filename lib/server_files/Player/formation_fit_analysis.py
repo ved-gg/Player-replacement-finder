@@ -159,7 +159,7 @@ formation_requirements = {
 
 def load_data(player_name, player_pos):
     """Load player data from CSV"""
-    df = pd.read_csv(f'./assets/data/playerdata/{player_pos}.csv')
+    df = pd.read_csv(f'../../assets/data/playerdata/{player_pos}.csv')
     return df[df['name'] == player_name].iloc[0] if player_name in df['name'].values else None
 
 

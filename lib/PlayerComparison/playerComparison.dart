@@ -52,7 +52,7 @@ class _PlayerComparisonState extends State<PlayerComparison> {
           'player': playerName,
         },
       );
-
+firebase
       if (response.statusCode == 200) {
         final Map<String, dynamic> data = json.decode(response.body);
         print("Fetched Data: $data");

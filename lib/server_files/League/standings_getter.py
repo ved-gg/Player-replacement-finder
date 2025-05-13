@@ -13,38 +13,40 @@ from fbref_searcher import scrape_fbref
 
 
 league_links = {
-     "Premier League":"https://fbref.com/en/comps/9/Premier-League-Stats", 
-     "La Liga":"https://fbref.com/en/comps/12/La-Liga-Stats", 
-     "Liga Portugal":"https://fbref.com/en/comps/32/Primeira-Liga-Stats",
-     "Bundesliga": "https://fbref.com/en/comps/20/Bundesliga-Stats",
-     "Eredivise": "https://fbref.com/en/comps/23/Eredivisie-Stats",
-     "SerieA": "https://fbref.com/en/comps/11/Serie-A-Stats",
-     "Ligue 1": "https://fbref.com/en/comps/13/Ligue-1-Stats",
+    "Premier League": "https://fbref.com/en/comps/9/Premier-League-Stats",
+    "La Liga": "https://fbref.com/en/comps/12/La-Liga-Stats",
+    "Liga Portugal": "https://fbref.com/en/comps/32/Primeira-Liga-Stats",
+    "Bundesliga": "https://fbref.com/en/comps/20/Bundesliga-Stats",
+    "Eredivise": "https://fbref.com/en/comps/23/Eredivisie-Stats",
+    "SerieA": "https://fbref.com/en/comps/11/Serie-A-Stats",
+    "Ligue 1": "https://fbref.com/en/comps/13/Ligue-1-Stats",
 }
 
 
 def standings_getter(league):
-     league_standings = {}
-     try:
-          standings = pd.read_csv(f"assets\Data\{league}\{league}_Standings.csv")
-          standings = standings.drop(columns=['xG','xGA','xGD','xGD/90','Top Team Scorer','Goalkeeper','Pts/MP','Last 5'])
-          # for i in range(len(standings)):
-          league_standings = {
-               "Rank": list(standings["Rk"]), 
-               "Teams": list(standings["Squad"]), 
-               "MP": list(standings["MP"]), 
-               "W": list(standings["W"]), 
-               "D": list(standings["D"]), 
-               "L": list(standings["L"]), 
-               "GF": list(standings["GF"]), 
-               "GA": list(standings["GA"]), 
-               "GD": list(standings["GD"]), 
-               "Pts": list(standings["Pts"]), 
-          }   
-          print(league_standings)  
-          return league_standings
-     except Exception as e:
-          print("Something went wrong in standings_getter:",e)
+    league_standings = {}
+    try:
+        standings = pd.read_csv(
+            f"../../assets/data/{league}/{league}_Standings.csv")
+        standings = standings.drop(columns=[
+                                   'xG', 'xGA', 'xGD', 'xGD/90', 'Top Team Scorer', 'Goalkeeper', 'Pts/MP', 'Last 5'])
+        # for i in range(len(standings)):
+        league_standings = {
+            "Rank": list(standings["Rk"]),
+            "Teams": list(standings["Squad"]),
+            "MP": list(standings["MP"]),
+            "W": list(standings["W"]),
+            "D": list(standings["D"]),
+            "L": list(standings["L"]),
+            "GF": list(standings["GF"]),
+            "GA": list(standings["GA"]),
+            "GD": list(standings["GD"]),
+            "Pts": list(standings["Pts"]),
+        }
+        print(league_standings)
+        return league_standings
+    except Exception as e:
+        print("Something went wrong in standings_getter:", e)
 
 # def image_getter(player_name):
 #     normalized_name = unidecode(player_name.decode("utf-8"))
@@ -72,7 +74,7 @@ def standings_getter(league):
 #         if image and "src" in image.attrs:
 #             return image["src"]
 
-#     return None  
+#     return None
 
 # def fetch_top_performers(league):
 #      best_performers = {}
@@ -98,7 +100,7 @@ def standings_getter(league):
 #                     best_performers['Top Scorer'] = {a.text.strip(): span.text.strip(), 'image':scorer_image,'team':team_name}
 #                if strong.text.strip() == "Most Assists":  # Strip to avoid leading/trailing spaces
 #                     team_name = p.text.split("(")[-1].split(")")[0]
-#                     player_name = a.text.encode("utf-8").strip() 
+#                     player_name = a.text.encode("utf-8").strip()
 #                     assister_image = image_getter(player_name)
 #                     best_performers['Top Assister'] = {a.text.strip(): span.text.strip(), 'image':assister_image,'team':team_name}
 #                if strong.text.strip() == "Most Clean Sheets":  # Strip to avoid leading/trailing spaces

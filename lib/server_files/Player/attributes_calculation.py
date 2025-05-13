@@ -3,8 +3,8 @@ import numpy as np
 
 
 def attributes_calculation(pos, player):
-    csv_path = f"././assets/data/playerdata/{pos}.csv"
-    tis_csv_path = f"././assets/data/playerdata/TIS_{pos}.csv"
+    csv_path = f"../../assets/data/playerdata/{pos}.csv"
+    tis_csv_path = f"../../assets/data/playerdata/TIS_{pos}.csv"
     df = pd.read_csv(csv_path)
     df = df.fillna(0)
     player_row = df[df["name"] == player]

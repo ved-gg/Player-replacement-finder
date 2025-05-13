@@ -7,7 +7,7 @@ def attack_vs_defence(league):
     attack_vs_defence_data = {}
     try:
         standings = pd.read_csv(
-            f"./assets/data/{league}/{league}_Standings.csv")
+            f"../../assets/data/{league}/{league}_Standings.csv")
         matches_played = np.array(standings["MP"])
         goals_scored = np.array(standings["GF"])
         goals_per_match = goals_scored/matches_played
@@ -25,7 +25,7 @@ def defensive_solidity(league):
     defensive_solidity_data = {}
     try:
         defensive_actions = pd.read_csv(
-            f"./assets/data/{league}/{league}_Squad_Defensive_Actions.csv")
+            f"../../assets/data/{league}/{league}_Squad_Defensive_Actions.csv")
         defensive_actions.columns = defensive_actions.iloc[0]
         defensive_actions = defensive_actions[1:].reset_index(drop=True)
         nineties = np.array(defensive_actions["90s"])

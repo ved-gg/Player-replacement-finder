@@ -1,9 +1,11 @@
 import traceback
-from flask import request, jsonify, make_response
-from flask import Flask
-from flask_cors import CORS
-import json
 import pandas as pd
+import json
+
+from fastapi import FastAPI, HTTPException, Header, Body
+from fastapi.responses import JSONResponse
+from fastapi.middleware.cors import CORSMiddleware
+from pydantic import BaseModel
 
 from fbref_searcher import scrape_fbref
 from League.standings_getter import standings_getter
@@ -12,153 +14,186 @@ from League.leagues_plot_data import attack_vs_defence
 from League.leagues_plot_data import defensive_solidity
 from Player.attributes_calculation import attributes_calculation
 from League.top_performers import get_top_performers
-from Player.formation_fit_analysis import analyze_formations, formation_fitness_score, load_data
+from Player.formation_fit_analysis import analyze_formations
 from Player.players_dashboard_data import send_dashboard_data
 
+app = FastAPI(
+    title="Football Stats API",
+    description="API for fetching football player and league statistics.",
+    version="1.0.0"
+)
 
-app = Flask(__name__)
-CORS(app)
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 
-@app.route('/scrape', methods=['POST'])
-def scrape():
+class ScrapeRequest(BaseModel):
+    player_name: str
+
+
+def load_player_data_for_fitness(player_name: str, player_pos: str) -> pd.Series | None:
     try:
-        player_name = request.json['player_name']
-        data = scrape_fbref(player_name)
-        return jsonify({"data": data})
-
+        file_path = f'../../assets/data/playerdata/{player_pos}.csv'
+        df = pd.read_csv(file_path)
+        df = df.reset_index(drop=True)
+        match = df[df['name'].str.lower() == player_name.lower()]
+        return match.iloc[0] if not match.empty else None
+    except FileNotFoundError:
+        print(f"File not found: {file_path}")
+        return None
     except Exception as e:
-        return make_response(jsonify({'error': str(e)}))
+        print(
+            f"Error loading data from {file_path} for {player_name} ({player_pos}): {str(e)}")
+        return None
 
 
-# @app.route('/report', methods=['POST'])
-# def report():
+@app.post("/scrape")
+async def scrape_player_data(payload: ScrapeRequest):
+    try:
+        data = scrape_fbref(payload.player_name)
+        return {"data": data}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+# @app.post("/report")
+# async def generate_player_report(payload: ReportRequest): # Assuming ReportRequest Pydantic model
 #     try:
-#         player1 = request.json['player1']
-#         player2 = request.json['player2']
-#         report = generate_report(player1, player2)
-#         print(report)
-#         return jsonify({"report": report})
-
+#         # from your_module import generate_report
+#         report_data = generate_report(payload.player1, payload.player2)
+#         print(report_data)
+#         return {"report": report_data}
 #     except Exception as e:
-#         return make_response(jsonify({'error': str(e)}))
+#         raise HTTPException(status_code=500, detail=str(e))
 
-@app.route('/standings', methods=['GET'])
-def standings():
+
+@app.get("/standings")
+async def get_league_standings(league: str = Header(..., description="League identifier")):
     try:
-        league = request.headers.get('league')
         data = standings_getter(league)
-        return jsonify(data)
-
+        return data
     except Exception as e:
-        return make_response(jsonify({'error': str(e)}))
+        raise HTTPException(status_code=500, detail=str(e))
 
 
-@app.route('/top_performers', methods=['GET'])
-def top_performers():
+@app.get("/top_performers")
+async def get_league_top_performers(league: str = Header(..., description="League identifier")):
     try:
-        league = request.headers.get('league')
         data = get_top_performers(league)
-        return jsonify(data)
+        return data
     except Exception as e:
-        return make_response(jsonify({'error': str(e)}))
+        raise HTTPException(status_code=500, detail=str(e))
 
 
-@app.route('/attack_vs_defence_charts_data', methods=["GET"])
-def attack_vs_defensive_chart_data():
+@app.get("/attack_vs_defence_charts_data")
+async def get_attack_vs_defence_data(league: str = Header(..., description="League identifier")):
     try:
-        league = request.headers.get('league')
         data = attack_vs_defence(league)
-        return jsonify(data)
+        return data
     except Exception as e:
-        return make_response(jsonify({'error': str(e)}))
+        raise HTTPException(status_code=500, detail=str(e))
 
 
-@app.route('/defensive_solidity', methods=["GET"])
-def defensive_solidity_chart_data():
+@app.get("/defensive_solidity")
+async def get_defensive_solidity_data(league: str = Header(..., description="League identifier")):
     try:
-        league = request.headers.get("league")
         data = defensive_solidity(league)
-        return jsonify(data)
+        return data
     except Exception as e:
-        return make_response(jsonify({'error': str(e)}))
+        raise HTTPException(status_code=500, detail=str(e))
 
 
-@app.route('/player_attributes', methods=["GET"])
-def get_player_attributes():
+@app.get("/player_attributes")
+async def get_player_attributes_data(
+    position: str = Header(..., description="Player's position"),
+    player: str = Header(..., description="Player's name")
+):
     try:
-        pos = request.headers.get("position")
-        player = request.headers.get("player")
-        data = attributes_calculation(pos, player)
-        return jsonify(data)
+        data = attributes_calculation(position, player)
+        return data
     except Exception as e:
-        return make_response(jsonify({'Error': str(e)}))
+        raise HTTPException(status_code=500, detail=f"Error: {str(e)}")
 
 
-@app.route('/fitness_score', methods=["GET"])
-def get_formation_fitness_score():
+@app.get("/fitness_score")
+async def get_player_formation_fitness_score(
+    player: str = Header(..., description="Player's name"),
+    position: str = Header(..., description="Player's position")
+):
     try:
-        player_name = request.headers.get("player")
-        player_pos = request.headers.get("position")
-        if not player_name or not player_pos:
-            return make_response(jsonify({'error': 'Missing player name or position in headers'}), 400)
+        if not player or not position:
+            raise HTTPException(
+                status_code=400, detail="Missing player name or position in headers")
 
-        def load_data(player_name, player_pos):
-            try:
-                df = pd.read_csv(f'./assets/data/playerdata/{player_pos}.csv')
-                # Reset index to ensure alignment
-                df = df.reset_index(drop=True)
-                # Case-insensitive comparison and exact match
-                match = df[df['name'].str.lower() == player_name.lower()]
-                return match.iloc[0] if not match.empty else None
-            except Exception as e:
-                print(f"Error loading data: {str(e)}")
-                return None
+        player_data = load_player_data_for_fitness(player, position)
 
-        player_data = load_data(player_name, player_pos)
         if player_data is None:
-            return make_response(jsonify({
-                'error': f'Player {player_name} not found in position {player_pos} data',
-                'available_players': list(pd.read_csv(f'./assets/data/playerdata/{player_pos}.csv')['name'])
-            }), 404)
+            available_players_list = []
+            try:
+                available_players_df = pd.read_csv(
+                    f'../../assets/data/playerdata/{position}.csv')
+                available_players_list = list(available_players_df['name'])
+            except Exception:
+                pass
+
+            raise HTTPException(
+                status_code=404,
+                detail={
+                    'error': f'Player {player} not found in position {position} data',
+                    'available_players_in_position': available_players_list if available_players_list else "Could not retrieve list."
+                }
+            )
+
         if not isinstance(player_data, pd.Series):
-            return make_response(jsonify({'error': 'Data loading format incorrect'}), 500)
-        results = analyze_formations(player_data, player_pos)
+            raise HTTPException(
+                status_code=500, detail="Data loading format incorrect for player.")
+
+        results = analyze_formations(player_data, position)
         formatted_results = []
         for res in results:
-            if res['score'] > 0:
+            if res.get('score', 0) > 0:
                 formatted_results.append({
-                    'formation': res['formation'],
-                    'score': float(res['score']),
-                    'style': res['style'],
-                    'position': res['position'],
-                    'explanation': res['explanation']
+                    'formation': res.get('formation'),
+                    'score': float(res.get('score', 0.0)),
+                    'style': res.get('style'),
+                    'position': res.get('position'),
+                    'explanation': res.get('explanation')
                 })
 
-        return jsonify({
-            'player': player_name,
-            'position': player_pos,
+        return {
+            'player': player,
+            'position': position,
             'results': formatted_results
-        })
+        }
 
+    except HTTPException:
+        raise
     except Exception as e:
-        return make_response(jsonify({
-            'error': str(e),
-            'traceback': traceback.format_exc()
-        }), 500)
+        raise HTTPException(
+            status_code=500,
+            detail={
+                'error': str(e),
+                'traceback': traceback.format_exc()
+            }
+        )
 
 
-@app.route('/player_dashboard_data', methods=["GET"])
-def player_dashboard():
+@app.get("/player_dashboard_data")
+async def get_player_dashboard(
+    position: str = Header(..., description="Player's position"),
+    player: str = Header(..., description="Player's name")
+):
     try:
-        pos = request.headers.get("position")
-        player = request.headers.get("player")
-        data = send_dashboard_data(pos, player)
+        data = send_dashboard_data(position, player)
         print(data)
-        return jsonify(data)
+        return data
     except Exception as e:
-        return make_response(jsonify({'Error': str(e)}))
-
+        raise HTTPException(status_code=500, detail=f"Error: {str(e)}")
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    import uvicorn
+    uvicorn.run(app, host="0.0.0.0", port=8000)

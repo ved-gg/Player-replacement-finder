@@ -2,8 +2,8 @@ import pandas as pd
 import os
 
 # Path to the folder containing all position CSVs
-input_folder = "./assets/data/playerdata"
-output_folder = "./assets/data/playerdata/Players_Leaguewise"
+input_folder = "../../assets/data/playerdata"
+output_folder = "../../assets/data/playerdata/Players_Leaguewise"
 
 # List of position CSV filenames
 positions = ["CB", "LB", "RB", "CDM", "CAM", "CM", "LW", "RW", "CF", "GK"]

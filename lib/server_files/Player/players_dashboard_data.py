@@ -16,7 +16,7 @@ position_columns = {
 
 
 def send_dashboard_data(position, player_name):
-    df = pd.read_csv(f'./assets/data/playerdata/{position}.csv')
+    df = pd.read_csv(f'../../assets/data/playerdata/{position}.csv')
     player_df = df.loc[df["name"] == player_name, position_columns[position]]
     if (position == "CB"):
         player_df['Cmp.3Per90'] = player_df['Cmp.3']/100

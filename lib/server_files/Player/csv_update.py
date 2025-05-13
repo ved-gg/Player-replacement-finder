@@ -25,7 +25,7 @@ leagues = [
 
 
 def tis_csv_update(pos):
-    csv_path = f"./assets/data/playerdata/{pos}.csv"
+    csv_path = f"../../assets/data/playerdata/{pos}.csv"
     df = pd.read_csv(csv_path)
     nineties = np.array(df["90s"])
     df = df.fillna(0)
@@ -251,7 +251,7 @@ for pos in positions_list:
 
 def player_table(position, name_list):
     # Define the CSV path
-    csv_path = f"./assets/data/playerdata/{position}.csv"
+    csv_path = f"../../assets/data/playerdata/{position}.csv"
 
     # Load the CSV into a DataFrame
     df = pd.read_csv(csv_path)
@@ -262,7 +262,7 @@ def player_table(position, name_list):
     # Select only the last 6 columns
     result_df = filtered_df[['name'] + list(filtered_df.columns[-6:])]
     # Save the result to a new CSV file
-    output_path = f"./assets/data/playerdata/{position}_filtered.csv"
+    output_path = f"../../assets/data/playerdata/{position}_filtered.csv"
     result_df.to_csv(output_path, index=False)
 
 
@@ -314,13 +314,13 @@ def image_getter(player_name):
 
 
 def advanced_top_performers(league, top_performers_df):
-    path = f"./assets/data/playerdata/Players_Leaguewise/{league}_players.csv"
+    path = f"../../assets/data/playerdata/Players_Leaguewise/{league}_players.csv"
     players_df = pd.read_csv(path)
     # TODO: Create a leaderboard based on advanced metrics such npxG, successful take ons, xA, xG, etc.
 
 
 def top_performers_csv_update(league):
-    csv_path = f"./assets/data/{league}/{league}_TopPerformers.csv"
+    csv_path = f"../../assets/data/{league}/{league}_TopPerformers.csv"
     top_performers_df = pd.read_csv(csv_path)
     link = league_links[league]
     HEADERS = {

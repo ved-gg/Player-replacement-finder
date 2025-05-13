@@ -15,7 +15,7 @@ league_links = {
 
 
 def path_decider(league):
-    folder_path = f"./assets/data/{league}"
+    folder_path = f"../../assets/data/{league}"
     if os.path.exists(folder_path):
         return folder_path
     else:
