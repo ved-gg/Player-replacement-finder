@@ -1,8 +1,9 @@
 import pandas as pd
 import numpy as np
 
+
 def get_top_performers(league):
-    csv_path = f"D:\\College\\Final Year Project\\Front end\\player_replacement\\assets\\data\\{league}\\{league}_TopPerformers.csv"
+    csv_path = f"./assets/data/{league}/{league}_TopPerformers.csv"
     df = pd.read_csv(csv_path)
     print(df)
     best_performers = {

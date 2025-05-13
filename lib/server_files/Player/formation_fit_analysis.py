@@ -5,15 +5,15 @@ player_name = 'Alejandro Balde'
 player_pos = 'LB'
 
 position_cols = {
-    'LB': ['Min','Tkl','Int','Crs','PrgP'],
-    'RB': ['Min','Tkl','Int','Crs','PrgP'],
-    'CB': ['Min','Tkl','Won','Clr','Blocks','Int'],
-    'CDM': ['Min','Tkl','Int','Cmp%','Blocks'],
-    'CM': ['Min','Tkl','Cmp%','KP','PrgP','Int','xA'],
-    'CAM': ['Min','KP','xA','Succ%','G+A','SoT','SCA'],
-    'LW': ['Min','KP','xA','Succ%','G+A','SoT','SCA','PrgC','PrgP'],
-    'RW': ['Min','KP','xA','Succ%','G+A','SoT','SCA','PrgC','PrgP'],
-    'CF': ['Min','xG','SoT','Won','Gls','Att Pen'],
+    'LB': ['Min', 'Tkl', 'Int', 'Crs', 'PrgP'],
+    'RB': ['Min', 'Tkl', 'Int', 'Crs', 'PrgP'],
+    'CB': ['Min', 'Tkl', 'Won', 'Clr', 'Blocks', 'Int'],
+    'CDM': ['Min', 'Tkl', 'Int', 'Cmp%', 'Blocks'],
+    'CM': ['Min', 'Tkl', 'Cmp%', 'KP', 'PrgP', 'Int', 'xA'],
+    'CAM': ['Min', 'KP', 'xA', 'Succ%', 'G+A', 'SoT', 'SCA'],
+    'LW': ['Min', 'KP', 'xA', 'Succ%', 'G+A', 'SoT', 'SCA', 'PrgC', 'PrgP'],
+    'RW': ['Min', 'KP', 'xA', 'Succ%', 'G+A', 'SoT', 'SCA', 'PrgC', 'PrgP'],
+    'CF': ['Min', 'xG', 'SoT', 'Won', 'Gls', 'Att Pen'],
 }
 
 # Complete formation requirements using only available attributes
@@ -156,10 +156,12 @@ formation_requirements = {
     }
 }
 
+
 def load_data(player_name, player_pos):
     """Load player data from CSV"""
-    df = pd.read_csv(f'assets/data/playerdata/{player_pos}.csv')
-    return df[df['name']==player_name].iloc[0] if player_name in df['name'].values else None
+    df = pd.read_csv(f'./assets/data/playerdata/{player_pos}.csv')
+    return df[df['name'] == player_name].iloc[0] if player_name in df['name'].values else None
+
 
 def normalize_stat(value, stat_name):
     """Normalize different stats appropriately"""
@@ -174,13 +176,14 @@ def normalize_stat(value, stat_name):
     else:
         return min(10, value / 5)   # Catch-all for other stats
 
+
 def evaluate_position_fit(player_stats, requirements):
     """Evaluate how well player fits position requirements"""
     score = 0
     max_score = sum(requirements.values())
     missing_attrs = []
     strong_attrs = []
-    
+
     for attr, req_score in requirements.items():
         player_val = player_stats.get(attr, 0)
         if player_val >= req_score * 0.9:
@@ -188,42 +191,44 @@ def evaluate_position_fit(player_stats, requirements):
         elif player_val < req_score * 0.7:
             missing_attrs.append((attr, req_score))
         score += min(player_val, req_score)
-    
+
     # Convert to 0-10 scale
     final_score = (score / max_score) * 10
-    
+
     # Generate explanation
     explanation_parts = []
     if strong_attrs:
         explanation_parts.append(f"Excels in {', '.join(strong_attrs)}")
     else:
         explanation_parts.append("Meets basic requirements")
-    
+
     if missing_attrs:
-        missing_str = ", ".join([f"{attr} ({req} needed)" for attr, req in missing_attrs])
+        missing_str = ", ".join(
+            [f"{attr} ({req} needed)" for attr, req in missing_attrs])
         explanation_parts.append(f"needs improvement in {missing_str}")
-    
+
     return round(final_score, 1), " ".join(explanation_parts)
+
 
 def analyze_formations(player_data, player_pos):
     """Analyze player's fit across all formations"""
     results = []
-    
+
     # Normalize player stats
     player_stats = {
-        col: normalize_stat(player_data[col], col) 
-        for col in position_cols[player_pos] 
+        col: normalize_stat(player_data[col], col)
+        for col in position_cols[player_pos]
         if col != 'Min' and col in player_data
     }
-    
+
     for formation, data in formation_requirements.items():
         primary_pos = player_pos if player_pos in data['position_needs'] else None
         secondary_pos = data['secondary_positions'].get(player_pos, [])
-        
+
         if primary_pos:
             # Evaluate primary position
             score, explanation = evaluate_position_fit(
-                player_stats, 
+                player_stats,
                 data['position_needs'][primary_pos]
             )
             position_played = primary_pos
@@ -246,7 +251,7 @@ def analyze_formations(player_data, player_pos):
         else:
             score, explanation = 0, "No suitable position"
             position_played = None
-        
+
         results.append({
             'formation': formation,
             'score': score,
@@ -254,8 +259,9 @@ def analyze_formations(player_data, player_pos):
             'explanation': explanation,
             'style': data['style']
         })
-    
+
     return sorted(results, key=lambda x: x['score'], reverse=True)
+
 
 def print_results(results, player_name):
     """Display formatted results"""
@@ -263,7 +269,7 @@ def print_results(results, player_name):
     print("=" * 85)
     print(f"{'Formation':<10} {'Score':<6} {'Style':<15} {'Position':<10} {'Explanation':<40}")
     print("-" * 85)
-    
+
     for res in results:
         if res['score'] > 0:
             print(f"{res['formation']:<10} {res['score']:<6.1f} {res['style']:<15} "
@@ -278,7 +284,3 @@ def formation_fitness_score(player_name, player_pos):
     else:
         print(f"Player {player_name} not found in position {player_pos} data")
     return results
-
-
-
-

@@ -1,10 +1,10 @@
 name: player_replacement
 description: "A new Flutter project."
-publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+publish_to: "none" # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: '>=3.4.3 <4.0.0'
+  sdk: ">=3.4.3 <4.0.0"
 dependencies:
   flutter:
     sdk: flutter
@@ -14,14 +14,12 @@ dependencies:
   flutter_radar_chart: ^0.2.1
   fl_chart: ^0.70.2
   flutter_flip_card: ^0.0.6
-  flip_carousel: ^0.0.3  
+  flip_carousel: ^0.0.3
   webviewx: ^0.1.0
   csv: ^6.0.0
   path_provider: ^2.1.5
   percent_indicator: ^4.2.5
   pie_chart: ^5.4.0
-
-  
 
 dev_dependencies:
   flutter_test:
@@ -31,21 +29,19 @@ flutter:
   uses-material-design: true
   assets:
     - assets/images/
-    - assets/data/
+    - ./assets/data/
     - assets/fonts/
 
-
-    
   fonts:
-   - family: Nevis
-     fonts:
-       - asset: assets/fonts/nevis.ttf
-   - family: League Spartan
-     fonts:
-       - asset: assets/fonts/LeagueSpartan.ttf   
-   - family: Barcelona
-     fonts:
-       - asset: assets/fonts/FCBFont.ttf 
-   - family: Prem
-     fonts:
-       - asset: assets/fonts/PremFont.ttf
+    - family: Nevis
+      fonts:
+        - asset: assets/fonts/nevis.ttf
+    - family: League Spartan
+      fonts:
+        - asset: assets/fonts/LeagueSpartan.ttf
+    - family: Barcelona
+      fonts:
+        - asset: assets/fonts/FCBFont.ttf
+    - family: Prem
+      fonts:
+        - asset: assets/fonts/PremFont.ttf

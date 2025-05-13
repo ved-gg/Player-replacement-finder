@@ -39,7 +39,7 @@ def scrape():
 #         report = generate_report(player1, player2)
 #         print(report)
 #         return jsonify({"report": report})
-    
+
 #     except Exception as e:
 #         return make_response(jsonify({'error': str(e)}))
 
@@ -49,9 +49,10 @@ def standings():
         league = request.headers.get('league')
         data = standings_getter(league)
         return jsonify(data)
-    
+
     except Exception as e:
         return make_response(jsonify({'error': str(e)}))
+
 
 @app.route('/top_performers', methods=['GET'])
 def top_performers():
@@ -61,7 +62,8 @@ def top_performers():
         return jsonify(data)
     except Exception as e:
         return make_response(jsonify({'error': str(e)}))
-    
+
+
 @app.route('/attack_vs_defence_charts_data', methods=["GET"])
 def attack_vs_defensive_chart_data():
     try:
@@ -69,29 +71,30 @@ def attack_vs_defensive_chart_data():
         data = attack_vs_defence(league)
         return jsonify(data)
     except Exception as e:
-        return make_response(jsonify({'error':str(e)}))
-    
-@app.route('/defensive_solidity',methods=["GET"])
+        return make_response(jsonify({'error': str(e)}))
+
+
+@app.route('/defensive_solidity', methods=["GET"])
 def defensive_solidity_chart_data():
     try:
         league = request.headers.get("league")
         data = defensive_solidity(league)
         return jsonify(data)
     except Exception as e:
-        return make_response(jsonify({'error':str(e)}))
-    
-@app.route('/player_attributes',methods=["GET"])
+        return make_response(jsonify({'error': str(e)}))
+
+
+@app.route('/player_attributes', methods=["GET"])
 def get_player_attributes():
-    try: 
+    try:
         pos = request.headers.get("position")
         player = request.headers.get("player")
-        data = attributes_calculation(pos,player)
+        data = attributes_calculation(pos, player)
         return jsonify(data)
     except Exception as e:
         return make_response(jsonify({'Error': str(e)}))
-    
-    
-    
+
+
 @app.route('/fitness_score', methods=["GET"])
 def get_formation_fitness_score():
     try:
@@ -99,9 +102,10 @@ def get_formation_fitness_score():
         player_pos = request.headers.get("position")
         if not player_name or not player_pos:
             return make_response(jsonify({'error': 'Missing player name or position in headers'}), 400)
+
         def load_data(player_name, player_pos):
             try:
-                df = pd.read_csv(f'assets/data/playerdata/{player_pos}.csv')
+                df = pd.read_csv(f'./assets/data/playerdata/{player_pos}.csv')
                 # Reset index to ensure alignment
                 df = df.reset_index(drop=True)
                 # Case-insensitive comparison and exact match
@@ -110,12 +114,12 @@ def get_formation_fitness_score():
             except Exception as e:
                 print(f"Error loading data: {str(e)}")
                 return None
-        
+
         player_data = load_data(player_name, player_pos)
         if player_data is None:
             return make_response(jsonify({
                 'error': f'Player {player_name} not found in position {player_pos} data',
-                'available_players': list(pd.read_csv(f'assets/data/playerdata/{player_pos}.csv')['name'])
+                'available_players': list(pd.read_csv(f'./assets/data/playerdata/{player_pos}.csv')['name'])
             }), 404)
         if not isinstance(player_data, pd.Series):
             return make_response(jsonify({'error': 'Data loading format incorrect'}), 500)
@@ -130,32 +134,30 @@ def get_formation_fitness_score():
                     'position': res['position'],
                     'explanation': res['explanation']
                 })
-        
+
         return jsonify({
             'player': player_name,
             'position': player_pos,
             'results': formatted_results
         })
-        
+
     except Exception as e:
         return make_response(jsonify({
             'error': str(e),
             'traceback': traceback.format_exc()
         }), 500)
-        
-        
+
+
 @app.route('/player_dashboard_data', methods=["GET"])
 def player_dashboard():
-    try: 
+    try:
         pos = request.headers.get("position")
         player = request.headers.get("player")
-        data = send_dashboard_data(pos,player)
+        data = send_dashboard_data(pos, player)
         print(data)
         return jsonify(data)
     except Exception as e:
         return make_response(jsonify({'Error': str(e)}))
-    
-
 
 
 if __name__ == '__main__':

@@ -2,8 +2,8 @@ import pandas as pd
 import os
 
 # Path to the folder containing all position CSVs
-input_folder = "D:\\College\\Final Year Project\\Front end\\player_replacement\\assets\\data\\playerdata"
-output_folder = "D:\\College\\Final Year Project\\Front end\\player_replacement\\assets\\data\\playerdata\\Players_Leaguewise"
+input_folder = "./assets/data/playerdata"
+output_folder = "./assets/data/playerdata/Players_Leaguewise"
 
 # List of position CSV filenames
 positions = ["CB", "LB", "RB", "CDM", "CAM", "CM", "LW", "RW", "CF", "GK"]
@@ -24,7 +24,8 @@ for pos in positions:
 
     for league in leagues.keys():
         league_df = df[df["Comp"] == league]
-        leagues[league] = pd.concat([leagues[league], league_df], ignore_index=True)
+        leagues[league] = pd.concat(
+            [leagues[league], league_df], ignore_index=True)
 
 # Save each league DataFrame to its own CSV file
 for league, league_df in leagues.items():
