@@ -35,7 +35,7 @@ class _PlayersDashboardState extends State<PlayersDashboard> {
   Future<void> fetchPlayerDashboardData(
       String position, String playerName) async {
     final url = Uri.parse(
-        'https://player-replacement-finder.onrender.com/player_dashboard_data'); // Replace with your Flask server address
+        'https://player-replacement-finder.onrender.com/player_dashboard_data');
 
     try {
       final response = await http.get(

@@ -1,4 +1,4 @@
-from flask import jsonify
+from fastapi import jsonify
 import numpy as np
 import pandas as pd
 
