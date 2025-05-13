@@ -32,6 +32,10 @@ flutter:
   assets:
     - assets/images/
     - assets/data/
+    - assets/fonts/
+
+
+    
   fonts:
    - family: Nevis
      fonts:

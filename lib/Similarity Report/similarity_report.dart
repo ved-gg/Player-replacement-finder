@@ -76,13 +76,13 @@ class _SimilarityReportState extends State<SimilarityReport> {
         appBar: AppBar(
           backgroundColor: Colors.black,
           foregroundColor: Colors.white,
-          title: Text(
+          title: const Text(
             'Similarity Report',
             style: TextStyle(color: Colors.white),
           ),
           centerTitle: true,
         ),
-        body: Center(
+        body: const Center(
           child: CircularProgressIndicator(),
         ),
       );
@@ -98,7 +98,7 @@ class _SimilarityReportState extends State<SimilarityReport> {
           foregroundColor: Colors.white,
           shadowColor: Colors.transparent,
           backgroundColor: Colors.black,
-          title: Text(
+          title: const Text(
             'Similarity Report',
             style: TextStyle(
               color: Colors.white,
@@ -141,7 +141,7 @@ class _SimilarityReportState extends State<SimilarityReport> {
       body: Container(
         decoration: const BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('images/background.jpg'),
+            image: AssetImage('background.jpg'),
             fit: BoxFit.cover,
             opacity: 0.8,
             filterQuality: FilterQuality.high,
