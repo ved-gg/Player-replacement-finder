@@ -46,7 +46,7 @@ class _PlayerComparisonState extends State<PlayerComparison> {
   Future<void> getPlayerAttributes(String position, String playerName) async {
     try {
       final response = await http.get(
-        Uri.parse('http://127.0.0.1:5000/player_attributes'),
+        Uri.parse('https://player-replacement-finder.onrender.com/player_attributes'),
         headers: {
           'position': position,
           'player': playerName,

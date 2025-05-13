@@ -35,7 +35,7 @@ class _PlayersDashboardState extends State<PlayersDashboard> {
   Future<void> fetchPlayerDashboardData(
       String position, String playerName) async {
     final url = Uri.parse(
-        'http://127.0.0.1:5000/player_dashboard_data'); // Replace with your Flask server address
+        'https://player-replacement-finder.onrender.com/player_dashboard_data'); // Replace with your Flask server address
 
     try {
       final response = await http.get(
@@ -65,7 +65,7 @@ class _PlayersDashboardState extends State<PlayersDashboard> {
   Future<void> getFormationFitness(String playerName, String position) async {
     try {
       final response = await http.get(
-        Uri.parse('http://127.0.0.1:5000/fitness_score'),
+        Uri.parse('https://player-replacement-finder.onrender.com/fitness_score'),
         headers: {
           'player': playerName,
           'position': position,

@@ -59,7 +59,7 @@ class _BuildTeamDataState extends State<BuildTeamData> {
   Future<void> get_attack_vs_defence_charts_data() async {
     try {
       final response = await http.get(
-          Uri.parse("http://127.0.0.1:5000/attack_vs_defence_charts_data"),
+          Uri.parse("https://player-replacement-finder.onrender.com/attack_vs_defence_charts_data"),
           headers: {
             'league': widget.league,
           });
@@ -79,7 +79,7 @@ class _BuildTeamDataState extends State<BuildTeamData> {
   Future<void> get_defensive_solidity_charts_data() async {
     try {
       final response = await http
-          .get(Uri.parse("http://127.0.0.1:5000/defensive_solidity"), headers: {
+          .get(Uri.parse("https://player-replacement-finder.onrender.com/defensive_solidity"), headers: {
         'league': widget.league,
       });
       if (response.statusCode == 200) {
@@ -98,7 +98,7 @@ class _BuildTeamDataState extends State<BuildTeamData> {
   Future<void> fetchStandings() async {
     try {
       final response = await http.get(
-        Uri.parse('http://127.0.0.1:5000/standings'),
+        Uri.parse('https://player-replacement-finder.onrender.com/standings'),
         headers: {
           'X-Auth-Token': '157ed7af01e24ef496771bf1338cf2c6',
           'league': widget.league,
@@ -128,7 +128,7 @@ class _BuildTeamDataState extends State<BuildTeamData> {
   Future<void> fetchTopScorers() async {
     try {
       final response = await http.get(
-        Uri.parse('http://127.0.0.1:5000/top_performers'),
+        Uri.parse('https://player-replacement-finder.onrender.com/top_performers'),
         headers: {
           'league': widget.league,
         },
