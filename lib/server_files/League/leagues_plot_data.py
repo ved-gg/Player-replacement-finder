@@ -1,4 +1,3 @@
-from fastapi import jsonify
 import pandas as pd
 import numpy as np
 
