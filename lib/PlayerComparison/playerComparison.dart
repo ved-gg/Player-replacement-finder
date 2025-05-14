@@ -11,10 +11,10 @@ class PlayerComparison extends StatefulWidget {
   final String positionSF;
   final String position;
   const PlayerComparison({
-    Key? key,
+    super.key,
     required this.positionSF,
     required this.position,
-  }) : super(key: key);
+  });
 
   @override
   _PlayerComparisonState createState() => _PlayerComparisonState();
@@ -46,13 +46,13 @@ class _PlayerComparisonState extends State<PlayerComparison> {
   Future<void> getPlayerAttributes(String position, String playerName) async {
     try {
       final response = await http.get(
-        Uri.parse('http://127.0.0.1:5000/player_attributes'),
+        Uri.parse('https://player-replacement-finder.onrender.com/player_attributes'),
         headers: {
           'position': position,
           'player': playerName,
         },
       );
-
+firebase
       if (response.statusCode == 200) {
         final Map<String, dynamic> data = json.decode(response.body);
         print("Fetched Data: $data");
@@ -74,6 +74,7 @@ class _PlayerComparisonState extends State<PlayerComparison> {
           }
         });
       } else {
+        
         print('Error: ${response.statusCode}');
       }
     } catch (e) {
@@ -86,7 +87,7 @@ class _PlayerComparisonState extends State<PlayerComparison> {
       final rawData = await rootBundle
           .loadString('data/playerdata/${widget.positionSF}.csv');
       List<List<dynamic>> csvTable =
-          CsvToListConverter().convert(rawData, eol: '\n');
+          const CsvToListConverter().convert(rawData, eol: '\n');
 
       List<String> headers = List<String>.from(csvTable[0]);
       int nameIndex = headers.indexOf('name');
@@ -260,7 +261,7 @@ class _PlayerComparisonState extends State<PlayerComparison> {
               child: TextField(
                 controller: searchController,
                 onChanged: filterSearchResults,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   labelText: "Search Player",
                   border: OutlineInputBorder(),
                 ),
@@ -348,19 +349,19 @@ class _PlayerComparisonState extends State<PlayerComparison> {
                         DataTable(
                           columnSpacing: w * 0.01,
                           columns: [
-                            DataColumn(label: Text('Player')),
+                            const DataColumn(label: Text('Player')),
                             ...radarAttributes.map((attr) => DataColumn(
                                   label: Tooltip(
                                     message: attributeExplanations[attr] ??
                                         "No description available",
                                     child: Text(
                                       attr,
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                           decoration: TextDecoration.underline),
                                     ),
                                   ),
                                 )),
-                            DataColumn(label: Text('Actions')),
+                            const DataColumn(label: Text('Actions')),
                           ],
                           rows: selectedPlayers.entries.map((entry) {
                             int index = selectedPlayers.keys
@@ -401,7 +402,7 @@ class _PlayerComparisonState extends State<PlayerComparison> {
                                 ),
                                 DataCell(
                                   IconButton(
-                                    icon: Icon(Icons.delete, color: Colors.red),
+                                    icon: const Icon(Icons.delete, color: Colors.red),
                                     onPressed: () {
                                       setState(
                                         () {
@@ -417,7 +418,7 @@ class _PlayerComparisonState extends State<PlayerComparison> {
                         ),
                       ],
                     )
-                  : Center(child: Text("Select players to compare")),
+                  : const Center(child: Text("Select players to compare")),
             ),
           ],
         ),

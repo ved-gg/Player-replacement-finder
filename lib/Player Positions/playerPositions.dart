@@ -5,9 +5,11 @@ import 'package:flip_carousel/flip_carousel.dart';
 import 'package:player_replacement/PlayerComparison/playerComparison.dart';
 
 class PlayerPositions extends StatelessWidget {
+  const PlayerPositions({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       debugShowCheckedModeBanner: false,
       home: SoccerFieldScreen(),
     );
@@ -15,6 +17,8 @@ class PlayerPositions extends StatelessWidget {
 }
 
 class SoccerFieldScreen extends StatefulWidget {
+  const SoccerFieldScreen({super.key});
+
   @override
   _SoccerFieldScreenState createState() => _SoccerFieldScreenState();
 }
@@ -164,7 +168,7 @@ class PositionsCard extends StatelessWidget {
   List decideImagesList() {
     List imagesList = [];
     for (var i = 0; i < 5; i++) {
-      String path = 'images/Cards/$positionSF/$i.png';
+      String path = '$positionSF/$i.png';
       imagesList.add(path);
     }
     return imagesList;

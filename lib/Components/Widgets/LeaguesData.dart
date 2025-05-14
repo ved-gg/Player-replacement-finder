@@ -59,7 +59,7 @@ class _BuildTeamDataState extends State<BuildTeamData> {
   Future<void> get_attack_vs_defence_charts_data() async {
     try {
       final response = await http.get(
-          Uri.parse("http://127.0.0.1:5000/attack_vs_defence_charts_data"),
+          Uri.parse("https://player-replacement-finder.onrender.com/attack_vs_defence_charts_data"),
           headers: {
             'league': widget.league,
           });
@@ -79,7 +79,7 @@ class _BuildTeamDataState extends State<BuildTeamData> {
   Future<void> get_defensive_solidity_charts_data() async {
     try {
       final response = await http
-          .get(Uri.parse("http://127.0.0.1:5000/defensive_solidity"), headers: {
+          .get(Uri.parse("https://player-replacement-finder.onrender.com/defensive_solidity"), headers: {
         'league': widget.league,
       });
       if (response.statusCode == 200) {
@@ -98,7 +98,7 @@ class _BuildTeamDataState extends State<BuildTeamData> {
   Future<void> fetchStandings() async {
     try {
       final response = await http.get(
-        Uri.parse('http://127.0.0.1:5000/standings'),
+        Uri.parse('https://player-replacement-finder.onrender.com/standings'),
         headers: {
           'X-Auth-Token': '157ed7af01e24ef496771bf1338cf2c6',
           'league': widget.league,
@@ -128,7 +128,7 @@ class _BuildTeamDataState extends State<BuildTeamData> {
   Future<void> fetchTopScorers() async {
     try {
       final response = await http.get(
-        Uri.parse('http://127.0.0.1:5000/top_performers'),
+        Uri.parse('https://player-replacement-finder.onrender.com/top_performers'),
         headers: {
           'league': widget.league,
         },
@@ -166,7 +166,7 @@ class _BuildTeamDataState extends State<BuildTeamData> {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             isLoading
-                ? Center(child: CircularProgressIndicator())
+                ? const Center(child: CircularProgressIndicator())
                 : Column(
                     children: [
                       Text('STANDINGS',
@@ -226,7 +226,7 @@ class _BuildTeamDataState extends State<BuildTeamData> {
                       ),
                     ],
                   ),
-            Container(
+            SizedBox(
               height: h * 1.5,
               width: w * 0.68,
               child: Stack(
@@ -236,7 +236,7 @@ class _BuildTeamDataState extends State<BuildTeamData> {
                     left: w * 0.01 / 2,
                     child: topPerformersLoading
                         ? Center(
-                            child: Container(
+                            child: SizedBox(
                               height: h * 0.5,
                               width: w * 0.2,
                               child: Column(
@@ -250,7 +250,7 @@ class _BuildTeamDataState extends State<BuildTeamData> {
                                         fontSize: h * 0.03,
                                         fontFamily: 'League Spartan'),
                                   ),
-                                  CircularProgressIndicator(),
+                                  const CircularProgressIndicator(),
                                 ],
                               ),
                             ),
@@ -258,7 +258,7 @@ class _BuildTeamDataState extends State<BuildTeamData> {
                         : Row(
                             children: [
                               Container(
-                                decoration: BoxDecoration(
+                                decoration: const BoxDecoration(
                                   color: kSecondaryColor,
                                 ),
                                 height: h * 0.5,
@@ -308,7 +308,7 @@ class _BuildTeamDataState extends State<BuildTeamData> {
                                 ),
                               ),
                               Container(
-                                decoration: BoxDecoration(
+                                decoration: const BoxDecoration(
                                   color: kSecondaryColor,
                                 ),
                                 height: h * 0.5,
@@ -358,7 +358,7 @@ class _BuildTeamDataState extends State<BuildTeamData> {
                                 ),
                               ),
                               Container(
-                                decoration: BoxDecoration(
+                                decoration: const BoxDecoration(
                                   color: kSecondaryColor,
                                 ),
                                 height: h * 0.5,
@@ -416,22 +416,22 @@ class _BuildTeamDataState extends State<BuildTeamData> {
                     child: Column(
                       children: [
                         teamGSvsGCStatsLoading
-                            ? CircularProgressIndicator()
+                            ? const CircularProgressIndicator()
                             : teamGSvsGCStatsLoading
-                                ? CircularProgressIndicator()
-                                : Container(
+                                ? const CircularProgressIndicator()
+                                : SizedBox(
                                     height: h * 0.4,
                                     width: w * 0.7,
                                     child: SfCartesianChart(
                                       title:
-                                          ChartTitle(text: 'Attack vs Defence'),
-                                      primaryXAxis: NumericAxis(
+                                          const ChartTitle(text: 'Attack vs Defence'),
+                                      primaryXAxis: const NumericAxis(
                                         title: AxisTitle(text: "Goals Per 90"),
                                         minimum: 0,
                                         maximum: 2.8,
                                         interval: 0.2,
                                       ),
-                                      primaryYAxis: NumericAxis(
+                                      primaryYAxis: const NumericAxis(
                                         title: AxisTitle(
                                             text: "Goals Conceded Per 90"),
                                         minimum: 0,
@@ -453,7 +453,7 @@ class _BuildTeamDataState extends State<BuildTeamData> {
                                               (TeamGoalScoredConcededStats team,
                                                       _) =>
                                                   team.goalsConcededPer90,
-                                          markerSettings: MarkerSettings(
+                                          markerSettings: const MarkerSettings(
                                             isVisible: true,
                                             width: 12,
                                             height: 12,
@@ -462,7 +462,7 @@ class _BuildTeamDataState extends State<BuildTeamData> {
                                               (TeamGoalScoredConcededStats team,
                                                       _) =>
                                                   team.teamName,
-                                          dataLabelSettings: DataLabelSettings(
+                                          dataLabelSettings: const DataLabelSettings(
                                             isVisible: true,
                                             labelIntersectAction:
                                                 LabelIntersectAction.shift,
@@ -484,15 +484,15 @@ class _BuildTeamDataState extends State<BuildTeamData> {
                                 width: w * 0.7,
                                 padding: EdgeInsets.only(right: w * 0.05),
                                 child: SfCartesianChart(
-                                  title: ChartTitle(
+                                  title: const ChartTitle(
                                       text: 'Tackles vs Tackles Won'),
-                                  primaryXAxis: NumericAxis(
+                                  primaryXAxis: const NumericAxis(
                                     title: AxisTitle(text: "Tackles Per 90"),
                                     minimum: 12,
                                     maximum: 20,
                                     interval: 0.5,
                                   ),
-                                  primaryYAxis: NumericAxis(
+                                  primaryYAxis: const NumericAxis(
                                     title:
                                         AxisTitle(text: "Tackles Won Per 90"),
                                     minimum: 5,

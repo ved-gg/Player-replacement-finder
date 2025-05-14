@@ -35,7 +35,7 @@ class _PlayersDashboardState extends State<PlayersDashboard> {
   Future<void> fetchPlayerDashboardData(
       String position, String playerName) async {
     final url = Uri.parse(
-        'http://127.0.0.1:5000/player_dashboard_data'); // Replace with your Flask server address
+        'https://player-replacement-finder.onrender.com/player_dashboard_data');
 
     try {
       final response = await http.get(
@@ -65,7 +65,7 @@ class _PlayersDashboardState extends State<PlayersDashboard> {
   Future<void> getFormationFitness(String playerName, String position) async {
     try {
       final response = await http.get(
-        Uri.parse('http://127.0.0.1:5000/fitness_score'),
+        Uri.parse('https://player-replacement-finder.onrender.com/fitness_score'),
         headers: {
           'player': playerName,
           'position': position,
@@ -92,7 +92,7 @@ class _PlayersDashboardState extends State<PlayersDashboard> {
     return ListView.builder(
       itemCount: results.length,
       shrinkWrap: true,
-      physics: NeverScrollableScrollPhysics(),
+      physics: const NeverScrollableScrollPhysics(),
       itemBuilder: (context, index) {
         final result = results[index];
 
@@ -113,7 +113,7 @@ class _PlayersDashboardState extends State<PlayersDashboard> {
                     Text(
                       '[${result.formation}] - ${result.position}',
                       style:
-                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                          const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                     ),
                     Chip(
                       label:
@@ -133,11 +133,11 @@ class _PlayersDashboardState extends State<PlayersDashboard> {
                         percent: (result.score / 10).clamp(0.0, 1.0),
                         progressColor: Colors.green,
                         backgroundColor: Colors.grey[300],
-                        barRadius: Radius.circular(8),
+                        barRadius: const Radius.circular(8),
                       ),
                     ),
                     const SizedBox(width: 10),
-                    Text(result.score.toStringAsFixed(1) + "/10"),
+                    Text("${result.score.toStringAsFixed(1)}/10"),
                   ],
                 ),
                 const SizedBox(height: 10),
@@ -206,7 +206,7 @@ class _PlayersDashboardState extends State<PlayersDashboard> {
         ];
 
         return isPlayerDataLoading
-            ? CircularProgressIndicator()
+            ? const CircularProgressIndicator()
             : Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
@@ -272,7 +272,7 @@ class _PlayersDashboardState extends State<PlayersDashboard> {
                                           "${radarPlotTitles[4]} : ${playerData!.stats[radarPlotTitles[4]]}",
                                       angle: angle);
                                 default:
-                                  return RadarChartTitle(text: "Not Title");
+                                  return const RadarChartTitle(text: "Not Title");
                               }
                             },
                             radarBackgroundColor: Colors.transparent,
@@ -448,7 +448,7 @@ class _PlayersDashboardState extends State<PlayersDashboard> {
         final values = dataMap.values.toList();
 
         return isPlayerDataLoading
-            ? Center(child: CircularProgressIndicator())
+            ? const Center(child: CircularProgressIndicator())
             : Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
@@ -468,9 +468,9 @@ class _PlayersDashboardState extends State<PlayersDashboard> {
                           width: w * 0.4,
                           color: Colors.transparent,
                           child: SfCartesianChart(
-                            primaryXAxis: CategoryAxis(),
+                            primaryXAxis: const CategoryAxis(),
                             primaryYAxis:
-                                NumericAxis(title: AxisTitle(text: 'Count')),
+                                const NumericAxis(title: AxisTitle(text: 'Count')),
                             series: [
                               ColumnSeries<String, String>(
                                 dataSource:
@@ -600,9 +600,9 @@ class _PlayersDashboardState extends State<PlayersDashboard> {
                         height: h * 0.4,
                         width: w * 0.7,
                         child: SfCartesianChart(
-                          title: ChartTitle(text: 'Touches in Different Zones'),
-                          legend: Legend(isVisible: true),
-                          primaryXAxis: CategoryAxis(),
+                          title: const ChartTitle(text: 'Touches in Different Zones'),
+                          legend: const Legend(isVisible: true),
+                          primaryXAxis: const CategoryAxis(),
                           tooltipBehavior: TooltipBehavior(enable: true),
                           series: [
                             ColumnSeries<MapEntry<String, num>, String>(
@@ -621,7 +621,7 @@ class _PlayersDashboardState extends State<PlayersDashboard> {
                                   entry.key,
                               yValueMapper: (MapEntry<String, num> entry, _) =>
                                   entry.value,
-                              markerSettings: MarkerSettings(isVisible: true),
+                              markerSettings: const MarkerSettings(isVisible: true),
                               color: Colors.orangeAccent,
                             ),
                           ],
@@ -651,7 +651,7 @@ class _PlayersDashboardState extends State<PlayersDashboard> {
           }
         ];
         return isPlayerDataLoading
-            ? Center(child: CircularProgressIndicator())
+            ? const Center(child: CircularProgressIndicator())
             : Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
@@ -669,9 +669,9 @@ class _PlayersDashboardState extends State<PlayersDashboard> {
                         height: h * 0.4,
                         width: w * 0.5,
                         child: SfCartesianChart(
-                          title: ChartTitle(text: 'Defensive Metrics'),
-                          primaryXAxis: CategoryAxis(),
-                          primaryYAxis: NumericAxis(),
+                          title: const ChartTitle(text: 'Defensive Metrics'),
+                          primaryXAxis: const CategoryAxis(),
+                          primaryYAxis: const NumericAxis(),
                           series: [
                             ColumnSeries<MapEntry<String, double>, String>(
                               dataSource: radarData[0]
@@ -686,7 +686,7 @@ class _PlayersDashboardState extends State<PlayersDashboard> {
                                   (MapEntry<String, double> entry, _) =>
                                       entry.value,
                               dataLabelSettings:
-                                  DataLabelSettings(isVisible: true),
+                                  const DataLabelSettings(isVisible: true),
                               color: Colors.teal,
                             )
                           ],
@@ -807,7 +807,7 @@ class _PlayersDashboardState extends State<PlayersDashboard> {
           }
         ];
         return isPlayerDataLoading
-            ? Center(child: CircularProgressIndicator())
+            ? const Center(child: CircularProgressIndicator())
             : Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
@@ -825,9 +825,9 @@ class _PlayersDashboardState extends State<PlayersDashboard> {
                         height: h * 0.4,
                         width: w * 0.5,
                         child: SfCartesianChart(
-                          title: ChartTitle(text: 'Overall Performance'),
-                          primaryXAxis: CategoryAxis(),
-                          primaryYAxis: NumericAxis(),
+                          title: const ChartTitle(text: 'Overall Performance'),
+                          primaryXAxis: const CategoryAxis(),
+                          primaryYAxis: const NumericAxis(),
                           series: [
                             ColumnSeries<MapEntry<String, double>, String>(
                               dataSource: radarData[0]
@@ -842,7 +842,7 @@ class _PlayersDashboardState extends State<PlayersDashboard> {
                                   (MapEntry<String, double> entry, _) =>
                                       entry.value,
                               dataLabelSettings:
-                                  DataLabelSettings(isVisible: true),
+                                  const DataLabelSettings(isVisible: true),
                               color: Colors.teal,
                             )
                           ],
@@ -866,16 +866,16 @@ class _PlayersDashboardState extends State<PlayersDashboard> {
                         height: h * 0.4,
                         width: w * 0.5,
                         child: SfCartesianChart(
-                          title: ChartTitle(text: 'CM Output vs Volume'),
+                          title: const ChartTitle(text: 'CM Output vs Volume'),
                           primaryXAxis: NumericAxis(
-                            title: AxisTitle(text: 'Touches'),
+                            title: const AxisTitle(text: 'Touches'),
                             minimum: 0,
                             maximum: bubbleData[0]['Touches']! * 1.5,
                             interval:
                                 (bubbleData[0]['Touches']! / 5).ceilToDouble(),
                           ),
                           primaryYAxis: NumericAxis(
-                            title: AxisTitle(text: 'Shot Creating Actions'),
+                            title: const AxisTitle(text: 'Shot Creating Actions'),
                             minimum: 0,
                             maximum: bubbleData[0]['SCA']! * 1.5,
                             interval:
@@ -888,7 +888,7 @@ class _PlayersDashboardState extends State<PlayersDashboard> {
                               yValueMapper: (data, _) => data['SCA'],
                               sizeValueMapper: (data, _) => data['Shots'],
                               dataLabelSettings:
-                                  DataLabelSettings(isVisible: true),
+                                  const DataLabelSettings(isVisible: true),
                             ),
                           ],
                         ),
@@ -914,7 +914,7 @@ class _PlayersDashboardState extends State<PlayersDashboard> {
           }
         ];
         return isPlayerDataLoading
-            ? Center(child: CircularProgressIndicator())
+            ? const Center(child: CircularProgressIndicator())
             : Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
@@ -932,8 +932,8 @@ class _PlayersDashboardState extends State<PlayersDashboard> {
                         height: h * 0.4,
                         width: w * 0.5,
                         child: SfCartesianChart(
-                          primaryXAxis: CategoryAxis(),
-                          primaryYAxis: NumericAxis(),
+                          primaryXAxis: const CategoryAxis(),
+                          primaryYAxis: const NumericAxis(),
                           series: [
                             ColumnSeries<MapEntry<String, double>, String>(
                               dataSource: radarData[0]
@@ -948,7 +948,7 @@ class _PlayersDashboardState extends State<PlayersDashboard> {
                                   (MapEntry<String, double> entry, _) =>
                                       entry.value,
                               dataLabelSettings:
-                                  DataLabelSettings(isVisible: true),
+                                  const DataLabelSettings(isVisible: true),
                               color: Colors.teal,
                             )
                           ],
@@ -1018,23 +1018,23 @@ class _PlayersDashboardState extends State<PlayersDashboard> {
                                     getTitlesWidget: (value, meta) {
                                       switch (value.toInt()) {
                                         case 0:
-                                          return Text('SCA');
+                                          return const Text('SCA');
                                         case 1:
-                                          return Text('G+A');
+                                          return const Text('G+A');
                                         case 2:
-                                          return Text('90s');
+                                          return const Text('90s');
                                         default:
-                                          return Text('');
+                                          return const Text('');
                                       }
                                     },
                                   ),
                                 ),
-                                leftTitles: AxisTitles(
+                                leftTitles: const AxisTitles(
                                   sideTitles: SideTitles(showTitles: true),
                                 ),
                               ),
                               borderData: FlBorderData(show: false),
-                              gridData: FlGridData(show: true),
+                              gridData: const FlGridData(show: true),
                               barTouchData: BarTouchData(enabled: true),
                             ),
                           )),
@@ -1063,7 +1063,7 @@ class _PlayersDashboardState extends State<PlayersDashboard> {
           }
         ];
         return isPlayerDataLoading
-            ? Center(child: CircularProgressIndicator())
+            ? const Center(child: CircularProgressIndicator())
             : Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
@@ -1082,10 +1082,10 @@ class _PlayersDashboardState extends State<PlayersDashboard> {
                           height: h * 0.4,
                           width: w * 0.5,
                           child: SfCartesianChart(
-                            primaryXAxis: CategoryAxis(
+                            primaryXAxis: const CategoryAxis(
                               title: AxisTitle(text: 'Metrics'),
                             ),
-                            primaryYAxis: NumericAxis(
+                            primaryYAxis: const NumericAxis(
                               title: AxisTitle(text: 'Value'),
                             ),
                             series: [
@@ -1102,7 +1102,7 @@ class _PlayersDashboardState extends State<PlayersDashboard> {
                                 yValueMapper: (datum, _) =>
                                     datum['value'] as num,
                                 dataLabelSettings:
-                                    DataLabelSettings(isVisible: true),
+                                    const DataLabelSettings(isVisible: true),
                                 pointColorMapper: (datum, _) {
                                   final metric = datum['metric'];
                                   if ([
@@ -1171,17 +1171,17 @@ class _PlayersDashboardState extends State<PlayersDashboard> {
                                     getTitlesWidget: (value, _) {
                                       switch (value.toInt()) {
                                         case 0:
-                                          return Text('PrgP');
+                                          return const Text('PrgP');
                                         case 1:
-                                          return Text('PrgC');
+                                          return const Text('PrgC');
                                         default:
-                                          return Text('');
+                                          return const Text('');
                                       }
                                     },
                                   ),
                                 ),
                               ),
-                              extraLinesData: ExtraLinesData(
+                              extraLinesData: const ExtraLinesData(
                                 extraLinesOnTop: true,
                                 horizontalLines: [],
                               ),
@@ -1214,7 +1214,7 @@ class _PlayersDashboardState extends State<PlayersDashboard> {
           }
         ];
         return isPlayerDataLoading
-            ? Center(child: CircularProgressIndicator())
+            ? const Center(child: CircularProgressIndicator())
             : Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
@@ -1235,9 +1235,9 @@ class _PlayersDashboardState extends State<PlayersDashboard> {
                           height: h * 0.4,
                           width: w * 0.5,
                           child: SfCartesianChart(
-                            title: ChartTitle(text: 'Passing Profile'),
-                            primaryXAxis: CategoryAxis(),
-                            primaryYAxis: NumericAxis(
+                            title: const ChartTitle(text: 'Passing Profile'),
+                            primaryXAxis: const CategoryAxis(),
+                            primaryYAxis: const NumericAxis(
                               title: AxisTitle(text: 'Count'),
                               minimum: 0,
                             ),
@@ -1257,7 +1257,7 @@ class _PlayersDashboardState extends State<PlayersDashboard> {
                                 yValueMapper: (datum, _) =>
                                     datum['value'] as num,
                                 dataLabelSettings:
-                                    DataLabelSettings(isVisible: true),
+                                    const DataLabelSettings(isVisible: true),
                                 color: Colors.teal,
                               ),
                             ],
@@ -1281,9 +1281,9 @@ class _PlayersDashboardState extends State<PlayersDashboard> {
                         height: h * 0.4,
                         width: w * 0.5,
                         child: SfCartesianChart(
-                          title: ChartTitle(text: 'Attacking Profile'),
-                          primaryXAxis: CategoryAxis(),
-                          primaryYAxis: NumericAxis(
+                          title: const ChartTitle(text: 'Attacking Profile'),
+                          primaryXAxis: const CategoryAxis(),
+                          primaryYAxis: const NumericAxis(
                             title: AxisTitle(text: 'Value'),
                             minimum: 0,
                           ),
@@ -1301,7 +1301,7 @@ class _PlayersDashboardState extends State<PlayersDashboard> {
                                   datum['label'] as String,
                               yValueMapper: (datum, _) => datum['value'] as num,
                               dataLabelSettings:
-                                  DataLabelSettings(isVisible: true),
+                                  const DataLabelSettings(isVisible: true),
                               color: Colors.deepOrange,
                             ),
                           ],
