@@ -222,7 +222,10 @@ async def head_root():
          response_class=StreamingResponse,
          description="Get squad playing time plot as PNG image"
          )
-async def get_squad_minutes_plot(league_name: str, squad_name: str):
+async def get_squad_minutes_plot(
+         squad_name: str = Header( ..., description = "Squad name"),
+         league_name: str = Header( ..., description = "League name"),
+        ):
     """
     Generates and returns a plot of squad playing time vs age as a PNG image.
     """
