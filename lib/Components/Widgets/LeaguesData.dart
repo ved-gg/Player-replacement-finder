@@ -59,7 +59,8 @@ class _BuildTeamDataState extends State<BuildTeamData> {
   Future<void> get_attack_vs_defence_charts_data() async {
     try {
       final response = await http.get(
-          Uri.parse("https://player-replacement-finder.onrender.com/attack_vs_defence_charts_data"),
+          Uri.parse(
+              "https://player-replacement-finder.onrender.com/attack_vs_defence_charts_data"),
           headers: {
             'league': widget.league,
           });
@@ -78,10 +79,12 @@ class _BuildTeamDataState extends State<BuildTeamData> {
 
   Future<void> get_defensive_solidity_charts_data() async {
     try {
-      final response = await http
-          .get(Uri.parse("https://player-replacement-finder.onrender.com/defensive_solidity"), headers: {
-        'league': widget.league,
-      });
+      final response = await http.get(
+          Uri.parse(
+              "https://player-replacement-finder.onrender.com/defensive_solidity"),
+          headers: {
+            'league': widget.league,
+          });
       if (response.statusCode == 200) {
         // print({response.body});
         tackleVsTacklesWon = parseTeamTackleStats(response.body);
@@ -128,7 +131,8 @@ class _BuildTeamDataState extends State<BuildTeamData> {
   Future<void> fetchTopScorers() async {
     try {
       final response = await http.get(
-        Uri.parse('https://player-replacement-finder.onrender.com/top_performers'),
+        Uri.parse(
+            'https://player-replacement-finder.onrender.com/top_performers'),
         headers: {
           'league': widget.league,
         },
@@ -201,6 +205,7 @@ class _BuildTeamDataState extends State<BuildTeamData> {
                                     MaterialPageRoute(
                                       builder: (context) => TeamsDashboard(
                                         teamName: team.team,
+                                        leagueName: widget.league,
                                       ),
                                     ),
                                   );
@@ -423,8 +428,8 @@ class _BuildTeamDataState extends State<BuildTeamData> {
                                     height: h * 0.4,
                                     width: w * 0.7,
                                     child: SfCartesianChart(
-                                      title:
-                                          const ChartTitle(text: 'Attack vs Defence'),
+                                      title: const ChartTitle(
+                                          text: 'Attack vs Defence'),
                                       primaryXAxis: const NumericAxis(
                                         title: AxisTitle(text: "Goals Per 90"),
                                         minimum: 0,
@@ -462,7 +467,8 @@ class _BuildTeamDataState extends State<BuildTeamData> {
                                               (TeamGoalScoredConcededStats team,
                                                       _) =>
                                                   team.teamName,
-                                          dataLabelSettings: const DataLabelSettings(
+                                          dataLabelSettings:
+                                              const DataLabelSettings(
                                             isVisible: true,
                                             labelIntersectAction:
                                                 LabelIntersectAction.shift,

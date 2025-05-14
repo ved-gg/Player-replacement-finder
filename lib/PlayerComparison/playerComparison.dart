@@ -212,10 +212,9 @@ class _PlayerComparisonState extends State<PlayerComparison> {
 
     return Scaffold(
       appBar: AppBar(
-        automaticallyImplyLeading: true,
+        automaticallyImplyLeading: false,
         toolbarHeight: h * 0.1,
         backgroundColor: kPrimaryColor,
-        foregroundColor: kSecondaryColor,
         leading: InkWell(
           onTap: () {
             Navigator.pop(context);
@@ -234,7 +233,11 @@ class _PlayerComparisonState extends State<PlayerComparison> {
                 style: TextStyle(
                   color: kSecondaryColor,
                   fontFamily: 'Nevis',
-                  fontSize: h * 0.04,
+                  fontSize: SizeConfig.isMobile
+                      ? h * 0.03
+                      : SizeConfig.isTablet
+                          ? h * 0.04
+                          : h * 0.05,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -243,7 +246,11 @@ class _PlayerComparisonState extends State<PlayerComparison> {
                 style: TextStyle(
                   color: kSecondaryColor,
                   fontFamily: 'Nevis',
-                  fontSize: h * 0.02,
+                  fontSize: SizeConfig.isMobile
+                      ? h * 0.01
+                      : SizeConfig.isTablet
+                          ? h * 0.015
+                          : h * 0.02,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -260,12 +267,20 @@ class _PlayerComparisonState extends State<PlayerComparison> {
               'COMPARE ${widget.position}S',
               style: TextStyle(
                 color: kPrimaryColor,
-                fontSize: h * 0.07,
+                fontSize: SizeConfig.isMobile
+                    ? h * 0.04
+                    : SizeConfig.isTablet
+                        ? h * 0.055
+                        : h * 0.07,
                 fontFamily: 'Barcelona',
               ),
             ),
             SizedBox(
-              width: w * 0.3,
+              width: SizeConfig.isMobile
+                  ? w * 0.7
+                  : SizeConfig.isTablet
+                      ? w * 0.4
+                      : w * 0.3,
               child: TextField(
                 controller: searchController,
                 onChanged: filterSearchResults,
@@ -278,8 +293,16 @@ class _PlayerComparisonState extends State<PlayerComparison> {
             const SizedBox(height: 5),
             if (filteredPlayers.isNotEmpty)
               Container(
-                height: h * 0.2,
-                width: w * 0.3,
+                height: SizeConfig.isMobile
+                    ? h * 0.1
+                    : SizeConfig.isTablet
+                        ? h * 0.1
+                        : h * 0.2,
+                width: SizeConfig.isMobile
+                    ? w * 0.7
+                    : SizeConfig.isTablet
+                        ? w * 0.4
+                        : w * 0.3,
                 decoration: BoxDecoration(
                   color: Colors.white,
                   border: Border.all(color: Colors.grey),
@@ -304,129 +327,411 @@ class _PlayerComparisonState extends State<PlayerComparison> {
                   },
                 ),
               ),
-            const SizedBox(height: 10),
+            SizedBox(
+              height: SizeConfig.isMobile
+                  ? h * 0.01
+                  : SizeConfig.isTablet
+                      ? h * 0.03
+                      : h * 0.04,
+            ),
             Expanded(
               child: selectedPlayers.isNotEmpty
-                  ? Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        SizedBox(
-                          height: h * 0.5,
-                          width: w * 0.3,
-                          child: RadarChart(
-                            RadarChartData(
-                              radarShape: RadarShape.polygon,
-                              dataSets: selectedPlayers.entries.map((entry) {
-                                int index = selectedPlayers.keys
-                                    .toList()
-                                    .indexOf(entry.key);
-                                Map<String, double> attributes = entry.value;
-                                return RadarDataSet(
-                                  dataEntries: attributes.values
-                                      .map((val) => RadarEntry(value: val))
-                                      .toList(),
-                                  fillColor:
-                                      // ignore: deprecated_member_use
-                                      chartColors[index].withOpacity(0.2),
-                                  borderColor: chartColors[index],
-                                  entryRadius: 2.0,
-                                  borderWidth: 2.0,
-                                );
-                              }).toList(),
-                              borderData: FlBorderData(show: false),
-                              radarBackgroundColor: Colors.transparent,
-                              tickCount: 5,
-                              titlePositionPercentageOffset: 0.15,
-                              titleTextStyle: const TextStyle(
-                                  fontSize: 14, fontWeight: FontWeight.bold),
-                              getTitle: (index, angle) {
-                                if (index < radarAttributes.length) {
-                                  return RadarChartTitle(
-                                    text: radarAttributes[index],
-                                    angle: angle,
-                                  );
-                                }
-                                return RadarChartTitle(
-                                  text: '',
-                                  angle: angle,
-                                );
-                              },
-                            ),
-                          ),
-                        ),
-                        DataTable(
-                          columnSpacing: w * 0.01,
-                          columns: [
-                            const DataColumn(label: Text('Player')),
-                            ...radarAttributes.map((attr) => DataColumn(
-                                  label: Tooltip(
-                                    message: attributeExplanations[attr] ??
-                                        "No description available",
-                                    child: Text(
-                                      attr,
-                                      style: const TextStyle(
-                                          decoration: TextDecoration.underline),
-                                    ),
+                  ? SizeConfig.isMobile
+                      ? SingleChildScrollView(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              SizedBox(
+                                height: h * 0.8,
+                                width: w * 0.7,
+                                child: RadarChart(
+                                  RadarChartData(
+                                    radarShape: RadarShape.polygon,
+                                    dataSets:
+                                        selectedPlayers.entries.map((entry) {
+                                      int index = selectedPlayers.keys
+                                          .toList()
+                                          .indexOf(entry.key);
+                                      Map<String, double> attributes =
+                                          entry.value;
+                                      return RadarDataSet(
+                                        dataEntries: attributes.values
+                                            .map(
+                                                (val) => RadarEntry(value: val))
+                                            .toList(),
+                                        fillColor:
+                                            // ignore: deprecated_member_use
+                                            chartColors[index].withOpacity(0.2),
+                                        borderColor: chartColors[index],
+                                        entryRadius: 2.0,
+                                        borderWidth: 2.0,
+                                      );
+                                    }).toList(),
+                                    borderData: FlBorderData(show: false),
+                                    radarBackgroundColor: Colors.transparent,
+                                    tickCount: 5,
+                                    titlePositionPercentageOffset: 0.15,
+                                    titleTextStyle: const TextStyle(
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.bold),
+                                    getTitle: (index, angle) {
+                                      if (index < radarAttributes.length) {
+                                        return RadarChartTitle(
+                                          text: radarAttributes[index],
+                                          angle: angle,
+                                        );
+                                      }
+                                      return RadarChartTitle(
+                                        text: '',
+                                        angle: angle,
+                                      );
+                                    },
                                   ),
-                                )),
-                            const DataColumn(label: Text('Actions')),
-                          ],
-                          rows: selectedPlayers.entries.map((entry) {
-                            int index = selectedPlayers.keys
-                                .toList()
-                                .indexOf(entry.key);
-                            Map<String, double> attributes = entry.value;
-                            return DataRow(
-                              cells: [
-                                DataCell(
-                                  GestureDetector(
-                                    onTap: () {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) =>
-                                              PlayersDashboard(
-                                            playerName: entry.key,
-                                            position: widget.positionSF,
+                                ),
+                              ),
+                              DataTable(
+                                columnSpacing: 20,
+                                columns: [
+                                  const DataColumn(label: Text('Player Name')),
+                                  ...selectedPlayers.keys
+                                      .map((player) => DataColumn(
+                                            label: GestureDetector(
+                                              onTap: () {
+                                                Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        PlayersDashboard(
+                                                      playerName: player,
+                                                      position:
+                                                          widget.positionSF,
+                                                    ),
+                                                  ),
+                                                );
+                                              },
+                                              child: Text(
+                                                player,
+                                                style: TextStyle(
+                                                  color: chartColors[
+                                                      selectedPlayers.keys
+                                                          .toList()
+                                                          .indexOf(player)],
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                            ),
+                                          )),
+                                ],
+                                rows: [
+                                  ...radarAttributes.map((attr) {
+                                    return DataRow(
+                                      cells: [
+                                        DataCell(
+                                          Tooltip(
+                                            message:
+                                                attributeExplanations[attr] ??
+                                                    "No description available",
+                                            child: Text(
+                                              attr,
+                                              style: const TextStyle(
+                                                  decoration:
+                                                      TextDecoration.underline),
+                                            ),
                                           ),
                                         ),
-                                      );
-                                    },
-                                    child: Text(
-                                      entry.key,
-                                      style: TextStyle(
-                                        color: chartColors[index],
-                                        fontWeight: FontWeight.bold,
-                                      ),
+                                        ...selectedPlayers.entries.map((entry) {
+                                          double value =
+                                              entry.value[attr] ?? 0.0;
+                                          return DataCell(
+                                              Text(value.toStringAsFixed(1)));
+                                        }).toList(),
+                                      ],
+                                    );
+                                  }).toList(),
+
+                                  // Optional row for delete buttons per player
+                                  DataRow(
+                                    cells: [
+                                      const DataCell(Text("Actions")),
+                                      ...selectedPlayers.keys.map((player) {
+                                        return DataCell(
+                                          IconButton(
+                                            icon: const Icon(Icons.delete,
+                                                color: Colors.red),
+                                            onPressed: () {
+                                              setState(() {
+                                                selectedPlayers.remove(player);
+                                              });
+                                            },
+                                          ),
+                                        );
+                                      }).toList(),
+                                    ],
+                                  ),
+                                ],
+                              )
+                            ],
+                          ),
+                        )
+                      : SizeConfig.isTablet
+                          ? Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                SizedBox(
+                                  height: h * 0.5,
+                                  width: w * 0.3,
+                                  child: RadarChart(
+                                    RadarChartData(
+                                      radarShape: RadarShape.polygon,
+                                      dataSets:
+                                          selectedPlayers.entries.map((entry) {
+                                        int index = selectedPlayers.keys
+                                            .toList()
+                                            .indexOf(entry.key);
+                                        Map<String, double> attributes =
+                                            entry.value;
+                                        return RadarDataSet(
+                                          dataEntries: attributes.values
+                                              .map((val) =>
+                                                  RadarEntry(value: val))
+                                              .toList(),
+                                          fillColor:
+                                              // ignore: deprecated_member_use
+                                              chartColors[index]
+                                                  .withOpacity(0.2),
+                                          borderColor: chartColors[index],
+                                          entryRadius: 2.0,
+                                          borderWidth: 2.0,
+                                        );
+                                      }).toList(),
+                                      borderData: FlBorderData(show: false),
+                                      radarBackgroundColor: Colors.transparent,
+                                      tickCount: 5,
+                                      titlePositionPercentageOffset: 0.15,
+                                      titleTextStyle: const TextStyle(
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.bold),
+                                      getTitle: (index, angle) {
+                                        if (index < radarAttributes.length) {
+                                          return RadarChartTitle(
+                                            text: radarAttributes[index],
+                                            angle: angle,
+                                          );
+                                        }
+                                        return RadarChartTitle(
+                                          text: '',
+                                          angle: angle,
+                                        );
+                                      },
                                     ),
                                   ),
                                 ),
-                                ...attributes.entries.map(
-                                  (attr) => DataCell(
-                                    Text(
-                                      attr.value.toStringAsFixed(1),
-                                    ), // Only 1 decimal place
-                                  ),
-                                ),
-                                DataCell(
-                                  IconButton(
-                                    icon: const Icon(Icons.delete,
-                                        color: Colors.red),
-                                    onPressed: () {
-                                      setState(
-                                        () {
-                                          selectedPlayers.remove(entry.key);
-                                        },
-                                      );
-                                    },
-                                  ),
+                                DataTable(
+                                  columnSpacing: w * 0.01,
+                                  columns: [
+                                    const DataColumn(label: Text('Player')),
+                                    ...radarAttributes.map((attr) => DataColumn(
+                                          label: Tooltip(
+                                            message:
+                                                attributeExplanations[attr] ??
+                                                    "No description available",
+                                            child: Text(
+                                              attr,
+                                              style: const TextStyle(
+                                                  decoration:
+                                                      TextDecoration.underline),
+                                            ),
+                                          ),
+                                        )),
+                                    const DataColumn(label: Text('Actions')),
+                                  ],
+                                  rows: selectedPlayers.entries.map((entry) {
+                                    int index = selectedPlayers.keys
+                                        .toList()
+                                        .indexOf(entry.key);
+                                    Map<String, double> attributes =
+                                        entry.value;
+                                    return DataRow(
+                                      cells: [
+                                        DataCell(
+                                          GestureDetector(
+                                            onTap: () {
+                                              Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      PlayersDashboard(
+                                                    playerName: entry.key,
+                                                    position: widget.positionSF,
+                                                  ),
+                                                ),
+                                              );
+                                            },
+                                            child: Text(
+                                              entry.key,
+                                              style: TextStyle(
+                                                color: chartColors[index],
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                        ...attributes.entries.map(
+                                          (attr) => DataCell(
+                                            Text(
+                                              attr.value.toStringAsFixed(1),
+                                            ), // Only 1 decimal place
+                                          ),
+                                        ),
+                                        DataCell(
+                                          IconButton(
+                                            icon: const Icon(Icons.delete,
+                                                color: Colors.red),
+                                            onPressed: () {
+                                              setState(
+                                                () {
+                                                  selectedPlayers
+                                                      .remove(entry.key);
+                                                },
+                                              );
+                                            },
+                                          ),
+                                        ),
+                                      ],
+                                    );
+                                  }).toList(),
                                 ),
                               ],
-                            );
-                          }).toList(),
-                        ),
-                      ],
-                    )
+                            )
+                          : Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                SizedBox(
+                                  height: h * 0.5,
+                                  width: w * 0.3,
+                                  child: RadarChart(
+                                    RadarChartData(
+                                      radarShape: RadarShape.polygon,
+                                      dataSets:
+                                          selectedPlayers.entries.map((entry) {
+                                        int index = selectedPlayers.keys
+                                            .toList()
+                                            .indexOf(entry.key);
+                                        Map<String, double> attributes =
+                                            entry.value;
+                                        return RadarDataSet(
+                                          dataEntries: attributes.values
+                                              .map((val) =>
+                                                  RadarEntry(value: val))
+                                              .toList(),
+                                          fillColor:
+                                              // ignore: deprecated_member_use
+                                              chartColors[index]
+                                                  .withOpacity(0.2),
+                                          borderColor: chartColors[index],
+                                          entryRadius: 2.0,
+                                          borderWidth: 2.0,
+                                        );
+                                      }).toList(),
+                                      borderData: FlBorderData(show: false),
+                                      radarBackgroundColor: Colors.transparent,
+                                      tickCount: 5,
+                                      titlePositionPercentageOffset: 0.15,
+                                      titleTextStyle: const TextStyle(
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.bold),
+                                      getTitle: (index, angle) {
+                                        if (index < radarAttributes.length) {
+                                          return RadarChartTitle(
+                                            text: radarAttributes[index],
+                                            angle: angle,
+                                          );
+                                        }
+                                        return RadarChartTitle(
+                                          text: '',
+                                          angle: angle,
+                                        );
+                                      },
+                                    ),
+                                  ),
+                                ),
+                                DataTable(
+                                  columnSpacing: w * 0.01,
+                                  columns: [
+                                    const DataColumn(label: Text('Player')),
+                                    ...radarAttributes.map((attr) => DataColumn(
+                                          label: Tooltip(
+                                            message:
+                                                attributeExplanations[attr] ??
+                                                    "No description available",
+                                            child: Text(
+                                              attr,
+                                              style: const TextStyle(
+                                                  decoration:
+                                                      TextDecoration.underline),
+                                            ),
+                                          ),
+                                        )),
+                                    const DataColumn(label: Text('Actions')),
+                                  ],
+                                  rows: selectedPlayers.entries.map((entry) {
+                                    int index = selectedPlayers.keys
+                                        .toList()
+                                        .indexOf(entry.key);
+                                    Map<String, double> attributes =
+                                        entry.value;
+                                    return DataRow(
+                                      cells: [
+                                        DataCell(
+                                          GestureDetector(
+                                            onTap: () {
+                                              Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      PlayersDashboard(
+                                                    playerName: entry.key,
+                                                    position: widget.positionSF,
+                                                  ),
+                                                ),
+                                              );
+                                            },
+                                            child: Text(
+                                              entry.key,
+                                              style: TextStyle(
+                                                color: chartColors[index],
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                        ...attributes.entries.map(
+                                          (attr) => DataCell(
+                                            Text(
+                                              attr.value.toStringAsFixed(1),
+                                            ), // Only 1 decimal place
+                                          ),
+                                        ),
+                                        DataCell(
+                                          IconButton(
+                                            icon: const Icon(Icons.delete,
+                                                color: Colors.red),
+                                            onPressed: () {
+                                              setState(
+                                                () {
+                                                  selectedPlayers
+                                                      .remove(entry.key);
+                                                },
+                                              );
+                                            },
+                                          ),
+                                        ),
+                                      ],
+                                    );
+                                  }).toList(),
+                                ),
+                              ],
+                            )
                   : const Center(child: Text("Select players to compare")),
             ),
           ],
