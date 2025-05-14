@@ -20,10 +20,10 @@ class SoccerFieldScreen extends StatefulWidget {
   const SoccerFieldScreen({super.key});
 
   @override
-  _SoccerFieldScreenState createState() => _SoccerFieldScreenState();
+  SoccerFieldScreenState createState() => SoccerFieldScreenState();
 }
 
-class _SoccerFieldScreenState extends State<SoccerFieldScreen> {
+class SoccerFieldScreenState extends State<SoccerFieldScreen> {
   @override
   Widget build(BuildContext context) {
     final h = MediaQuery.of(context).size.height;
