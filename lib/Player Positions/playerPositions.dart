@@ -30,6 +30,15 @@ class _SoccerFieldScreenState extends State<SoccerFieldScreen> {
         toolbarHeight: h * 0.1,
         backgroundColor: kPrimaryColor,
         foregroundColor: kSecondaryColor,
+        leading: InkWell(
+          onTap: () {
+            Navigator.pop(context);
+          },
+          child: Icon(
+            Icons.arrow_back_ios,
+            color: kSecondaryColor,
+          ),
+        ),
         title: Padding(
           padding: EdgeInsets.symmetric(vertical: h * 0.03),
           child: Column(
