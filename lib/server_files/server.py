@@ -1,9 +1,11 @@
+import io
 import traceback
+from matplotlib import pyplot as plt
 import pandas as pd
 import json
 
 from fastapi import FastAPI, HTTPException, Header, Body, status
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse, StreamingResponse
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 
@@ -16,6 +18,7 @@ from Player.attributes_calculation import attributes_calculation
 from League.top_performers import get_top_performers
 from Player.formation_fit_analysis import analyze_formations
 from Player.players_dashboard_data import send_dashboard_data
+from Player.squad_playing_time import plot_squad_playing_time
 
 app = FastAPI(
     title="Football Stats API",
@@ -203,3 +206,38 @@ async def healthz_check():
 @app.head("/healthz", status_code=status.HTTP_200_OK)
 async def healthz_check_head():
     return {}
+
+
+@app.head("/", status_code=status.HTTP_200_OK)
+async def head_root():
+    return {}
+
+
+@app.get("/plot_squad_minutes",
+         responses={
+             200: {"content": {"image/png": {}}},
+             404: {"description": "Data not found"},
+             500: {"description": "Internal Server Error"}
+         },
+         response_class=StreamingResponse,
+         description="Get squad playing time plot as PNG image"
+         )
+async def get_squad_minutes_plot(league_name: str, squad_name: str):
+    """
+    Generates and returns a plot of squad playing time vs age as a PNG image.
+    """
+    fig = plot_squad_playing_time(league_name, squad_name)
+
+    if fig is None:
+        raise HTTPException(
+            status_code=404, detail=f"Data not found for squad: {squad_name} in league: {league_name}")
+
+    buf = io.BytesIO()
+    try:
+        fig.savefig(buf, format='png', dpi=300,
+                    bbox_inches='tight', facecolor='white')
+        buf.seek(0)
+    finally:
+        plt.close(fig)
+
+    return StreamingResponse(buf, media_type="image/png")
