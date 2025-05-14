@@ -83,19 +83,19 @@ def plot_squad_playing_time(league_name: str, squad_name: str):
     ax.text((df_squad['Player Age'].min() + youth_end) / 2,
             50,
             'YOUTH',
-            color='black', rotation=90, fontsize='xx-large', alpha=0.2,
+            color='black', rotation=90, fontsize='40', alpha=0.1,
             horizontalalignment='center', verticalalignment='center')
 
     ax.text((youth_end + peak_end) / 2,
             50,
             'PEAK',
-            color='black', rotation=90, fontsize='xx-large', alpha=0.2,
+            color='black', rotation=90, fontsize='40', alpha=0.1,
             horizontalalignment='center', verticalalignment='center')
 
     ax.text((peak_end + ax.get_xlim()[1]) / 2,
             50,
             'EXPERIENCE',
-            color='black', rotation=90, fontsize='xx-large', alpha=0.2,
+            color='black', rotation=90, fontsize='40', alpha=0.1,
             horizontalalignment='center', verticalalignment='center')
 
     max_x = ax.get_xlim()[1]

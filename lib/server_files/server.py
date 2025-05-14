@@ -220,6 +220,7 @@ async def head_root():
              500: {"description": "Internal Server Error"}
          },
          response_class=StreamingResponse,
+         description="Get squad playing time plot as PNG image"
          )
 async def get_squad_minutes_plot(league_name: str, squad_name: str):
     """
