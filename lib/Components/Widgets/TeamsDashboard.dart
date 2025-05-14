@@ -20,8 +20,18 @@ class _TeamsDashboardState extends State<TeamsDashboard> {
     squad_playing_minutes();
   }
 
-  Uint8List? imageBytes;
+  Uint8List? minutesImage;
+  Uint8List? possesionImage;
+  Uint8List? xgImage;
+  Uint8List? qualityImage;
+  Uint8List? topPerformersImage;
+
   bool isMinutesLoading = true;
+  bool isPossesionLoading = true;
+  bool isXgLoading = true;
+  bool isQualityLoading = true;
+  bool isTopPerformersLoading = true;
+
   Future<void> squad_playing_minutes() async {
     try {
       final response = await http.get(
@@ -34,7 +44,7 @@ class _TeamsDashboardState extends State<TeamsDashboard> {
 
       if (response.statusCode == 200) {
         setState(() {
-          imageBytes = response.bodyBytes;
+          minutesImage = response.bodyBytes;
           isMinutesLoading = false;
         });
       } else {
@@ -44,6 +54,112 @@ class _TeamsDashboardState extends State<TeamsDashboard> {
       print("Error fetching data");
       setState(() {
         isMinutesLoading = true;
+      });
+    }
+  }
+
+    Future<void> league_possesion() async {
+    try {
+      final response = await http.get(
+          Uri.parse(
+              "https://player-replacement-finder.onrender.com/plot_league_possesion"),
+          headers: {
+            'squad-name': widget.teamName,
+            'league-name': widget.leagueName,
+          });
+
+      if (response.statusCode == 200) {
+        setState(() {
+          possessionImage = response.bodyBytes;
+          isPossesionLoading = false;
+        });
+      } else {
+        print("Failed to load image");
+      }
+    } catch (e) {
+      print("Error fetching data");
+      setState(() {
+        isPosessionLoading = true;
+      });
+    }
+  }
+
+    Future<void> squad_xg() async {
+    try {
+      final response = await http.get(
+          Uri.parse(
+              "https://player-replacement-finder.onrender.com/plot_league_xg_comparison"),
+          headers: {
+            'squad-name': widget.teamName,
+            'league-name': widget.leagueName,
+          });
+
+      if (response.statusCode == 200) {
+        setState(() {
+          xgImage = response.bodyBytes;
+          isXgLoading = false;
+        });
+      } else {
+        print("Failed to load image");
+      }
+    } catch (e) {
+      print("Error fetching data");
+      setState(() {
+        isXgLoading = true;
+      });
+    }
+  }
+
+    Future<void> squad_quality_volume() async {
+    try {
+      final response = await http.get(
+          Uri.parse(
+              "https://player-replacement-finder.onrender.com/plot_quality_volume_scatter"),
+          headers: {
+            'squad-name': widget.teamName,
+            'league-name': widget.leagueName,
+          });
+
+      if (response.statusCode == 200) {
+        setState(() {
+          qualityImage = response.bodyBytes;
+          isQualityLoading = false;
+        });
+      } else {
+        print("Failed to load image");
+      }
+    } catch (e) {
+      print("Error fetching data");
+      setState(() {
+        isQualityLoading = true;
+      });
+    }
+  }
+
+    Future<void> squad_top_performers() async {
+    try {
+      final response = await http.get(
+          Uri.parse(
+              "https://player-replacement-finder.onrender.com/plot_squad_top_performers"),
+          headers: {
+            'squad-name': widget.teamName,
+            'league-name': widget.leagueName,
+            'metric_col' : 'xG.1',
+            'metric_label' : 'xG per 90',
+          });
+
+      if (response.statusCode == 200) {
+        setState(() {
+          topPerformersImage = response.bodyBytes;
+          isTopPerformersLoading = false;
+        });
+      } else {
+        print("Failed to load image");
+      }
+    } catch (e) {
+      print("Error fetching data");
+      setState(() {
+        isTopPerformersLoading = true;
       });
     }
   }
@@ -142,6 +258,112 @@ class _TeamsDashboardState extends State<TeamsDashboard> {
                               ),
                             )
                           : Image.memory(imageBytes!),
+                    ),
+              isPossesionLoading
+                  ? CircularProgressIndicator()
+                  : SizedBox(
+                      height: SizeConfig.isMobile
+                          ? h * 0.3
+                          : SizeConfig.isTablet
+                              ? h * 0.4
+                              : h * 0.9,
+                      width: SizeConfig.isMobile
+                          ? w * 0.3
+                          : SizeConfig.isTablet
+                              ? w * 0.4
+                              : w * 0.8,
+                      child: possessionImage == null
+                          ? Text(
+                              'Data could not be fetched',
+                              style: TextStyle(
+                                fontSize: SizeConfig.isMobile
+                                    ? h * 0.02
+                                    : SizeConfig.isTablet
+                                        ? h * 0.03
+                                        : h * 0.03,
+                              ),
+                            )
+                          : Image.memory(possessionImage!),
+                    ),
+              isXgLoading
+                  ? CircularProgressIndicator()
+                  : SizedBox(
+                      height: SizeConfig.isMobile
+                          ? h * 0.3
+                          : SizeConfig.isTablet
+                              ? h * 0.4
+                              : h * 0.9,
+                      width: SizeConfig.isMobile
+                          ? w * 0.3
+                          : SizeConfig.isTablet
+                              ? w * 0.4
+                              : w * 0.8,
+                      child: xgImage == null
+                          ? Text(
+                              'Data could not be fetched',
+                              style: TextStyle(
+                                fontSize: SizeConfig.isMobile
+                                    ? h * 0.02
+                                    : SizeConfig.isTablet
+                                        ? h * 0.03
+                                        : h * 0.03,
+                              ),
+                            )
+                          : Image.memory(xgImage!),
+                    ),
+              isQualityLoading  
+                  ? CircularProgressIndicator()
+                  : SizedBox(
+                      height: SizeConfig.isMobile
+                          ? h * 0.3
+                          : SizeConfig.isTablet
+                              ? h * 0.4
+                              : h * 0.9,
+                      width: SizeConfig.isMobile
+                          ? w * 0.3
+                          : SizeConfig.isTablet
+                              ? w * 0.4
+                              : w * 0.8,
+                      child: qualityImage == null
+                          ? Text(
+                              'Data could not be fetched',
+                              style: TextStyle(
+                                fontSize: SizeConfig.isMobile
+                                    ? h * 0.02
+                                    : SizeConfig.isTablet
+                                        ? h * 0.03
+                                        : h * 0.03,
+                              ),
+                            )
+                          : Image.memory(qualityImage!),
+                    ),  
+
+
+              isTopPerformersLoading
+                  ? CircularProgressIndicator()
+                  : SizedBox(
+                      height: SizeConfig.isMobile
+                          ? h * 0.3
+                          : SizeConfig.isTablet
+                              ? h * 0.4
+                              : h * 0.9,
+                      width: SizeConfig.isMobile
+                          ? w * 0.3
+                          : SizeConfig.isTablet
+                              ? w * 0.4
+                              : w * 0.8,
+                      child: topPerformersImage == null
+                          ? Text(
+                              'Data could not be fetched',
+                              style: TextStyle(
+                                fontSize: SizeConfig.isMobile
+                                    ? h * 0.02
+                                    : SizeConfig.isTablet
+                                        ? h * 0.03
+                                        : h * 0.03,
+                              ),
+                            )
+                          : Image.memory(topPerformersImage!),
                     ),
             ],
           ),
