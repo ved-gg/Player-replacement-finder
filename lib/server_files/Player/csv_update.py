@@ -305,7 +305,7 @@ def image_getter(player_name):
                 soup = BeautifulSoup(query, "html.parser")
                 break
     info = soup.find("div", {"id": "meta"})
-    for div in info.findAll("div", {'class': 'media-item'}):
+    for div in info.find_all("div", {'class': 'media-item'}):
         image = div.find("img")
         if image and "src" in image.attrs:
             return image["src"]
@@ -328,11 +328,11 @@ def top_performers_csv_update(league):
     }
     response = requests.get(link, headers=HEADERS)
     if response.status_code != 200:
-        print("Failed to fetch the page.")
+        print("Failed to fetch the page. Got response: ", response.status_code)
         return
     soup = BeautifulSoup(response.text, "html.parser")
     info = soup.find("div", {'id': 'meta'})
-    for p in info.findAll("p"):
+    for p in info.find_all("p"):
         strong = p.find("strong")
         a = p.find("a")
         span = p.find("span")
@@ -363,8 +363,9 @@ def top_performers_csv_update(league):
     advanced_top_performers(league, top_performers_df)
     top_performers_df.to_csv(csv_path, index=False)
 
-# for league in leagues:
-#     top_performers_csv_update(league)
-#     print(f"{league} File Updated")
+
+for league in leagues:
+    top_performers_csv_update(league)
+    print(f"{league} File Updated")
 
 # top_performers_csv_update("SerieA")

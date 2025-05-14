@@ -66,9 +66,9 @@ def main():
         if df is not None:
             all_leagues_data[league] = df
     # Save data
-    # for league, df in all_leagues_data.items():
-    #     df.to_csv(f"data/{league.replace(' ', '_')}_stats-{year}.csv", index=False)
-    #     print(f"Saved {league} data to CSV.")
+    for league, df in all_leagues_data.items():
+        df.to_csv(f"data/{league.replace(' ', '_')}_stats-{year}.csv", index=False)
+        print(f"Saved {league} data to CSV.")
 
 
 if __name__ == "__main__":

@@ -47,3 +47,7 @@ def defensive_solidity(league):
 
 
 # defensive_solidity("La Liga")
+leagues = ['Premier League', 'La Liga', 'Liga Portugal', 'Bundesliga', 'Eredivise', 'SerieA', 'Ligue 1']
+for league in leagues:
+    defensive_solidity(league)
+    attack_vs_defence(league)

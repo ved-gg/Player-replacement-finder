@@ -1,19 +1,19 @@
-Rk,Squad,MP,W,D,L,GF,GA,GD,Pts,Pts/MP,Last 5,Top Team Scorer,Goalkeeper
-1,Sporting CP,24,17,5,2,64,21,43,56,2.33,W D D D W,Viktor Gyökeres - 25,Franco Israel
-2,Benfica,24,18,2,4,56,18,38,56,2.33,W W W W W,Vangelis Pavlidis - 9,Anatolii Trubin
-3,Braga,25,15,5,5,41,22,19,50,2.0,W D W L W,Ricardo Horta - 8,Matheus
-4,Porto,25,15,5,5,49,20,29,50,2.0,D W D W L,Samu Omorodion - 14,Diogo Costa
-5,Santa Clara,24,12,3,9,25,24,1,39,1.63,W W L D L,Vinícius - 7,Gabriel Batista
-6,Casa Pia,24,10,6,8,30,29,1,36,1.5,L W L W L,Cassiano - 8,Patrick Sequeira
-7,Vitória,24,8,11,5,32,26,6,35,1.46,W D D D W,Gustavo da Silva - 4,Bruno Varela
-8,Estoril,25,9,8,8,33,40,-7,35,1.4,W D W L D,Alejandro Marqués - 8,Joel Robles
-9,Famalicão,24,7,10,7,27,26,1,31,1.29,W D W W L,Óscar Aranda - 7,Ivan Zlobin
-10,Rio Ave,24,7,8,9,27,39,-12,29,1.21,D D D L W,Clayton - 12,Cezary Miszta
-11,Arouca,25,7,7,11,24,38,-14,28,1.12,D D D L W,Jason - 5,Nico Mantl
-12,Moreirense,24,7,6,11,29,36,-7,27,1.13,L L W L D,"Alan, Luismi - 5",Kewin
-13,Nacional,25,7,5,13,23,35,-12,26,1.04,W D L W L,"José Gomes, Dudu... - 3",Lucas França
-14,Gil Vicente FC,24,5,8,11,24,36,-12,23,0.96,L L L L D,Félix Correia - 6,Andrew
-15,AVS Futebol,25,4,11,10,20,35,-15,23,0.92,L D D W L,John Mercado - 3,Guillermo Ochoa
-16,Estrela,25,5,8,12,21,36,-15,23,0.92,L W D D D,"Rodrigo Pinho, Kikas - 5",Bruno Brigido
-17,Farense,25,3,8,14,17,36,-19,17,0.68,L L D L D,Tomané - 3,Ricardo Velho
-18,Boavista,24,3,6,15,15,40,-25,15,0.63,L L L L W,Miguel Reisinho - 4,César
+Rk,Squad,MP,W,D,L,GF,GA,GD,Pts,Pts/MP,xG,xGA,xGD,xGD/90,Last 5,Top Team Scorer,Goalkeeper
+1,Sporting CP,33,24,7,2,86,27,59,79,2.39,69.7,23.4,46.4,1.4,W W W W D,Viktor Gyökeres - 38,Rui Silva
+2,Benfica,33,25,4,4,83,27,56,79,2.39,77.4,27.3,50.0,1.52,D W W W D,Vangelis Pavlidis - 18,Anatolii Trubin
+3,Porto,33,21,5,7,62,30,32,68,2.06,54.5,29.3,25.2,0.76,W W L W W,Samu Omorodion - 18,Diogo Costa
+4,Braga,33,19,8,6,54,29,25,65,1.97,49.4,32.8,16.6,0.5,W W D D L,Ricardo Horta - 10,Matheus
+5,Vitória,33,14,12,7,47,35,12,54,1.64,44.5,29.9,14.6,0.44,W L W W L,Gustavo da Silva - 7,Bruno Varela
+6,Santa Clara,33,16,6,11,34,31,3,54,1.64,41.3,31.3,9.9,0.3,L D W D W,Vinícius - 8,Gabriel Batista
+7,Casa Pia,33,12,9,12,38,42,-4,45,1.36,33.0,42.2,-9.3,-0.28,L D L D W,Cassiano - 10,Patrick Sequeira
+8,Famalicão,33,11,11,11,42,38,4,44,1.33,36.3,42.6,-6.3,-0.19,W L D L L,Óscar Aranda - 9,Lazar Carević
+9,Estoril,33,11,10,12,44,53,-9,43,1.3,38.7,57.6,-18.9,-0.57,L L W L D,Alejandro Marqués - 11,Joel Robles
+10,Rio Ave,33,9,10,14,38,54,-16,37,1.12,38.0,53.6,-15.5,-0.47,W D L W D,Clayton - 14,Cezary Miszta
+11,Moreirense,33,9,10,14,39,50,-11,37,1.12,32.2,39.1,-6.9,-0.21,L L D L D,Alan - 6,Kewin
+12,Arouca,33,8,11,14,31,48,-17,35,1.06,38.9,45.0,-6.1,-0.18,D W L D D,"Jason, Henrique Araújo - 5",Nico Mantl
+13,Nacional,33,9,7,17,32,47,-15,34,1.03,36.8,46.2,-9.4,-0.29,W L D L D,Daniel Penha - 4,Lucas França
+14,Gil Vicente FC,33,8,9,16,33,46,-13,33,1.0,33.0,41.3,-8.3,-0.25,L W W L D,Félix Correia - 9,Andrew
+15,Estrela,33,7,8,18,24,46,-22,29,0.88,28.8,43.1,-14.3,-0.43,L L W L L,Kikas - 6,Bruno Brigido
+16,AVS Futebol,33,5,12,16,25,57,-32,27,0.82,31.3,53.8,-22.5,-0.68,L D L L W,Nenê - 4,Guillermo Ochoa
+17,Farense,33,6,9,18,24,44,-20,27,0.82,29.0,50.2,-21.3,-0.64,W L L W W,Darío Poveda - 4,Ricardo Velho
+18,Boavista,33,6,6,21,23,55,-32,24,0.73,30.4,54.4,-24.0,-0.73,L W L W L,Miguel Reisinho - 5,César

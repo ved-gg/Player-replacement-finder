@@ -41,11 +41,9 @@ def squad_defensive_actions(league):
     df[16].to_csv(csv_path, index=False)
 
 
-squad_defensive_actions("Eredivise")
+# squad_defensive_actions("Eredivise")
 
-# league_standings_csv("Premier League")s
-
-# for key in league_links.keys():
-#     print(key)
-#     league_standings_csv(key)
-#     squad_defensive_actions(key)
+for key in league_links.keys():
+    print(key)
+    league_standings_csv(key)
+    squad_defensive_actions(key)

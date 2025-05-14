@@ -113,4 +113,6 @@ def standings_getter(league):
 
 # # fetch_top_performers("La Liga")
 # # image_getter("Lionel Messi")
-# standings_getter("La Liga")
+leagues = ['Premier League', 'La Liga', 'Liga Portugal', 'Bundesliga', 'Eredivise', 'SerieA', 'Ligue 1']
+for league in leagues:
+    standings_getter(league)

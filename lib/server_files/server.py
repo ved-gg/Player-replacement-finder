@@ -4,7 +4,7 @@ from matplotlib import pyplot as plt
 import pandas as pd
 import json
 
-from fastapi import FastAPI, HTTPException, Header, Body, status
+from fastapi import FastAPI, HTTPException, Header, Body, Query, status
 from fastapi.responses import JSONResponse, StreamingResponse
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
@@ -18,7 +18,7 @@ from Player.attributes_calculation import attributes_calculation
 from League.top_performers import get_top_performers
 from Player.formation_fit_analysis import analyze_formations
 from Player.players_dashboard_data import send_dashboard_data
-from Player.squad_playing_time import plot_squad_playing_time
+from lib.server_files.Player.squad_plots import plot_league_possession_style, plot_league_xg_comparison, plot_squad_playing_time, plot_squad_shot_quality_volume_scatter, plot_squad_top_performers_bar
 
 app = FastAPI(
     title="Football Stats API",
@@ -216,30 +216,196 @@ async def head_root():
 @app.get("/plot_squad_minutes",
          responses={
              200: {"content": {"image/png": {}}},
-             404: {"description": "Data not found"},
+             # Updated description
+             404: {"description": "Data not found or insufficient"},
              500: {"description": "Internal Server Error"}
          },
          response_class=StreamingResponse,
-         description="Get squad playing time plot as PNG image"
+         # Corrected description
+         description="Get a plot of player minutes vs age for a specific squad as PNG image"
          )
 async def get_squad_minutes_plot(
-         squad_name: str = Header( ..., description = "Squad name"),
-         league_name: str = Header( ..., description = "League name"),
-        ):
-    """
-    Generates and returns a plot of squad playing time vs age as a PNG image.
-    """
+    squad_name: str = Header(..., description="Squad name"),
+    league_name: str = Header(..., description="League name"),
+):
     fig = plot_squad_playing_time(league_name, squad_name)
 
     if fig is None:
         raise HTTPException(
-            status_code=404, detail=f"Data not found for squad: {squad_name} in league: {league_name}")
+            status_code=404, detail=f"Data not found or insufficient for squad: {squad_name} in league: {league_name}")
 
     buf = io.BytesIO()
     try:
-        fig.savefig(buf, format='png', dpi=300,
-                    bbox_inches='tight', facecolor='white')
+        fig.savefig(buf, format='png', dpi=300, bbox_inches='tight',
+                    facecolor=fig.get_facecolor())
         buf.seek(0)
+    except Exception as e:
+        print(f"Error saving plot: {e}")
+        raise HTTPException(
+            status_code=500, detail="Error generating plot image")
+    finally:
+        plt.close(fig)
+
+    return StreamingResponse(buf, media_type="image/png")
+
+
+@app.get("/plot_league_possession",
+         responses={
+             200: {"content": {"image/png": {}}},
+             404: {"description": "Data not found or insufficient"},
+             500: {"description": "Internal Server Error"}
+         },
+         response_class=StreamingResponse,
+         description="Get a plot comparing league teams by passing volume and completion percentage, highlighting a specific squad"
+         )
+async def get_league_possession_plot(
+    squad_name: str = Header(
+        None, description="Squad name to highlight (optional)"),
+    league_name: str = Header(..., description="League name"),
+):
+    fig = plot_league_possession_style(
+        league_name, squad_name_to_highlight=squad_name)
+
+    if fig is None:
+        raise HTTPException(
+            status_code=404, detail=f"Data not found or insufficient for league: {league_name} (or highlight squad: {squad_name})")
+
+    buf = io.BytesIO()
+    try:
+        fig.savefig(buf, format='png', dpi=300, bbox_inches='tight',
+                    facecolor=fig.get_facecolor())
+        buf.seek(0)
+    except Exception as e:
+        print(f"Error saving plot: {e}")
+        raise HTTPException(
+            status_code=500, detail="Error generating plot image")
+    finally:
+        plt.close(fig)
+
+    return StreamingResponse(buf, media_type="image/png")
+
+
+@app.get("/plot_league_xg_comparison",
+         responses={
+             200: {"content": {"image/png": {}}},
+             404: {"description": "Data not found or insufficient"},
+             500: {"description": "Internal Server Error"}
+         },
+         response_class=StreamingResponse,
+         description="Get a plot comparing league teams by xG and xGA, highlighting a specific squad"
+         )
+async def get_league_xg_plot(
+    squad_name: str = Header(
+        None, description="Squad name to highlight (optional)"),
+    league_name: str = Header(..., description="League name"),
+):
+    fig = plot_league_xg_comparison(
+        league_name, squad_name_to_highlight=squad_name)
+
+    if fig is None:
+        raise HTTPException(
+            status_code=404, detail=f"Data not found or insufficient for league: {league_name} (or highlight squad: {squad_name})")
+
+    buf = io.BytesIO()
+    try:
+        fig.savefig(buf, format='png', dpi=300, bbox_inches='tight',
+                    facecolor=fig.get_facecolor())
+        buf.seek(0)
+    except Exception as e:
+        print(f"Error saving plot: {e}")
+        raise HTTPException(
+            status_code=500, detail="Error generating plot image")
+    finally:
+        plt.close(fig)
+
+    return StreamingResponse(buf, media_type="image/png")
+
+
+@app.get("/plot_quality_volume_scatter",
+         responses={
+             200: {"content": {"image/png": {}}},
+             404: {"description": "Data not found or insufficient"},
+             500: {"description": "Internal Server Error"}
+         },
+         response_class=StreamingResponse,
+         description="Get a scatter plot of player shot volume vs quality for a specific squad"
+         )
+async def get_quality_volume_plot(
+    squad_name: str = Header(..., description="Squad name"),
+    league_name: str = Header(..., description="League name"),
+    min_90s: int = Query(
+        5, description="Minimum 90s played for a player to be included"),
+    min_shots: int = Query(
+        5, description="Minimum total shots for a player to be included"),
+):
+    fig = plot_squad_shot_quality_volume_scatter(
+        league_name, squad_name, min_90s, min_shots)
+
+    if fig is None:
+        raise HTTPException(
+            status_code=404, detail=f"Data not found or insufficient for squad: {squad_name} in league: {league_name} with specified filters (Min. {min_90s} 90s, Min. {min_shots} Shots)")
+
+    buf = io.BytesIO()
+    try:
+        fig.savefig(buf, format='png', dpi=300, bbox_inches='tight',
+                    facecolor=fig.get_facecolor())
+        buf.seek(0)
+    except Exception as e:
+        print(f"Error saving plot: {e}")
+        raise HTTPException(
+            status_code=500, detail="Error generating plot image")
+    finally:
+        plt.close(fig)
+
+    return StreamingResponse(buf, media_type="image/png")
+
+
+@app.get("/plot_squad_top_performers",
+         responses={
+             200: {"content": {"image/png": {}}},
+             400: {"description": "Invalid metric requested"},
+             404: {"description": "Data not found or insufficient"},
+             500: {"description": "Internal Server Error"}
+         },
+         response_class=StreamingResponse,
+         description="Get a bar plot of top players for a specific squad based on a given metric"
+         )
+async def get_squad_top_performers_plot(
+    squad_name: str = Header(..., description="Squad name"),
+    league_name: str = Header(..., description="League name"),
+    metric_col: str = Query(..., description="Internal column name or calculation string (e.g., 'xG.1', 'Tkl + Int'). See function docstring for supported values."),
+    metric_label: str = Query(
+        ..., description="Human-readable label for the metric (e.g., 'xG per 90', 'Tackles + Interceptions per 90')"),
+    min_90s: int = Query(
+        5, description="Minimum 90s played for a player to be included"),
+):
+    fig = plot_squad_top_performers_bar(
+        league_name, squad_name, metric_col, metric_label, min_90s)
+
+    if fig is None:
+        supported_metrics = (
+            list(plot_squad_top_performers_bar.__globals__['direct_per_90_metrics']) +
+            list(plot_squad_top_performers_bar.__globals__['needs_div_90s_metrics']) +
+            ['xG.1 + xAG.1', 'Tkl + Int', 'Gls + Ast', 'G-PK + Ast', 'xG + xAG']
+        )
+        if metric_col not in supported_metrics:
+            raise HTTPException(
+                status_code=400, detail=f"Metric '{metric_col}' not recognized or supported. Supported metrics include: {', '.join(sorted(supported_metrics))}"
+            )
+        else:
+            raise HTTPException(
+                status_code=404, detail=f"Data not found or insufficient for squad: {squad_name} in league: {league_name} for metric '{metric_label}' with specified filters (Min. {min_90s} 90s). Check logs for specific data issues."
+            )
+
+    buf = io.BytesIO()
+    try:
+        fig.savefig(buf, format='png', dpi=300, bbox_inches='tight',
+                    facecolor=fig.get_facecolor())
+        buf.seek(0)
+    except Exception as e:
+        print(f"Error saving plot: {e}")
+        raise HTTPException(
+            status_code=500, detail="Error generating plot image")
     finally:
         plt.close(fig)
 

@@ -1,21 +1,21 @@
 Rk,Squad,MP,W,D,L,GF,GA,GD,Pts,Pts/MP,xG,xGA,xGD,xGD/90,Last 5,Top Team Scorer,Goalkeeper
-1,Liverpool,29,21,7,1,69,27,42,70,2.41,65.0,25.1,39.8,1.37,W D W W W,Mohamed Salah - 27,Alisson
-2,Arsenal,27,15,9,3,51,23,28,54,2.0,42.2,22.9,19.3,0.72,W W W L D,Kai Havertz - 9,David Raya
-3,Nott'ham Forest,28,15,6,7,45,33,12,51,1.82,35.0,33.6,1.4,0.05,W L L D W,Chris Wood - 18,Matz Sels
-4,Manchester City,28,14,5,9,53,38,15,47,1.68,49.7,37.4,12.3,0.44,L W L W L,Erling Haaland - 20,Ederson
-5,Chelsea,27,13,7,7,52,36,16,46,1.7,53.8,38.7,15.2,0.56,L W L L W,Cole Palmer - 14,Robert Sánchez
-6,Brighton,28,12,10,6,46,40,6,46,1.64,41.7,39.3,2.3,0.08,L W W W W,João Pedro - 8,Bart Verbruggen
-7,Aston Villa,29,12,9,8,41,45,-4,45,1.55,41.2,39.9,1.3,0.05,D D W L W,Ollie Watkins - 13,Emiliano Martínez
-8,Newcastle Utd,27,13,5,9,46,38,8,44,1.63,44.9,34.7,10.2,0.38,W L L W L,Alexander Isak - 19,Nick Pope
-9,Bournemouth,27,12,7,8,45,32,13,43,1.59,49.1,36.4,12.7,0.47,W L W L L,Justin Kluivert - 12,Kepa Arrizabalaga
-10,Fulham,28,11,9,8,41,38,3,42,1.5,38.8,32.2,6.7,0.24,W W L W L,Raúl Jiménez - 10,Bernd Leno
-11,Crystal Palace,28,10,9,9,36,33,3,39,1.39,44.3,35.1,9.3,0.33,W L W W W,Jean-Philippe Mateta - 12,Dean Henderson
-12,Brentford,28,11,5,12,48,44,4,38,1.36,43.7,43.6,0.1,0.0,L W W D L,Bryan Mbeumo - 15,Mark Flekken
-13,Tottenham,27,10,3,14,53,39,14,33,1.22,44.8,45.3,-0.4,-0.02,L W W W L,"James Maddison, Brennan Johnson - 9",Guglielmo Vicario
-14,Everton,28,7,12,9,31,35,-4,33,1.18,30.5,34.6,-4.1,-0.15,D W D D D,"Iliman Ndiaye, Beto - 6",Jordan Pickford
-15,Manchester Utd,27,9,6,12,33,39,-6,33,1.22,36.4,41.6,-5.2,-0.19,W L L D W,"Bruno Fernandes, Amad Diallo - 6",André Onana
-16,West Ham,27,9,6,12,32,47,-15,33,1.22,35.1,44.8,-9.7,-0.36,D L L W W,Jarrod Bowen - 7,Alphonse Areola
-17,Wolves,28,6,5,17,38,57,-19,23,0.82,31.1,44.8,-13.7,-0.49,W L W L D,Matheus Cunha - 13,José Sá
-18,Ipswich Town,28,3,8,17,26,58,-32,17,0.61,26.4,56.1,-29.7,-1.06,L D L L L,Liam Delap - 10,Arijanet Muric
-19,Leicester City,27,4,5,18,25,61,-36,17,0.63,24.5,50.8,-26.3,-0.97,W L L L L,Jamie Vardy - 7,Mads Hermansen
-20,Southampton,28,2,3,23,20,68,-48,9,0.32,25.6,67.2,-41.6,-1.49,W L L L L,Joe Aribo - 3,Aaron Ramsdale
+1,Liverpool,36,25,8,3,83,37,46,83,2.31,77.8,34.6,43.2,1.2,W W W L D,Mohamed Salah - 28,Alisson
+2,Arsenal,36,18,14,4,66,33,33,68,1.89,57.0,32.3,24.7,0.69,D W D L D,Kai Havertz - 9,David Raya
+3,Newcastle Utd,36,20,6,10,68,45,23,66,1.83,61.1,43.7,17.3,0.48,W L W D W,Alexander Isak - 23,Nick Pope
+4,Manchester City,36,19,8,9,67,43,24,65,1.81,63.6,45.3,18.3,0.51,W W W W D,Erling Haaland - 21,Ederson
+5,Chelsea,36,18,9,9,62,43,19,63,1.75,65.9,45.8,20.1,0.56,D W W W L,Cole Palmer - 15,Robert Sánchez
+6,Aston Villa,36,18,9,9,56,49,7,63,1.75,54.3,46.7,7.6,0.21,W W L W W,Ollie Watkins - 16,Emiliano Martínez
+7,Nott'ham Forest,36,18,8,10,56,44,12,62,1.72,42.4,46.7,-4.4,-0.12,L W L D D,Chris Wood - 20,Matz Sels
+8,Brentford,36,16,7,13,63,53,10,55,1.53,55.0,53.4,1.6,0.05,D W W W W,"Yoane Wissa, Bryan Mbeumo - 18",Mark Flekken
+9,Brighton,36,14,13,9,59,56,3,55,1.53,54.3,50.3,4.0,0.11,D L W D W,"Danny Welbeck, João Pedro - 10",Bart Verbruggen
+10,Bournemouth,36,14,11,11,55,43,12,53,1.47,61.3,46.7,14.6,0.41,W D D W L,Justin Kluivert - 12,Kepa Arrizabalaga
+11,Fulham,36,14,9,13,51,50,1,51,1.42,46.8,41.7,5.1,0.14,L L W L L,Raúl Jiménez - 11,Bernd Leno
+12,Crystal Palace,36,12,13,11,46,48,-2,49,1.36,57.0,45.6,11.4,0.32,L D D D W,Jean-Philippe Mateta - 14,Dean Henderson
+13,Everton,36,9,15,12,39,44,-5,42,1.17,37.9,43.9,-5.9,-0.16,W L L D W,Beto - 8,Jordan Pickford
+14,Wolves,36,12,5,19,51,64,-13,41,1.14,41.3,55.0,-13.8,-0.38,W W W L L,Matheus Cunha - 15,José Sá
+15,West Ham,36,10,10,16,42,59,-17,40,1.11,44.8,57.0,-12.2,-0.34,L D L D W,Jarrod Bowen - 11,Alphonse Areola
+16,Manchester Utd,36,10,9,17,42,53,-11,39,1.08,49.4,52.7,-3.3,-0.09,L L D L L,Bruno Fernandes - 8,André Onana
+17,Tottenham,36,11,5,20,63,59,4,38,1.06,56.2,59.7,-3.5,-0.1,L L L D L,Brennan Johnson - 11,Guglielmo Vicario
+18,Ipswich Town,36,4,10,22,35,77,-42,22,0.61,32.2,70.8,-38.6,-1.07,D L L D L,Liam Delap - 12,Arijanet Muric
+19,Leicester City,36,5,7,24,31,78,-47,22,0.61,31.6,68.9,-37.3,-1.04,D L L W D,Jamie Vardy - 8,Mads Hermansen
+20,Southampton,36,2,6,28,25,82,-57,12,0.33,30.8,79.8,-49.0,-1.36,L D L L D,Paul Onuachu - 4,Aaron Ramsdale
