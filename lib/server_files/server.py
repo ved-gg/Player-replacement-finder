@@ -18,7 +18,7 @@ from Player.attributes_calculation import attributes_calculation
 from League.top_performers import get_top_performers
 from Player.formation_fit_analysis import analyze_formations
 from Player.players_dashboard_data import send_dashboard_data
-from lib.server_files.Player.squad_plots import plot_league_possession_style, plot_league_xg_comparison, plot_squad_playing_time, plot_squad_shot_quality_volume_scatter, plot_squad_top_performers_bar
+from Player.squad_plots import plot_league_possession_style, plot_league_xg_comparison, plot_squad_playing_time, plot_squad_shot_quality_volume_scatter, plot_squad_top_performers_bar
 
 app = FastAPI(
     title="Football Stats API",
