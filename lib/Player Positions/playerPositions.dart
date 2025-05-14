@@ -30,10 +30,9 @@ class _SoccerFieldScreenState extends State<SoccerFieldScreen> {
     return Scaffold(
       backgroundColor: kSecondaryColor,
       appBar: AppBar(
-        automaticallyImplyLeading: true,
+        automaticallyImplyLeading: false,
         toolbarHeight: h * 0.1,
         backgroundColor: kPrimaryColor,
-        foregroundColor: kSecondaryColor,
         title: Padding(
           padding: EdgeInsets.symmetric(vertical: h * 0.03),
           child: Column(
@@ -43,7 +42,11 @@ class _SoccerFieldScreenState extends State<SoccerFieldScreen> {
                 style: TextStyle(
                   color: kSecondaryColor,
                   fontFamily: 'Nevis',
-                  fontSize: h * 0.04,
+                  fontSize: SizeConfig.isMobile
+                      ? h * 0.03
+                      : SizeConfig.isTablet
+                          ? h * 0.04
+                          : h * 0.05,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -52,7 +55,11 @@ class _SoccerFieldScreenState extends State<SoccerFieldScreen> {
                 style: TextStyle(
                   color: kSecondaryColor,
                   fontFamily: 'Nevis',
-                  fontSize: h * 0.02,
+                  fontSize: SizeConfig.isMobile
+                      ? h * 0.01
+                      : SizeConfig.isTablet
+                          ? h * 0.015
+                          : h * 0.02,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -64,7 +71,11 @@ class _SoccerFieldScreenState extends State<SoccerFieldScreen> {
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.symmetric(
-            vertical: h * 0.07,
+            vertical: SizeConfig.isMobile
+                ? h * 0.03
+                : SizeConfig.isTablet
+                    ? h * 0.05
+                    : h * 0.07,
           ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -73,7 +84,11 @@ class _SoccerFieldScreenState extends State<SoccerFieldScreen> {
                 'Compare Players',
                 style: TextStyle(
                   color: kPrimaryColor,
-                  fontSize: h * 0.06,
+                  fontSize: SizeConfig.isMobile
+                      ? h * 0.03
+                      : SizeConfig.isTablet
+                          ? h * 0.04
+                          : h * 0.06,
                   fontFamily: 'Barcelona',
                 ),
               ),
@@ -159,7 +174,7 @@ class PositionsCard extends StatelessWidget {
   List decideImagesList() {
     List imagesList = [];
     for (var i = 0; i < 5; i++) {
-      String path = '$positionSF/$i.png';
+      String path = 'images/Cards/$positionSF/$i.png';
       imagesList.add(path);
     }
     return imagesList;
@@ -170,8 +185,16 @@ class PositionsCard extends StatelessWidget {
     final h = MediaQuery.of(context).size.height;
     final w = MediaQuery.of(context).size.width;
     return Container(
-      height: h * 0.6,
-      width: w * 0.2,
+      height: SizeConfig.isMobile
+          ? h * 0.3
+          : SizeConfig.isTablet
+              ? h * 0.4
+              : h * 0.6,
+      width: SizeConfig.isMobile
+          ? w * 0.3
+          : SizeConfig.isTablet
+              ? w * 0.3
+              : w * 0.2,
       decoration: BoxDecoration(
         color: kSecondaryColor,
         boxShadow: [
@@ -183,10 +206,15 @@ class PositionsCard extends StatelessWidget {
         ],
       ),
       child: Padding(
-        padding: EdgeInsets.symmetric(
-          vertical: h * 0.025,
-          horizontal: w * 0.02,
-        ),
+        padding: SizeConfig.isMobile
+            ? EdgeInsets.all(h * 0)
+            : SizeConfig.isTablet
+                ? EdgeInsets.symmetric(
+                    vertical: h * 0.020, horizontal: w * 0.01)
+                : EdgeInsets.symmetric(
+                    vertical: h * 0.025,
+                    horizontal: w * 0.02,
+                  ),
         child: GestureFlipCard(
           animationDuration: const Duration(milliseconds: 300),
           axis: FlipAxis.vertical,
@@ -206,19 +234,31 @@ class PositionsCard extends StatelessWidget {
                 },
                 child: Image.asset(
                   'images/Positions/$positionSF.png',
-                  height: h * 0.4,
-                  width: w * 0.5,
+                  height: SizeConfig.isMobile
+                      ? h * 0.2
+                      : SizeConfig.isTablet
+                          ? h * 0.3
+                          : h * 0.4,
+                  width: SizeConfig.isMobile
+                      ? w * 0.2
+                      : SizeConfig.isTablet
+                          ? w * 0.3
+                          : w * 0.5,
                 ),
               ),
               SizedBox(
-                height: h * 0.03,
+                height: h * 0.01,
               ),
               Text(
                 position,
                 style: TextStyle(
                   color: kPrimaryColor,
                   fontFamily: 'Barcelona',
-                  fontSize: h * 0.045,
+                  fontSize: SizeConfig.isMobile
+                      ? h * 0.020
+                      : SizeConfig.isTablet
+                          ? h * 0.030
+                          : h * 0.045,
                 ),
               )
             ],
@@ -226,20 +266,33 @@ class PositionsCard extends StatelessWidget {
           backWidget: Column(
             children: [
               FlipCarousel(
+                arrowControllersVisibility: false,
                 items: decideImagesList(),
                 isAssetImage: true,
-                height: h * 0.45,
-                width: w * 0.5,
+                height: SizeConfig.isMobile
+                    ? h * 0.2
+                    : SizeConfig.isTablet
+                        ? h * 0.3
+                        : h * 0.45,
+                width: SizeConfig.isMobile
+                    ? w * 0.2
+                    : SizeConfig.isTablet
+                        ? w * 0.3
+                        : w * 0.5,
               ),
               SizedBox(
-                height: h * 0.02,
+                height: h * 0.01,
               ),
               Text(
                 'NOTABLE PLAYERS',
                 style: TextStyle(
                   color: kPrimaryColor,
                   fontFamily: 'Barcelona',
-                  fontSize: h * 0.05,
+                  fontSize: SizeConfig.isMobile
+                      ? h * 0.02
+                      : SizeConfig.isTablet
+                          ? h * 0.03
+                          : h * 0.05,
                 ),
               )
             ],

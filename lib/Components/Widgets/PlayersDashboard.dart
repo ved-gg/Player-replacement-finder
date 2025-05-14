@@ -25,6 +25,8 @@ class _PlayersDashboardState extends State<PlayersDashboard> {
     super.initState();
     getFormationFitness(widget.playerName, widget.position);
     fetchPlayerDashboardData(widget.position, widget.playerName);
+    isPlayerDataLoading = false;
+    startDelay();
   }
 
   List<FormationResult> formationResults = [];
@@ -51,9 +53,7 @@ class _PlayersDashboardState extends State<PlayersDashboard> {
         final data = json.decode(response.body);
         playerData = PlayerDashboardModel.fromJson(data);
         print("Player Data: ${playerData!.stats}");
-        setState(() {
-          isPlayerDataLoading = false;
-        });
+        setState(() {});
       } else {
         print('Error: ${response.body}');
       }
@@ -65,7 +65,8 @@ class _PlayersDashboardState extends State<PlayersDashboard> {
   Future<void> getFormationFitness(String playerName, String position) async {
     try {
       final response = await http.get(
-        Uri.parse('https://player-replacement-finder.onrender.com/fitness_score'),
+        Uri.parse(
+            'https://player-replacement-finder.onrender.com/fitness_score'),
         headers: {
           'player': playerName,
           'position': position,
@@ -112,8 +113,8 @@ class _PlayersDashboardState extends State<PlayersDashboard> {
                   children: [
                     Text(
                       '[${result.formation}] - ${result.position}',
-                      style:
-                          const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                      style: const TextStyle(
+                          fontSize: 16, fontWeight: FontWeight.bold),
                     ),
                     Chip(
                       label:
@@ -176,10 +177,25 @@ class _PlayersDashboardState extends State<PlayersDashboard> {
     }
   }
 
+  bool isLoading = true;
+  void startDelay() async {
+    await Future.delayed(const Duration(seconds: 2));
+    setState(() {
+      isLoading = false;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final h = MediaQuery.of(context).size.height;
     final w = MediaQuery.of(context).size.width;
+    if (isLoading) {
+      return const Scaffold(
+        body: Center(
+          child: CircularProgressIndicator(color: kPrimaryColor),
+        ),
+      );
+    }
     Widget fetchPlots(position, playerName) {
       if (position == "CB") {
         final radarData = [
@@ -272,7 +288,8 @@ class _PlayersDashboardState extends State<PlayersDashboard> {
                                           "${radarPlotTitles[4]} : ${playerData!.stats[radarPlotTitles[4]]}",
                                       angle: angle);
                                 default:
-                                  return const RadarChartTitle(text: "Not Title");
+                                  return const RadarChartTitle(
+                                      text: "Not Title");
                               }
                             },
                             radarBackgroundColor: Colors.transparent,
@@ -443,9 +460,6 @@ class _PlayersDashboardState extends State<PlayersDashboard> {
             'Att Penalty Touches': playerData!.stats['Att Pen'] ?? 0,
           }
         ];
-        final dataMap = barAndLine[0];
-        final categories = dataMap.keys.toList();
-        final values = dataMap.values.toList();
 
         return isPlayerDataLoading
             ? const Center(child: CircularProgressIndicator())
@@ -469,8 +483,8 @@ class _PlayersDashboardState extends State<PlayersDashboard> {
                           color: Colors.transparent,
                           child: SfCartesianChart(
                             primaryXAxis: const CategoryAxis(),
-                            primaryYAxis:
-                                const NumericAxis(title: AxisTitle(text: 'Count')),
+                            primaryYAxis: const NumericAxis(
+                                title: AxisTitle(text: 'Count')),
                             series: [
                               ColumnSeries<String, String>(
                                 dataSource:
@@ -600,7 +614,8 @@ class _PlayersDashboardState extends State<PlayersDashboard> {
                         height: h * 0.4,
                         width: w * 0.7,
                         child: SfCartesianChart(
-                          title: const ChartTitle(text: 'Touches in Different Zones'),
+                          title: const ChartTitle(
+                              text: 'Touches in Different Zones'),
                           legend: const Legend(isVisible: true),
                           primaryXAxis: const CategoryAxis(),
                           tooltipBehavior: TooltipBehavior(enable: true),
@@ -621,7 +636,8 @@ class _PlayersDashboardState extends State<PlayersDashboard> {
                                   entry.key,
                               yValueMapper: (MapEntry<String, num> entry, _) =>
                                   entry.value,
-                              markerSettings: const MarkerSettings(isVisible: true),
+                              markerSettings:
+                                  const MarkerSettings(isVisible: true),
                               color: Colors.orangeAccent,
                             ),
                           ],
@@ -875,7 +891,8 @@ class _PlayersDashboardState extends State<PlayersDashboard> {
                                 (bubbleData[0]['Touches']! / 5).ceilToDouble(),
                           ),
                           primaryYAxis: NumericAxis(
-                            title: const AxisTitle(text: 'Shot Creating Actions'),
+                            title:
+                                const AxisTitle(text: 'Shot Creating Actions'),
                             minimum: 0,
                             maximum: bubbleData[0]['SCA']! * 1.5,
                             interval:
@@ -1359,6 +1376,14 @@ class _PlayersDashboardState extends State<PlayersDashboard> {
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
+                  Text(
+                    widget.playerName,
+                    style: TextStyle(
+                      fontSize: h * 0.05,
+                      fontFamily: 'Barcelona',
+                      color: kPrimaryColor,
+                    ),
+                  ),
                   fetchPlots(widget.position, widget.playerName),
                 ],
               ),

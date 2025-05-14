@@ -1,5 +1,4 @@
 import 'dart:math';
-
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:player_replacement/Components/Widgets/TeamsDashboard.dart';
@@ -44,7 +43,7 @@ class _HomepageState extends State<Homepage> {
   ];
 
   Random random = Random();
-  int randomNumber = 0; // Declare the variable
+  int randomNumber = 0;
 
   @override
   void initState() {
@@ -56,9 +55,10 @@ class _HomepageState extends State<Homepage> {
   Widget build(BuildContext context) {
     final h = MediaQuery.of(context).size.height;
     final w = MediaQuery.of(context).size.width;
-
+    SizeConfig.init(context);
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         toolbarHeight: h * 0.1,
         backgroundColor: kPrimaryColor,
         title: Padding(
@@ -70,7 +70,11 @@ class _HomepageState extends State<Homepage> {
                 style: TextStyle(
                   color: kSecondaryColor,
                   fontFamily: 'Nevis',
-                  fontSize: h * 0.04,
+                  fontSize: SizeConfig.isMobile
+                      ? h * 0.03
+                      : SizeConfig.isTablet
+                          ? h * 0.04
+                          : h * 0.05,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -79,7 +83,11 @@ class _HomepageState extends State<Homepage> {
                 style: TextStyle(
                   color: kSecondaryColor,
                   fontFamily: 'Nevis',
-                  fontSize: h * 0.02,
+                  fontSize: SizeConfig.isMobile
+                      ? h * 0.01
+                      : SizeConfig.isTablet
+                          ? h * 0.015
+                          : h * 0.02,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -101,10 +109,20 @@ class _HomepageState extends State<Homepage> {
                 children: [
                   MouseRegion(
                     opaque: false,
-                    onEnter: (event) => setState(() {
-                      _playerContainerColor = kPrimaryColor;
-                      _playerContainerColorText = kSecondaryColor;
-                    }),
+                    onEnter: (event) => SizeConfig.isMobile
+                        ? setState(() {
+                            _playerContainerColor = kPrimaryColor;
+                            _playerContainerColorText = kPrimaryColor;
+                          })
+                        : SizeConfig.isTablet
+                            ? setState(() {
+                                _playerContainerColor = kPrimaryColor;
+                                _playerContainerColorText = kSecondaryColor;
+                              })
+                            : setState(() {
+                                _playerContainerColor = kPrimaryColor;
+                                _playerContainerColorText = kSecondaryColor;
+                              }),
                     onExit: (event) => setState(() {
                       _playerContainerColor = kSecondaryColor;
                       _playerContainerColorText = kPrimaryColor;
@@ -115,43 +133,102 @@ class _HomepageState extends State<Homepage> {
                       },
                       child: AnimatedContainer(
                         duration: const Duration(milliseconds: 100),
-                        height: h * 0.4,
-                        width: w * 0.2,
+                        height: SizeConfig.isMobile
+                            ? h * 0.1
+                            : SizeConfig.isTablet
+                                ? h * 0.3
+                                : h * 0.4,
+                        width: SizeConfig.isMobile
+                            ? w * 0.3
+                            : SizeConfig.isTablet
+                                ? w * 0.3
+                                : w * 0.2,
                         decoration: BoxDecoration(
                           color: _playerContainerColor,
                           borderRadius: BorderRadius.circular(
                             w * 0.01,
                           ),
                           boxShadow: [
-                            BoxShadow(
-                              color: kPrimaryColor,
-                              spreadRadius: h * 0.002,
-                              blurRadius: w * 0.02,
-                              offset: Offset(h * 0.02, h * 0.02),
-                            ),
+                            SizeConfig.isMobile
+                                ? BoxShadow(
+                                    color: kPrimaryColor,
+                                    spreadRadius: h * 0.01 / 4,
+                                    blurRadius: w * 0.001 / 4,
+                                    offset: Offset(h * 00, h * 0.0),
+                                  )
+                                : SizeConfig.isTablet
+                                    ? BoxShadow(
+                                        color: kPrimaryColor,
+                                        spreadRadius: h * 0.0004 / 2,
+                                        blurRadius: w * 0.004,
+                                        offset: Offset(h * 0.01, h * 0.01),
+                                      )
+                                    : BoxShadow(
+                                        color: kPrimaryColor,
+                                        spreadRadius: h * 0.002,
+                                        blurRadius: w * 0.02,
+                                        offset: Offset(h * 0.02, h * 0.02),
+                                      ),
                           ],
                         ),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Image.asset(
-                              '/images/Players/RandomPlayer.png',
-                              height: h * 0.2,
-                            ),
-                            SizedBox(
-                              height: h * 0.03,
-                            ),
-                            Text(
-                              'PLAYERS',
-                              style: TextStyle(
-                                fontSize: h * 0.03,
-                                color: _playerContainerColorText,
-                                fontWeight: FontWeight.w900,
-                                fontFamily: 'League Spartan',
-                              ),
-                            ),
-                          ],
-                        ),
+                        child: SizeConfig.isMobile
+                            ? Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    'PLAYERS',
+                                    style: TextStyle(
+                                      fontSize: h * 0.02,
+                                      color: _playerContainerColorText,
+                                      fontWeight: FontWeight.w900,
+                                      fontFamily: 'League Spartan',
+                                    ),
+                                  ),
+                                ],
+                              )
+                            : SizeConfig.isTablet
+                                ? Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Image.asset(
+                                        '/images/Players/RandomPlayer.png',
+                                        height: h * 0.1,
+                                      ),
+                                      SizedBox(
+                                        height: h * 0.01,
+                                      ),
+                                      Text(
+                                        'PLAYERS',
+                                        style: TextStyle(
+                                          fontSize: h * 0.03,
+                                          color: _playerContainerColorText,
+                                          fontWeight: FontWeight.w900,
+                                          fontFamily: 'League Spartan',
+                                        ),
+                                      ),
+                                    ],
+                                  )
+                                : Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Image.asset(
+                                        '/images/Players/RandomPlayer.png',
+                                        height: h * 0.2,
+                                      ),
+                                      SizedBox(
+                                        height: h * 0.03,
+                                      ),
+                                      Text(
+                                        'PLAYERS',
+                                        style: TextStyle(
+                                          fontSize: h * 0.03,
+                                          color: _playerContainerColorText,
+                                          fontWeight: FontWeight.w900,
+                                          fontFamily: 'League Spartan',
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                       ),
                     ),
                   ),
@@ -160,10 +237,20 @@ class _HomepageState extends State<Homepage> {
                     height: h * 0.05,
                   ),
                   MouseRegion(
-                    onEnter: (event) => setState(() {
-                      _teamContainerColor = kPrimaryColor;
-                      _teamContainerColorText = kSecondaryColor;
-                    }),
+                    onEnter: (event) => SizeConfig.isMobile
+                        ? setState(() {
+                            _teamContainerColor = kPrimaryColor;
+                            _teamContainerColorText = kPrimaryColor;
+                          })
+                        : SizeConfig.isTablet
+                            ? setState(() {
+                                _teamContainerColor = kPrimaryColor;
+                                _teamContainerColorText = kSecondaryColor;
+                              })
+                            : setState(() {
+                                _teamContainerColor = kPrimaryColor;
+                                _teamContainerColorText = kSecondaryColor;
+                              }),
                     onExit: (event) => setState(() {
                       _teamContainerColor = kSecondaryColor;
                       _teamContainerColorText = kPrimaryColor;
@@ -172,44 +259,104 @@ class _HomepageState extends State<Homepage> {
                       onTap: () {
                         Navigator.pushNamed(context, '/AllTeams');
                       },
-                      child: Container(
-                        height: h * 0.4,
-                        width: w * 0.2,
+                      child: AnimatedContainer(
+                        duration: const Duration(milliseconds: 100),
+                        height: SizeConfig.isMobile
+                            ? h * 0.1
+                            : SizeConfig.isTablet
+                                ? h * 0.3
+                                : h * 0.4,
+                        width: SizeConfig.isMobile
+                            ? w * 0.3
+                            : SizeConfig.isTablet
+                                ? w * 0.3
+                                : w * 0.2,
                         decoration: BoxDecoration(
                           color: _teamContainerColor,
                           borderRadius: BorderRadius.circular(
                             w * 0.01,
                           ),
                           boxShadow: [
-                            BoxShadow(
-                              color: kPrimaryColor,
-                              spreadRadius: h * 0.002,
-                              blurRadius: w * 0.02,
-                              offset: Offset(h * 0.02, h * 0.02),
-                            ),
+                            SizeConfig.isMobile
+                                ? BoxShadow(
+                                    color: kPrimaryColor,
+                                    spreadRadius: h * 0.01 / 4,
+                                    blurRadius: w * 0.001 / 4,
+                                    offset: Offset(h * 00, h * 0.0),
+                                  )
+                                : SizeConfig.isTablet
+                                    ? BoxShadow(
+                                        color: kPrimaryColor,
+                                        spreadRadius: h * 0.0004 / 2,
+                                        blurRadius: w * 0.004,
+                                        offset: Offset(h * 0.01, h * 0.01),
+                                      )
+                                    : BoxShadow(
+                                        color: kPrimaryColor,
+                                        spreadRadius: h * 0.002,
+                                        blurRadius: w * 0.02,
+                                        offset: Offset(h * 0.02, h * 0.02),
+                                      ),
                           ],
                         ),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Image.asset(
-                              '/images/Players/TeamPhoto.png',
-                              height: h * 0.2,
-                            ),
-                            SizedBox(
-                              height: h * 0.03,
-                            ),
-                            Text(
-                              'TEAMS',
-                              style: TextStyle(
-                                fontSize: h * 0.03,
-                                color: _teamContainerColorText,
-                                fontWeight: FontWeight.w900,
-                                fontFamily: 'League Spartan',
-                              ),
-                            ),
-                          ],
-                        ),
+                        child: SizeConfig.isMobile
+                            ? Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    'TEAMS',
+                                    style: TextStyle(
+                                      fontSize: h * 0.02,
+                                      color: _teamContainerColorText,
+                                      fontWeight: FontWeight.w900,
+                                      fontFamily: 'League Spartan',
+                                    ),
+                                  ),
+                                ],
+                              )
+                            : SizeConfig.isTablet
+                                ? Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Image.asset(
+                                        '/images/Players/TeamPhoto.png',
+                                        height: h * 0.1,
+                                      ),
+                                      SizedBox(
+                                        height: h * 0.01,
+                                      ),
+                                      Text(
+                                        'TEAMS',
+                                        style: TextStyle(
+                                          fontSize: h * 0.03,
+                                          color: _teamContainerColorText,
+                                          fontWeight: FontWeight.w900,
+                                          fontFamily: 'League Spartan',
+                                        ),
+                                      ),
+                                    ],
+                                  )
+                                : Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Image.asset(
+                                        '/images/Players/TeamPhoto.png',
+                                        height: h * 0.2,
+                                      ),
+                                      SizedBox(
+                                        height: h * 0.03,
+                                      ),
+                                      Text(
+                                        'TEAMS',
+                                        style: TextStyle(
+                                          fontSize: h * 0.03,
+                                          color: _teamContainerColorText,
+                                          fontWeight: FontWeight.w900,
+                                          fontFamily: 'League Spartan',
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                       ),
                     ),
                   ),
@@ -223,7 +370,11 @@ class _HomepageState extends State<Homepage> {
                   Text(
                     'Legends & Lore',
                     style: TextStyle(
-                      fontSize: h * 0.03,
+                      fontSize: SizeConfig.isMobile
+                          ? h * 0.025
+                          : SizeConfig.isTablet
+                              ? h * 0.027
+                              : h * 0.03,
                       fontFamily: 'Nevis',
                       color: kPrimaryColor,
                     ),
@@ -231,12 +382,23 @@ class _HomepageState extends State<Homepage> {
                   SizedBox(
                     height: h * 0.03,
                   ),
-                  Text(
-                    facts[randomNumber],
-                    style: TextStyle(
-                      color: kPrimaryColor,
-                      fontSize: h * 0.02,
-                      fontFamily: 'League Spartan',
+                  Padding(
+                    padding: SizeConfig.isMobile
+                        ? EdgeInsets.symmetric(
+                            horizontal: h * 0.03,
+                          )
+                        : SizeConfig.isTablet
+                            ? EdgeInsets.symmetric(
+                                horizontal: h * 0.03,
+                              )
+                            : EdgeInsets.symmetric(horizontal: h * 0.01),
+                    child: Text(
+                      facts[randomNumber],
+                      style: TextStyle(
+                        color: kPrimaryColor,
+                        fontSize: h * 0.02,
+                        fontFamily: 'League Spartan',
+                      ),
                     ),
                   ),
                 ],
@@ -251,7 +413,7 @@ class _HomepageState extends State<Homepage> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Expanded(
+                    const Expanded(
                       child: Divider(
                         color: kPrimaryColor,
                       ),
@@ -262,12 +424,16 @@ class _HomepageState extends State<Homepage> {
                         'Top teams around the world',
                         style: TextStyle(
                           color: kPrimaryColor,
-                          fontSize: h * 0.03,
+                          fontSize: SizeConfig.isMobile
+                              ? h * 0.02
+                              : SizeConfig.isTablet
+                                  ? h * 0.02
+                                  : h * 0.03,
                           fontFamily: 'Nevis',
                         ),
                       ),
                     ),
-                    Expanded(
+                    const Expanded(
                       child: Divider(color: kPrimaryColor),
                     ),
                   ],
@@ -278,8 +444,20 @@ class _HomepageState extends State<Homepage> {
               ),
               // Fc Barcelona
               MouseRegion(
-                onEnter: (event) => setState(() => isHovered = true),
-                onExit: (event) => setState(() => isHovered = false),
+                onEnter: (event) => SizeConfig.isMobile
+                    ? setState(() {})
+                    : SizeConfig.isTablet
+                        ? setState(() {})
+                        : setState(
+                            () => isHovered = true,
+                          ),
+                onExit: (event) => SizeConfig.isMobile
+                    ? setState(() {})
+                    : SizeConfig.isTablet
+                        ? setState(() {})
+                        : setState(
+                            () => isHovered = false,
+                          ),
                 child: GestureDetector(
                   onTap: () {
                     Navigator.push(
@@ -287,15 +465,20 @@ class _HomepageState extends State<Homepage> {
                       MaterialPageRoute(
                         builder: (context) => TeamsDashboard(
                           teamName: 'Barcelona',
+                          leagueName: 'La Liga',
                         ),
                       ),
                     );
                   },
                   child: AnimatedContainer(
                     duration: const Duration(milliseconds: 200),
-                    height: h * 0.2,
+                    height: SizeConfig.isMobile
+                        ? h * 0.1
+                        : SizeConfig.isTablet
+                            ? h * 0.15
+                            : h * 0.2,
                     width: w,
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       color: kPrimaryColor,
                     ),
                     child: Center(
@@ -305,7 +488,11 @@ class _HomepageState extends State<Homepage> {
                           Image.asset(
                             'images/Clubs/Backgrounds/FCBarcelonaStripes.png',
                             width: w,
-                            height: h * 0.4,
+                            height: SizeConfig.isMobile
+                                ? h * 0.2
+                                : SizeConfig.isTablet
+                                    ? h * 0.25
+                                    : h * 0.4,
                             fit: BoxFit.cover,
                           ),
                           AnimatedPositioned(
@@ -314,7 +501,11 @@ class _HomepageState extends State<Homepage> {
                             curve: Curves.easeInOut,
                             child: Image.asset(
                               'images/Clubs/Barcelona.png',
-                              height: h * 0.15,
+                              height: SizeConfig.isMobile
+                                  ? h * 0.07
+                                  : SizeConfig.isTablet
+                                      ? h * 0.1
+                                      : h * 0.15,
                             ),
                           ),
                           AnimatedPositioned(
@@ -469,8 +660,16 @@ class _HomepageState extends State<Homepage> {
               ),
               // Real Madrid
               MouseRegion(
-                onEnter: (event) => setState(() => isHovered2 = true),
-                onExit: (event) => setState(() => isHovered2 = false),
+                onEnter: (event) => SizeConfig.isMobile
+                    ? setState(() {})
+                    : SizeConfig.isTablet
+                        ? setState(() {})
+                        : setState(() => isHovered = true),
+                onExit: (event) => SizeConfig.isMobile
+                    ? setState(() {})
+                    : SizeConfig.isTablet
+                        ? setState(() {})
+                        : setState(() => isHovered = false),
                 child: GestureDetector(
                   onTap: () {
                     Navigator.push(
@@ -478,15 +677,20 @@ class _HomepageState extends State<Homepage> {
                       MaterialPageRoute(
                         builder: (context) => TeamsDashboard(
                           teamName: 'Real Madrid',
+                          leagueName: 'La Liga',
                         ),
                       ),
                     );
                   },
                   child: AnimatedContainer(
                     duration: const Duration(milliseconds: 200),
-                    height: h * 0.2,
+                    height: SizeConfig.isMobile
+                        ? h * 0.1
+                        : SizeConfig.isTablet
+                            ? h * 0.15
+                            : h * 0.2,
                     width: w,
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       color: kPrimaryColor,
                     ),
                     child: Center(
@@ -502,7 +706,11 @@ class _HomepageState extends State<Homepage> {
                             curve: Curves.easeInOut,
                             child: Image.asset(
                               'images/Clubs/RealMadrid.png',
-                              height: h * 0.15,
+                              height: SizeConfig.isMobile
+                                  ? h * 0.07
+                                  : SizeConfig.isTablet
+                                      ? h * 0.1
+                                      : h * 0.15,
                             ),
                           ),
                           AnimatedPositioned(
@@ -783,8 +991,16 @@ class _HomepageState extends State<Homepage> {
               ),
               // Liverpool
               MouseRegion(
-                onEnter: (event) => setState(() => isHovered3 = true),
-                onExit: (event) => setState(() => isHovered3 = false),
+                onEnter: (event) => SizeConfig.isMobile
+                    ? setState(() {})
+                    : SizeConfig.isTablet
+                        ? setState(() {})
+                        : setState(() => isHovered = true),
+                onExit: (event) => SizeConfig.isMobile
+                    ? setState(() {})
+                    : SizeConfig.isTablet
+                        ? setState(() {})
+                        : setState(() => isHovered = false),
                 child: GestureDetector(
                   onTap: () {
                     Navigator.push(
@@ -792,15 +1008,20 @@ class _HomepageState extends State<Homepage> {
                       MaterialPageRoute(
                         builder: (context) => TeamsDashboard(
                           teamName: 'Barcelona',
+                          leagueName: 'La Liga',
                         ),
                       ),
                     );
                   },
                   child: AnimatedContainer(
                     duration: const Duration(milliseconds: 200),
-                    height: h * 0.2,
+                    height: SizeConfig.isMobile
+                        ? h * 0.1
+                        : SizeConfig.isTablet
+                            ? h * 0.15
+                            : h * 0.2,
                     width: w,
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       color: kPrimaryColor,
                     ),
                     child: Center(
@@ -810,7 +1031,11 @@ class _HomepageState extends State<Homepage> {
                           Image.asset(
                             'images/Clubs/Backgrounds/Liverpoolback.png',
                             width: w,
-                            height: h * 0.4,
+                            height: SizeConfig.isMobile
+                                ? h * 0.2
+                                : SizeConfig.isTablet
+                                    ? h * 0.25
+                                    : h * 0.4,
                             fit: BoxFit.cover,
                           ),
                           AnimatedPositioned(
@@ -819,7 +1044,11 @@ class _HomepageState extends State<Homepage> {
                             curve: Curves.easeInOut,
                             child: Image.asset(
                               'images/Clubs/Liverpool.png',
-                              height: h * 0.15,
+                              height: SizeConfig.isMobile
+                                  ? h * 0.07
+                                  : SizeConfig.isTablet
+                                      ? h * 0.1
+                                      : h * 0.15,
                             ),
                           ),
                           AnimatedPositioned(
@@ -974,8 +1203,16 @@ class _HomepageState extends State<Homepage> {
               ),
               //MAN CITY
               MouseRegion(
-                onEnter: (event) => setState(() => isHovered4 = true),
-                onExit: (event) => setState(() => isHovered4 = false),
+                onEnter: (event) => SizeConfig.isMobile
+                    ? setState(() {})
+                    : SizeConfig.isTablet
+                        ? setState(() {})
+                        : setState(() => isHovered = true),
+                onExit: (event) => SizeConfig.isMobile
+                    ? setState(() {})
+                    : SizeConfig.isTablet
+                        ? setState(() {})
+                        : setState(() => isHovered = false),
                 child: GestureDetector(
                   onTap: () {
                     Navigator.push(
@@ -983,13 +1220,18 @@ class _HomepageState extends State<Homepage> {
                       MaterialPageRoute(
                         builder: (context) => TeamsDashboard(
                           teamName: 'Manchester City',
+                          leagueName: 'Premier League',
                         ),
                       ),
                     );
                   },
                   child: AnimatedContainer(
                     duration: const Duration(milliseconds: 200),
-                    height: h * 0.2,
+                    height: SizeConfig.isMobile
+                        ? h * 0.1
+                        : SizeConfig.isTablet
+                            ? h * 0.15
+                            : h * 0.2,
                     width: w,
                     decoration: BoxDecoration(
                       color: kPrimaryColor,
@@ -1001,7 +1243,11 @@ class _HomepageState extends State<Homepage> {
                           Image.asset(
                             'images/Clubs/Backgrounds/Mancityback.png',
                             width: w,
-                            height: h * 0.4,
+                            height: SizeConfig.isMobile
+                                ? h * 0.2
+                                : SizeConfig.isTablet
+                                    ? h * 0.25
+                                    : h * 0.4,
                             fit: BoxFit.cover,
                           ),
                           AnimatedPositioned(
@@ -1010,7 +1256,11 @@ class _HomepageState extends State<Homepage> {
                             curve: Curves.easeInOut,
                             child: Image.asset(
                               'images/Clubs/ManCity.png',
-                              height: h * 0.15,
+                              height: SizeConfig.isMobile
+                                  ? h * 0.07
+                                  : SizeConfig.isTablet
+                                      ? h * 0.1
+                                      : h * 0.15,
                             ),
                           ),
                           AnimatedPositioned(
@@ -1165,8 +1415,16 @@ class _HomepageState extends State<Homepage> {
               ),
               // Borussia Dortmund
               MouseRegion(
-                onEnter: (event) => setState(() => isHovered5 = true),
-                onExit: (event) => setState(() => isHovered5 = false),
+                onEnter: (event) => SizeConfig.isMobile
+                    ? setState(() {})
+                    : SizeConfig.isTablet
+                        ? setState(() {})
+                        : setState(() => isHovered = true),
+                onExit: (event) => SizeConfig.isMobile
+                    ? setState(() {})
+                    : SizeConfig.isTablet
+                        ? setState(() {})
+                        : setState(() => isHovered = false),
                 child: GestureDetector(
                   onTap: () {
                     Navigator.push(
@@ -1174,13 +1432,18 @@ class _HomepageState extends State<Homepage> {
                       MaterialPageRoute(
                         builder: (context) => TeamsDashboard(
                           teamName: 'Dortmund',
+                          leagueName: 'Bundesliga',
                         ),
                       ),
                     );
                   },
                   child: AnimatedContainer(
                     duration: const Duration(milliseconds: 200),
-                    height: h * 0.2,
+                    height: SizeConfig.isMobile
+                        ? h * 0.1
+                        : SizeConfig.isTablet
+                            ? h * 0.15
+                            : h * 0.2,
                     width: w,
                     decoration: BoxDecoration(
                       color: kPrimaryColor,
@@ -1192,7 +1455,11 @@ class _HomepageState extends State<Homepage> {
                           Image.asset(
                             'images/Clubs/Backgrounds/Dortmundback.png',
                             width: w,
-                            height: h * 0.4,
+                            height: SizeConfig.isMobile
+                                ? h * 0.2
+                                : SizeConfig.isTablet
+                                    ? h * 0.25
+                                    : h * 0.4,
                             fit: BoxFit.cover,
                           ),
                           AnimatedPositioned(
@@ -1201,7 +1468,11 @@ class _HomepageState extends State<Homepage> {
                             curve: Curves.easeInOut,
                             child: Image.asset(
                               'images/Clubs/BorussiaDortmund.png',
-                              height: h * 0.15,
+                              height: SizeConfig.isMobile
+                                  ? h * 0.07
+                                  : SizeConfig.isTablet
+                                      ? h * 0.1
+                                      : h * 0.15,
                             ),
                           ),
                           AnimatedPositioned(
@@ -1359,8 +1630,20 @@ class _HomepageState extends State<Homepage> {
               ),
               // Bayern Munich
               MouseRegion(
-                onEnter: (event) => setState(() => isHovered6 = true),
-                onExit: (event) => setState(() => isHovered6 = false),
+                onEnter: (event) => SizeConfig.isMobile
+                    ? setState(() {})
+                    : SizeConfig.isTablet
+                        ? setState(() {})
+                        : setState(
+                            () => isHovered = true,
+                          ),
+                onExit: (event) => SizeConfig.isMobile
+                    ? setState(() {})
+                    : SizeConfig.isTablet
+                        ? setState(() {})
+                        : setState(
+                            () => isHovered = false,
+                          ),
                 child: GestureDetector(
                   onTap: () {
                     Navigator.push(
@@ -1368,13 +1651,18 @@ class _HomepageState extends State<Homepage> {
                       MaterialPageRoute(
                         builder: (context) => TeamsDashboard(
                           teamName: 'Bayern Munich',
+                          leagueName: 'Bundesliga',
                         ),
                       ),
                     );
                   },
                   child: AnimatedContainer(
                     duration: const Duration(milliseconds: 200),
-                    height: h * 0.2,
+                    height: SizeConfig.isMobile
+                        ? h * 0.1
+                        : SizeConfig.isTablet
+                            ? h * 0.15
+                            : h * 0.2,
                     width: w,
                     decoration: BoxDecoration(
                       color: kPrimaryColor,
@@ -1386,7 +1674,11 @@ class _HomepageState extends State<Homepage> {
                           Image.asset(
                             'images/Clubs/Backgrounds/Bayernback.png',
                             width: w,
-                            height: h * 0.4,
+                            height: SizeConfig.isMobile
+                                ? h * 0.2
+                                : SizeConfig.isTablet
+                                    ? h * 0.25
+                                    : h * 0.4,
                             fit: BoxFit.cover,
                           ),
                           AnimatedPositioned(
@@ -1395,7 +1687,11 @@ class _HomepageState extends State<Homepage> {
                             curve: Curves.easeInOut,
                             child: Image.asset(
                               'images/Clubs/BayernMunich.png',
-                              height: h * 0.15,
+                              height: SizeConfig.isMobile
+                                  ? h * 0.07
+                                  : SizeConfig.isTablet
+                                      ? h * 0.1
+                                      : h * 0.15,
                             ),
                           ),
                           AnimatedPositioned(
@@ -1553,8 +1849,20 @@ class _HomepageState extends State<Homepage> {
               ),
               //Chelsea
               MouseRegion(
-                onEnter: (event) => setState(() => isHovered7 = true),
-                onExit: (event) => setState(() => isHovered7 = false),
+                onEnter: (event) => SizeConfig.isMobile
+                    ? setState(() {})
+                    : SizeConfig.isTablet
+                        ? setState(() {})
+                        : setState(
+                            () => isHovered = true,
+                          ),
+                onExit: (event) => SizeConfig.isMobile
+                    ? setState(() {})
+                    : SizeConfig.isTablet
+                        ? setState(() {})
+                        : setState(
+                            () => isHovered = false,
+                          ),
                 child: GestureDetector(
                   onTap: () {
                     Navigator.push(
@@ -1562,13 +1870,18 @@ class _HomepageState extends State<Homepage> {
                       MaterialPageRoute(
                         builder: (context) => TeamsDashboard(
                           teamName: 'Chelsea',
+                          leagueName: 'Premier League',
                         ),
                       ),
                     );
                   },
                   child: AnimatedContainer(
                     duration: const Duration(milliseconds: 200),
-                    height: h * 0.2,
+                    height: SizeConfig.isMobile
+                        ? h * 0.1
+                        : SizeConfig.isTablet
+                            ? h * 0.15
+                            : h * 0.2,
                     width: w,
                     decoration: BoxDecoration(
                       color: kPrimaryColor,
@@ -1580,7 +1893,11 @@ class _HomepageState extends State<Homepage> {
                           Image.asset(
                             'images/Clubs/Backgrounds/Chelseaback.png',
                             width: w,
-                            height: h * 0.4,
+                            height: SizeConfig.isMobile
+                                ? h * 0.2
+                                : SizeConfig.isTablet
+                                    ? h * 0.25
+                                    : h * 0.4,
                             fit: BoxFit.cover,
                           ),
                           AnimatedPositioned(
@@ -1589,7 +1906,11 @@ class _HomepageState extends State<Homepage> {
                             curve: Curves.easeInOut,
                             child: Image.asset(
                               'images/Clubs/Chelsea.png',
-                              height: h * 0.15,
+                              height: SizeConfig.isMobile
+                                  ? h * 0.07
+                                  : SizeConfig.isTablet
+                                      ? h * 0.1
+                                      : h * 0.15,
                             ),
                           ),
                           AnimatedPositioned(
@@ -1745,10 +2066,22 @@ class _HomepageState extends State<Homepage> {
                   ),
                 ),
               ),
-              //Athletico Madrid
+              //Atletico Madrid
               MouseRegion(
-                onEnter: (event) => setState(() => isHovered8 = true),
-                onExit: (event) => setState(() => isHovered8 = false),
+                onEnter: (event) => SizeConfig.isMobile
+                    ? setState(() {})
+                    : SizeConfig.isTablet
+                        ? setState(() {})
+                        : setState(
+                            () => isHovered = true,
+                          ),
+                onExit: (event) => SizeConfig.isMobile
+                    ? setState(() {})
+                    : SizeConfig.isTablet
+                        ? setState(() {})
+                        : setState(
+                            () => isHovered = false,
+                          ),
                 child: GestureDetector(
                   onTap: () {
                     Navigator.push(
@@ -1756,15 +2089,20 @@ class _HomepageState extends State<Homepage> {
                       MaterialPageRoute(
                         builder: (context) => TeamsDashboard(
                           teamName: 'Atletico Madrid',
+                          leagueName: 'La Liga',
                         ),
                       ),
                     );
                   },
                   child: AnimatedContainer(
                     duration: const Duration(milliseconds: 200),
-                    height: h * 0.2,
+                    height: SizeConfig.isMobile
+                        ? h * 0.1
+                        : SizeConfig.isTablet
+                            ? h * 0.15
+                            : h * 0.2,
                     width: w,
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       color: kPrimaryColor,
                     ),
                     child: Center(
@@ -1774,7 +2112,11 @@ class _HomepageState extends State<Homepage> {
                           Image.asset(
                             'images/Clubs/Backgrounds/Athleticoback.png',
                             width: w,
-                            height: h * 0.4,
+                            height: SizeConfig.isMobile
+                                ? h * 0.2
+                                : SizeConfig.isTablet
+                                    ? h * 0.25
+                                    : h * 0.4,
                             fit: BoxFit.cover,
                           ),
                           AnimatedPositioned(
@@ -1783,7 +2125,11 @@ class _HomepageState extends State<Homepage> {
                             curve: Curves.easeInOut,
                             child: Image.asset(
                               'images/Clubs/Athletico.png',
-                              height: h * 0.15,
+                              height: SizeConfig.isMobile
+                                  ? h * 0.07
+                                  : SizeConfig.isTablet
+                                      ? h * 0.1
+                                      : h * 0.15,
                             ),
                           ),
                           AnimatedPositioned(
