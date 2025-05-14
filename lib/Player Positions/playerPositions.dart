@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:player_replacement/Components/constants.dart';
 import 'package:flutter_flip_card/flutter_flip_card.dart';
 import 'package:flip_carousel/flip_carousel.dart';
+import 'package:player_replacement/Home%20Page/homePage.dart';
 import 'package:player_replacement/PlayerComparison/playerComparison.dart';
 
 class PlayerPositions extends StatelessWidget {
@@ -30,19 +31,10 @@ class _SoccerFieldScreenState extends State<SoccerFieldScreen> {
     return Scaffold(
       backgroundColor: kSecondaryColor,
       appBar: AppBar(
-        automaticallyImplyLeading: true,
         toolbarHeight: h * 0.1,
         backgroundColor: kPrimaryColor,
         foregroundColor: kSecondaryColor,
-        leading: InkWell(
-          onTap: () {
-            Navigator.pop(context);
-          },
-          child: Icon(
-            Icons.arrow_back_ios,
-            color: kSecondaryColor,
-          ),
-        ),
+        automaticallyImplyLeading: true,
         title: Padding(
           padding: EdgeInsets.symmetric(vertical: h * 0.03),
           child: Column(

@@ -46,13 +46,13 @@ class _PlayerComparisonState extends State<PlayerComparison> {
   Future<void> getPlayerAttributes(String position, String playerName) async {
     try {
       final response = await http.get(
-        Uri.parse('https://player-replacement-finder.onrender.com/player_attributes'),
+        Uri.parse(
+            'https://player-replacement-finder.onrender.com/player_attributes'),
         headers: {
           'position': position,
           'player': playerName,
         },
       );
-firebase
       if (response.statusCode == 200) {
         final Map<String, dynamic> data = json.decode(response.body);
         print("Fetched Data: $data");
@@ -74,7 +74,6 @@ firebase
           }
         });
       } else {
-        
         print('Error: ${response.statusCode}');
       }
     } catch (e) {
@@ -217,6 +216,15 @@ firebase
         toolbarHeight: h * 0.1,
         backgroundColor: kPrimaryColor,
         foregroundColor: kSecondaryColor,
+        leading: InkWell(
+          onTap: () {
+            Navigator.pop(context);
+          },
+          child: Icon(
+            Icons.arrow_back_ios,
+            color: kSecondaryColor,
+          ),
+        ),
         title: Padding(
           padding: EdgeInsets.symmetric(vertical: h * 0.03),
           child: Column(
@@ -402,7 +410,8 @@ firebase
                                 ),
                                 DataCell(
                                   IconButton(
-                                    icon: const Icon(Icons.delete, color: Colors.red),
+                                    icon: const Icon(Icons.delete,
+                                        color: Colors.red),
                                     onPressed: () {
                                       setState(
                                         () {

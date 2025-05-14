@@ -44,7 +44,7 @@ class _HomepageState extends State<Homepage> {
   ];
 
   Random random = Random();
-  int randomNumber = 0; // Declare the variable
+  int randomNumber = 0;
 
   @override
   void initState() {
@@ -59,6 +59,7 @@ class _HomepageState extends State<Homepage> {
 
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         toolbarHeight: h * 0.1,
         backgroundColor: kPrimaryColor,
         title: Padding(
@@ -109,7 +110,7 @@ class _HomepageState extends State<Homepage> {
                       _playerContainerColor = kSecondaryColor;
                       _playerContainerColorText = kPrimaryColor;
                     }),
-                    child: GestureDetector(
+                    child: InkWell(
                       onTap: () {
                         Navigator.pushNamed(context, '/PlayerPositions');
                       },
