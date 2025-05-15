@@ -171,11 +171,15 @@ class _TeamsDashboardState extends State<TeamsDashboard> {
                       0.7), // Ensure content area has min height
               child: isLoading
                   ? Center(
-                      child: CircularProgressIndicator(color: kPrimaryColor))
+                      child: CircularProgressIndicator(color: kPrimaryColor),
+                    )
                   : imageData != null
                       ? SizedBox(
                           width: imageDisplayWidth,
-                          child: Image.memory(imageData, fit: BoxFit.contain),
+                          child: Image.memory(
+                            imageData,
+                            fit: BoxFit.contain,
+                          ),
                         )
                       : Center(
                           child: Padding(
@@ -183,8 +187,9 @@ class _TeamsDashboardState extends State<TeamsDashboard> {
                             child: Text(
                               errorMessage,
                               style: TextStyle(
-                                  fontSize: errorFontSize,
-                                  color: Colors.red.shade700),
+                                fontSize: errorFontSize,
+                                color: Colors.red.shade700,
+                              ),
                               textAlign: TextAlign.center,
                             ),
                           ),

@@ -664,12 +664,12 @@ class _HomepageState extends State<Homepage> {
                     ? setState(() {})
                     : SizeConfig.isTablet
                         ? setState(() {})
-                        : setState(() => isHovered = true),
+                        : setState(() => isHovered2 = true),
                 onExit: (event) => SizeConfig.isMobile
                     ? setState(() {})
                     : SizeConfig.isTablet
                         ? setState(() {})
-                        : setState(() => isHovered = false),
+                        : setState(() => isHovered2 = false),
                 child: GestureDetector(
                   onTap: () {
                     Navigator.push(
@@ -763,11 +763,11 @@ class _HomepageState extends State<Homepage> {
                           ),
                           AnimatedPositioned(
                             duration: const Duration(microseconds: 500),
-                            left: isHovered ? w * 0.70 : w * 0.65,
+                            left: isHovered2 ? w * 0.70 : w * 0.65,
                             curve: Curves.easeInOut,
                             child: AnimatedOpacity(
                               duration: const Duration(microseconds: 500),
-                              opacity: isHovered ? 1.0 : 0.0,
+                              opacity: isHovered2 ? 1.0 : 0.0,
                               child: Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceEvenly,
@@ -1007,8 +1007,8 @@ class _HomepageState extends State<Homepage> {
                       context,
                       MaterialPageRoute(
                         builder: (context) => TeamsDashboard(
-                          teamName: 'Barcelona',
-                          leagueName: 'La Liga',
+                          teamName: 'Liverpool',
+                          leagueName: 'Premier League',
                         ),
                       ),
                     );
