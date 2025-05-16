@@ -1,0 +1,34 @@
+TIS 
+Formulas for feature engineering 
+Scraping pipelines: 
+- Team data with top performer in every statistic
+- Position wise player data
+- league wise standings data
+- transfermarkt basic user data
+- detailed player data for every main statistic 
+
+Data processing:
+filtering and splitting dataset into 4 positions: Forward, midfielder, defender, goalkeeper
+clean data and drop columns with more than 80% empty data - winsorization 
+
+- feature engineering: 
+Defender_columns = [ "Defensive Actions", "Aerial Duels", "Passing and Build-up", "Defensive Awareness", "Discipline", "Defensive Duties", "Offensive Contributions", "Final Third Play", "Possession Play", "Dribbling" ]
+Midfielder_columns = [ "Defensive Contributions", "Passing Ability", "Build-Up Play", "Ball Recovery & Defensive Work", "Line Breaking Passes", "Passing", "Ball Carrying", "Defensive Work", "Chance Creation", "Possession Retention", "Playmaking", "Ball Progression", "Final Third Impact", "Goal Threat", "Final Ball Efficiency" ]
+Forward_columns = [ "Dribbling", "Crosses and Playmaking", "Goal Threat", "Final Third Impact", "Ball Carrying", "Chance Conversion", "Link-Up Play", "Shooting Accuracy", "Penalty Box Presence" ]
+Goalkeeper_columns = [ "Shot Stopping", "Expected Goals Prevented", "Cross and Aerial Control", "Sweeper Keeper Activity", "Passing" ]
+
+- model: Ensemble model: Ridge, Lasso, ElasticNet, RandomForest, XGBoost, LightGBM, GradientBoosting, AdaBoost, SVR
+meta model: RandomForestRegressor
+
+Feature engineering then PCA using Kaiser's rule and graph rule, then Ensemble model then Shap 
+
+result:
+Stacking Ensemble -> RMSE: 3112937.64, R²: 0.9457
+📊 Model Evaluation Results:
+🔹 R² Score - Train: 0.9464, Test: 0.9457
+🔹 MSE - Train: 9732255442501.1855, Test: 9690380731744.1113
+🔹 RMSE - Train: 3119656.3020, Test: 3112937.6370
+🔹 MAE - Train: 2199469.4676, Test: 2259460.7034
+🔹 Cross-Validation R² (Mean): 0.9383 ± 0.0029
+
+Results show that model does not overfit, since value between train and test is not very different.
